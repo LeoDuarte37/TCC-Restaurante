@@ -16,7 +16,7 @@ public class Mesa {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private int id;
+    private Long id;
 
     @NotNull(message = "Atributo numero é obrigatório!")
     private int numero;

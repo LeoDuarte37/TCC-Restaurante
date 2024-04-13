@@ -17,7 +17,7 @@ public class Contato {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private int id;
+    private Long id;
 
     @NotBlank(message = "Atributo email é obrigatório!")
     @Email(message = "Atributo email deverá ser um email válido!")

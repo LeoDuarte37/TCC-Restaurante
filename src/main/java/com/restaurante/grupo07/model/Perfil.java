@@ -16,7 +16,7 @@ public class Perfil {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private int id;
+    private Long id;
 
     @NotNull(message = "Atributo nivel é obrigatório!")
     private int nivel;
