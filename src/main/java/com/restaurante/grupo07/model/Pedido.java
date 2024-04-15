@@ -1,5 +1,6 @@
 package com.restaurante.grupo07.model;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.restaurante.grupo07.enumeration.StatusPedido;
 import jakarta.persistence.*;
@@ -23,7 +24,8 @@ public class Pedido {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @OneToOne(fetch = FetchType.LAZY)
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JsonIgnore
     private Mesa mesa;
 
     @OneToMany(fetch = FetchType.LAZY, mappedBy = "pedido", cascade = CascadeType.REMOVE)
