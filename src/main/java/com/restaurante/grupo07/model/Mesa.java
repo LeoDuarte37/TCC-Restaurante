@@ -1,5 +1,6 @@
 package com.restaurante.grupo07.model;
 
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.restaurante.grupo07.enumeration.StatusMesa;
 import jakarta.persistence.*;
 import jakarta.validation.constraints.NotNull;
@@ -21,12 +22,10 @@ public class Mesa {
     @NotNull(message = "Atributo numero é obrigatório!")
     private int numero;
 
-    @OneToMany(fetch = FetchType.LAZY, mappedBy = "mesa", cascade = CascadeType.REMOVE)
-    @JsonIgnoreProperties("mesa")
-    private List<Pedido> pedidos;
-
     @NotNull(message = "Atributo total é obrigatório!")
     private float total;
+
+    private boolean chamarGarcom;
 
     @Enumerated(EnumType.STRING)
     @NotNull(message = "Atributo status é obrigatório!")

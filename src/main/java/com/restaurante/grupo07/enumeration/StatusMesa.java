@@ -3,9 +3,9 @@ package com.restaurante.grupo07.enumeration;
 import com.fasterxml.jackson.annotation.JsonValue;
 
 public enum StatusMesa {
-    DISPONIVEL ("D", "DISPONIVEL"),
-    ABERTA ("A", "ABERTA"),
-    PENDENTE ("P", "PENDENTE");
+    DISPONIVEL ("D"),
+    ABERTA ("A"),
+    PENDENTE ("P");
 
     private String status;
 
