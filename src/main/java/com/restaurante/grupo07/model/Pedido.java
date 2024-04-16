@@ -41,5 +41,5 @@ public class Pedido {
     @Enumerated(EnumType.STRING)
     @NotNull(message = "Atributo status é obrigatório!")
     @Builder.Default
-    private StatusPedido status = StatusPedido.FEITO;
+    private StatusPedido status = StatusPedido.REALIZADO;
 }

@@ -18,11 +18,16 @@ public class Item {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
+    @NotNull(message = "Atributo produto é obrigatório!")
     @OneToOne(fetch = FetchType.LAZY)
     private Produto produto;
 
     @NotNull(message = "Atributo quantidade é obrigatório!")
-    private int quantidade;
+    @Min(1)
+    @Builder.Default
+    private int quantidade = 1;
+
+    private String observacao;
 
     @ManyToOne(fetch = FetchType.LAZY)
     @JsonIgnoreProperties("item")

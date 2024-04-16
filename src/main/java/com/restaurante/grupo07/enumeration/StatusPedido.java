@@ -3,9 +3,9 @@ package com.restaurante.grupo07.enumeration;
 import com.fasterxml.jackson.annotation.JsonValue;
 
 public enum StatusPedido {
-    FEITO ("FEITO"),
-    PRONTO ("PRONTO"),
-    ENTREGUE ("ENTREGUE");
+    REALIZADO ("R", "REALIZADO"),
+    PRONTO ("P", "PRONTO"),
+    ENTREGUE ("E", "ENTREGUE");
 
     private String status;
 
@@ -14,11 +14,11 @@ public enum StatusPedido {
     }
 
     public static StatusPedido doStatus (String status) {
-        if (status.equals("FEITO")) {
-            return FEITO;
-        } else if (status.equals("PRONTO")) {
+        if (status.equals("R")) {
+            return REALIZADO;
+        } else if (status.equals("P")) {
             return PRONTO;
-        } else if (status.equals("ENTREGUE")) {
+        } else if (status.equals("E")) {
             return ENTREGUE;
         } else {
             return null;

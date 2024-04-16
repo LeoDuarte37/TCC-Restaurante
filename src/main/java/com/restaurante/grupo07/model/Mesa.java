@@ -21,6 +21,10 @@ public class Mesa {
     @NotNull(message = "Atributo numero é obrigatório!")
     private int numero;
 
+    @OneToMany(fetch = FetchType.LAZY, mappedBy = "mesa", cascade = CascadeType.REMOVE)
+    @JsonIgnoreProperties("mesa")
+    private List<Pedido> pedidos;
+
     @NotNull(message = "Atributo total é obrigatório!")
     private float total;
 
