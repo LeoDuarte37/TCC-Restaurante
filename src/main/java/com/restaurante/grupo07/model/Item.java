@@ -23,7 +23,6 @@ public class Item {
     @OneToOne(fetch = FetchType.LAZY)
     private Produto produto;
 
-    @NotNull(message = "Atributo quantidade é obrigatório!")
     @Min(1)
     @Builder.Default
     private int quantidade = 1;

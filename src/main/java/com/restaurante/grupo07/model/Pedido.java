@@ -32,7 +32,6 @@ public class Pedido {
     @JsonIgnoreProperties("pedido")
     private List<Item> item;
 
-    @NotNull(message = "Atributo total é obrigatório!")
     private float total;
 
     @UpdateTimestamp
