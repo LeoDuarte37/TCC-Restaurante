@@ -1,10 +1,7 @@
 package com.restaurante.grupo07.resource.dto;
 
-import com.restaurante.grupo07.model.Item;
 import jakarta.persistence.Embeddable;
 import lombok.*;
-
-import java.util.List;
 
 @AllArgsConstructor
 @NoArgsConstructor
@@ -12,7 +9,10 @@ import java.util.List;
 @Embeddable
 @Getter
 @Setter
-public class PedidoDto {
-    private Long idMesa;
-    private List<Item> itens;
+public class ProdutoDto {
+    private String nome;
+    private String descricao;
+    private String foto;
+    private float valor;
+    private boolean disponivel;
 }

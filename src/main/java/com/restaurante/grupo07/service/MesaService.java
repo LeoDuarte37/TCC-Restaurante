@@ -8,6 +8,7 @@ import java.util.List;
 
 public interface MesaService {
 
+    Mesa buscarMesaPorId(Long id);
     List<Mesa> listarMesas();
     List<Mesa> listarMesasPorStatus(String status);
     List<Mesa> listarChamandoGarcom();

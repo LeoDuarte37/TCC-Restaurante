@@ -8,11 +8,11 @@ import com.restaurante.grupo07.resource.dto.PedidoDto;
 import java.util.List;
 
 public interface PedidoService {
+    Pedido buscarPedidoPorId(Long id);
     List<Item> listarPedidos();
     List<Item> listarPedidosPorStatus(String status);
     Pedido adicionarPedido(PedidoDto pedidoDto);
     void excluirPedido(Long id);
-    Pedido atualizarPedido(Long id);
+    Pedido atualizarPedido(Long id, Pedido pedido);
     Pedido atualizarStatusPedido(Long id, String status);
-
 }

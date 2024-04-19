@@ -28,8 +28,7 @@ public class Categoria {
     private String foto;
 
     @NotNull(message = "Atributo disponivel é obrigatório!")
-    @Builder.Default
-    private boolean disponivel = true;
+    private boolean disponivel;
 
     @OneToMany(fetch = FetchType.LAZY, mappedBy = "categoria", cascade = CascadeType.REMOVE)
     @JsonIgnoreProperties("categoria")

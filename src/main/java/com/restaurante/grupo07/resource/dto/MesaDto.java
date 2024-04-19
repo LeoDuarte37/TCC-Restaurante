@@ -10,4 +10,5 @@ import lombok.*;
 @Getter
 @Setter
 public class MesaDto {
+    private int numero;
 }

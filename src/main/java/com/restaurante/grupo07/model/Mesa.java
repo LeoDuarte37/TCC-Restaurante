@@ -22,10 +22,10 @@ public class Mesa {
     @NotNull(message = "Atributo numero é obrigatório!")
     private int numero;
 
-    @NotNull(message = "Atributo total é obrigatório!")
     private float total;
 
-    private boolean chamarGarcom;
+    @Builder.Default
+    private boolean chamarGarcom = false;
 
     @Enumerated(EnumType.STRING)
     @NotNull(message = "Atributo status é obrigatório!")

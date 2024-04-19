@@ -31,8 +31,8 @@ public class Produto {
     @NotNull(message = "Atributo valor é obrigatório!")
     private float valor;
 
-    @Builder.Default
-    private boolean disponivel = true;
+    @NotNull(message = "Atributo disponivel é obrigatório!")
+    private boolean disponivel;
 
     @ManyToOne(fetch = FetchType.LAZY)
     @JsonIgnoreProperties("produto")

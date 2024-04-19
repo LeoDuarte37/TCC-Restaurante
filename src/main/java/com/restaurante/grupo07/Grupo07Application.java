@@ -11,6 +11,12 @@ public class Grupo07Application {
 
 		// http://localhost:8080/h2-console
 		// https://www.youtube.com/watch?v=nG2KTQnES1s
+
+
+
+		// Filtro de requisição/consulta
+		// https://dzone.com/articles/spring-web-service-response-filtering
+		// https://jfilter.sframework.org/projects/jfilter/1.0.18/
 	}
 
 }

@@ -51,6 +51,11 @@
 			<artifactId>spring-boot-starter-test</artifactId>
 			<scope>test</scope>
 		</dependency>
+		<dependency>
+			<groupId>com.github.rkonovalov</groupId>
+			<artifactId>jfilter</artifactId>
+			<version>1.0.18</version>
+		</dependency>
 	</dependencies>
 
 	<build>
