@@ -27,6 +27,9 @@ public class Mesa {
     @Builder.Default
     private boolean chamarGarcom = false;
 
+    @OneToOne(fetch = FetchType.LAZY)
+    private Restaurante restaurante;
+
     @Enumerated(EnumType.STRING)
     @NotNull(message = "Atributo status é obrigatório!")
     @Builder.Default
