@@ -11,5 +11,5 @@ import lombok.*;
 @Setter
 public class MesaDto {
     private int numero;
-    private Long id_restaurante;
+    private Long idRestaurante;
 }

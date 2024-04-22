@@ -8,5 +8,6 @@ import java.util.List;
 
 public interface ProdutoRepository extends JpaRepository<Produto, Long> {
     public List<Produto> findByDisponivelTrue();
-        public List<Produto> findAllByNomeContainingIgnoreCase(@Param("nome") String nome);
+    public List<Produto> findAllByNomeContainingIgnoreCase(@Param("nome") String nome);
+
 }
