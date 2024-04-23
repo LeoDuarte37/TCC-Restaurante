@@ -7,11 +7,11 @@ import java.util.List;
 
 public interface CategoriaService {
     Categoria buscarCategoriaPorId(Long id);
+    Categoria adicionarCategoria(CategoriaDto categoriaDto);
     List<Categoria> listarCategorias();
     List<Categoria> listarCategoriasDisponiveis();
     List<Categoria> listarCategoriasPorNome(String nome);
-    Categoria adicionarCategoria(CategoriaDto categoriaDto);
-    Categoria editarCategoria(Long id, Categoria categoria);
+    Categoria editarCategoria(Long id, CategoriaDto categoriaDto);
     Categoria editarStatusCategoria(Long id, boolean disponivel);
     void excluirCategoria(Long id);
 }

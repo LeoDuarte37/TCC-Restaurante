@@ -1,8 +1,8 @@
 package com.restaurante.grupo07.model;
 
-import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.restaurante.grupo07.enumeration.StatusMesa;
 import jakarta.persistence.*;
+import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.NotNull;
 import lombok.*;
 
@@ -24,14 +24,13 @@ public class Mesa {
 
     private float total;
 
-    @Builder.Default
-    private boolean chamarGarcom = false;
+    private boolean chamarGarcom;
 
+    @NotNull(message = "Atributo restaurante é obrigatório!")
     @OneToOne(fetch = FetchType.LAZY)
     private Restaurante restaurante;
 
+    @NotBlank(message = "Atributo status é obrigatório!")
     @Enumerated(EnumType.STRING)
-    @NotNull(message = "Atributo status é obrigatório!")
-    @Builder.Default
-    private StatusMesa status = StatusMesa.DISPONIVEL;
+    private StatusMesa status;
 }

@@ -15,4 +15,5 @@ public class ProdutoDto {
     private String foto;
     private float valor;
     private boolean disponivel;
+    private Long idCategoria;
 }
