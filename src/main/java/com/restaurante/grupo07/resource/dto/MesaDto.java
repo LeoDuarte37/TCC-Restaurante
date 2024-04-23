@@ -12,5 +12,4 @@ import lombok.*;
 public class MesaDto {
     private int numero;
     private Long idRestaurante;
-    private String status;
 }

@@ -24,13 +24,15 @@ public class Mesa {
 
     private float total;
 
-    private boolean chamarGarcom;
+    @Builder.Default
+    private boolean chamarGarcom = false;
 
     @NotNull(message = "Atributo restaurante é obrigatório!")
-    @OneToOne(fetch = FetchType.LAZY)
+    @ManyToOne(fetch = FetchType.LAZY)
     private Restaurante restaurante;
 
     @NotBlank(message = "Atributo status é obrigatório!")
     @Enumerated(EnumType.STRING)
-    private StatusMesa status;
+    @Builder.Default
+    private StatusMesa status = StatusMesa.DISPONIVEL;
 }

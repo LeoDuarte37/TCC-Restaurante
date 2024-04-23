@@ -12,7 +12,10 @@ public class Grupo07Application {
 		// CONTINUAR EM MESA SERVICE E DTO
 
 		// http://localhost:8080/h2-console
+
+
 		// https://www.youtube.com/watch?v=nG2KTQnES1s
+
 
 		// Filtro de requisição/consulta
 		// https://dzone.com/articles/spring-web-service-response-filtering
@@ -27,6 +30,8 @@ public class Grupo07Application {
 			from Medico m
 			inner join m.especialidade e
 		 */
+
+
 
 		/*
 			Comandos data.sql para testes
