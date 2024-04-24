@@ -22,8 +22,6 @@ public class Mesa {
     @NotNull(message = "Atributo numero é obrigatório!")
     private int numero;
 
-    private float total;
-
     @Builder.Default
     private boolean chamarGarcom = false;
 

@@ -9,5 +9,4 @@ import java.util.List;
 public interface CategoriaRepository extends JpaRepository<Categoria, Long> {
     public List<Categoria> findByDisponivelTrue();
     public List<Categoria> findAllByNomeContainingIgnoreCase(@Param("nome") String nome);
-
 }

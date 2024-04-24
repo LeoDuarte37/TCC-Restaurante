@@ -12,5 +12,6 @@ import lombok.*;
 public class ItemDto {
     private Long idProduto;
     private int quantidade;
+    private String observacao;
     private Long idPedido;
 }

@@ -6,8 +6,8 @@ import com.restaurante.grupo07.resource.dto.CategoriaDto;
 import java.util.List;
 
 public interface CategoriaService {
-    Categoria buscarCategoriaPorId(Long id);
     Categoria adicionarCategoria(CategoriaDto categoriaDto);
+    Categoria buscarCategoriaPorId(Long id);
     List<Categoria> listarCategorias();
     List<Categoria> listarCategoriasDisponiveis();
     List<Categoria> listarCategoriasPorNome(String nome);

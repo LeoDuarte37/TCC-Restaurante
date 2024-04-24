@@ -6,8 +6,8 @@ import com.restaurante.grupo07.resource.dto.MesaDto;
 import java.util.List;
 
 public interface MesaService {
-    Mesa buscarMesaPorId(Long id);
     Mesa adicionarMesa(MesaDto mesaDto);
+    Mesa buscarMesaPorId(Long id);
     List<Mesa> listarMesas();
     List<Mesa> listarMesasPorStatus(String status);
     List<Mesa> listarChamandoGarcom();

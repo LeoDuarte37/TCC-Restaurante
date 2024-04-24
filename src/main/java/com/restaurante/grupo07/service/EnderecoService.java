@@ -1,10 +1,14 @@
 package com.restaurante.grupo07.service;
 
+import java.util.List;
+
+import com.restaurante.grupo07.model.Endereco;
+import com.restaurante.grupo07.resource.dto.EnderecoDto;
+
 public interface EnderecoService {
-    Endereco buscarEnderecoPorId(Long id);
     Endereco adicionarEndereco(EnderecoDto enderecoDto);
+    Endereco buscarEnderecoPorId(Long id);
     List<Endereco> listarEnderecos();
-    List<Endereco> listarEnderecoPorStatus(String status);
     Endereco atualizarEndereco(Long id, EnderecoDto enderecoDto);
     void excluirPedido(Long id);
 }

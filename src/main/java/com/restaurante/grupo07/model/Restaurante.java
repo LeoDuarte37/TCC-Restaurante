@@ -26,9 +26,11 @@ public class Restaurante {
     @CNPJ
     private int cnpj;
 
+    @NotNull(message = "Atributo endereco é obrigatório!")
     @OneToOne(fetch = FetchType.LAZY)
     private Endereco endereco;
 
+    @NotNull(message = "Atributo contato é obrigatório!")
     @OneToOne(fetch = FetchType.LAZY)
     private Contato contato;
 }
