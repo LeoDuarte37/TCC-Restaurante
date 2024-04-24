@@ -30,6 +30,7 @@ public class Categoria {
     @NotNull(message = "Atributo disponivel é obrigatório!")
     private boolean disponivel;
 
+    @NotNull(message = "Atributo produto é obrigatório!")
     @OneToMany(fetch = FetchType.LAZY, mappedBy = "categoria", cascade = CascadeType.REMOVE)
     @JsonIgnoreProperties("categoria")
     private List<Produto> produto;

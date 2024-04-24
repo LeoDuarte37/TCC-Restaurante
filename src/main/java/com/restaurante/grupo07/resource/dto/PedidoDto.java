@@ -14,7 +14,7 @@ import java.util.List;
 @Setter
 public class PedidoDto {
     private Long idMesa;
-    private List<Item> itens;
+    private List<Item> item;
     private float valor;
     private String status;
 }

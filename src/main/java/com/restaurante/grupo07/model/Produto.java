@@ -34,6 +34,7 @@ public class Produto {
     @NotNull(message = "Atributo disponivel é obrigatório!")
     private boolean disponivel;
 
+    @NotNull(message = "Atributo categoria é obrigatório!")
     @ManyToOne(fetch = FetchType.LAZY)
     @JsonIgnoreProperties("produto")
     private Categoria categoria;
