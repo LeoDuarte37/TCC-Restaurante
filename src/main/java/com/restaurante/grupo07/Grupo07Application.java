@@ -13,6 +13,8 @@ public class Grupo07Application {
 
 		// http://localhost:8080/h2-console
 
+		// https://docs.spring.io/spring-data/jpa/reference/jpa/query-methods.html
+
 
 		// https://www.youtube.com/watch?v=nG2KTQnES1s
 
