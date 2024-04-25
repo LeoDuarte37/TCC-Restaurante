@@ -29,7 +29,6 @@ public class Item {
 
     private String observacao;
 
-    @NotNull(message = "Atributo pedido é obrigatório!")
     @ManyToOne(fetch = FetchType.LAZY)
     @JsonIgnoreProperties("item")
     private Pedido pedido;

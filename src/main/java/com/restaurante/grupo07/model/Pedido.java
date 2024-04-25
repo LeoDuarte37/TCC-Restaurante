@@ -26,12 +26,11 @@ public class Pedido {
     private Long id;
 
     @NotNull(message = "Atributo mesa é obrigatório!")
-    @ManyToOne(fetch = FetchType.LAZY)
+    @ManyToOne(fetch = FetchType.EAGER)
     @JsonIgnore
     private Mesa mesa;
 
-    @NotNull(message = "Atributo item é obrigatório!")
-    @OneToMany(fetch = FetchType.LAZY, mappedBy = "pedido", cascade = CascadeType.REMOVE)
+    @OneToMany(fetch = FetchType.EAGER, mappedBy = "pedido", cascade = CascadeType.REMOVE)
     @JsonIgnoreProperties("pedido")
     private List<Item> item;
 
@@ -40,7 +39,6 @@ public class Pedido {
     @UpdateTimestamp
     private LocalDateTime data;
 
-    @NotBlank(message = "Atributo status é obrigatório!")
     @Enumerated(EnumType.STRING)
     private StatusPedido status;
 }

@@ -10,6 +10,6 @@ import lombok.*;
 @Getter
 @Setter
 public class MesaDto {
-    private int numero;
+    private Long numero;
     private Long idRestaurante;
 }

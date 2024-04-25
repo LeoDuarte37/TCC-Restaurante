@@ -23,8 +23,7 @@ public class Restaurante {
     private String nome;
 
     @NotNull(message = "Atributo cnpj é obrigatório!")
-    @CNPJ
-    private int cnpj;
+    private String cnpj;
 
     @NotNull(message = "Atributo endereco é obrigatório!")
     @OneToOne(fetch = FetchType.LAZY)

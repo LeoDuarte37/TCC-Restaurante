@@ -10,6 +10,7 @@ public interface PedidoService {
     Pedido adicionarPedido(PedidoDto pedidoDto);
     Pedido buscarPedidoPorId(Long id);
     List<Pedido> listarPedidos();
+    List<Object[]> listarPedidosPorMesa(Long mesa);
     List<Pedido> listarPedidosPorStatus(String status);
     Pedido atualizarPedido(Long id, PedidoDto pedidoDto);
     Pedido atualizarStatusPedido(Long id, String status);

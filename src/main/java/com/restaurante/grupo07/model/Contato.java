@@ -24,5 +24,5 @@ public class Contato {
     private String email;
 
     @NotNull(message = "Atributo telefone é obrigatório!")
-    private int telefone;
+    private String telefone;
 }

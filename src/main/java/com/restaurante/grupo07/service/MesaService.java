@@ -7,13 +7,13 @@ import java.util.List;
 
 public interface MesaService {
     Mesa adicionarMesa(MesaDto mesaDto);
-    Mesa buscarMesaPorId(Long id);
+    Mesa buscarMesaPorNumero(Long numero);
     List<Mesa> listarMesas();
     List<Mesa> listarMesasPorStatus(String status);
     List<Mesa> listarChamandoGarcom();
-    Mesa atualizarMesa(Long id, MesaDto mesaDto);
-    Mesa atualizarStatusMesa(Long id, String status);
-    Mesa atualizarChamarGarcom(Long id, boolean chamarGarcom);
-    Mesa fecharMesa(Long id);
-    void excluirMesa(Long id);
+    Mesa atualizarMesa(Long numero, MesaDto mesaDto);
+    Mesa atualizarStatusMesa(Long numero, String status);
+    Mesa atualizarChamarGarcom(Long numero, boolean chamarGarcom);
+    Mesa fecharMesa(Long numero);
+    void excluirMesa(Long numero);
 }

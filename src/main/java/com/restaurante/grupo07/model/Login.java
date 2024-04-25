@@ -16,9 +16,6 @@ import lombok.*;
 public class Login {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long id;
-
     @NotBlank(message = "Atributo login é obrigatório!")
     @Size(min = 5)
     private String login;
