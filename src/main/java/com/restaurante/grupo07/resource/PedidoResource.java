@@ -40,7 +40,7 @@ public class PedidoResource {
     public ResponseEntity<Pedido> atualizarPedido(@PathVariable("id") Long id, @Valid @RequestBody PedidoDto pedidoDto) {
         return pedidoService.atualizarPedido(id, pedidoDto);
     }
-    @PatchMapping("/atualizarStatus/{id}")
+    @PatchMapping("/{id}/atualizarStatus")
     public ResponseEntity<Pedido> atualizarStatusPedido(@PathVariable("id") Long id, @RequestBody String status) {
         return pedidoService.atualizarStatusPedido(id, status);
     }

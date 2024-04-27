@@ -32,7 +32,7 @@ public class CategoriaResource {
     public ResponseEntity<List<Categoria>> listarCategorias() {
         return categoriaService.listarCategorias();
     }
-    @GetMapping("/listarDisponiveis")
+    @GetMapping("/listar/disponiveis")
     public ResponseEntity<List<Categoria>> listarCategoriasDisponiveis() {
         return categoriaService.listarCategoriasDisponiveis();
     }
