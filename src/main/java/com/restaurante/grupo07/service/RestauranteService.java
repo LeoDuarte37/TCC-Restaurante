@@ -4,11 +4,12 @@ import java.util.List;
 
 import com.restaurante.grupo07.model.Restaurante;
 import com.restaurante.grupo07.resource.dto.RestauranteDto;
+import org.springframework.http.ResponseEntity;
 
 public interface RestauranteService {
-    Restaurante adicionarRestaurante(RestauranteDto restauranteDto);
-    Restaurante buscarRestaurantePorId(Long id);
-    List<Restaurante> listarRestaurantes();
-    Restaurante atualizarRestaurante(Long id, RestauranteDto restauranteDto);
+    ResponseEntity<Restaurante> adicionarRestaurante(RestauranteDto restauranteDto);
+    ResponseEntity<Restaurante> buscarRestaurantePorId(Long id);
+    ResponseEntity<List<Restaurante>> listarRestaurantes();
+    ResponseEntity<Restaurante> atualizarRestaurante(Long id, RestauranteDto restauranteDto);
     void excluirRestaurante(Long id);
 }

@@ -2,18 +2,20 @@ package com.restaurante.grupo07.service;
 
 import com.restaurante.grupo07.model.Mesa;
 import com.restaurante.grupo07.resource.dto.MesaDto;
+import org.springframework.http.ResponseEntity;
 
 import java.util.List;
 
 public interface MesaService {
-    Mesa adicionarMesa(MesaDto mesaDto);
-    Mesa buscarMesaPorNumero(Long numero);
-    List<Mesa> listarMesas();
-    List<Mesa> listarMesasPorStatus(String status);
-    List<Mesa> listarChamandoGarcom();
-    Mesa atualizarMesa(Long numero, MesaDto mesaDto);
-    Mesa atualizarStatusMesa(Long numero, String status);
-    Mesa atualizarChamarGarcom(Long numero, boolean chamarGarcom);
-    Mesa fecharMesa(Long numero);
+    ResponseEntity<Mesa> adicionarMesa(MesaDto mesaDto);
+    ResponseEntity<Mesa> buscarMesaPorNumero(Long numero);
+    ResponseEntity<List<Mesa>> listarMesas();
+    ResponseEntity<List<Mesa>> listarMesasPorStatus(String status);
+    ResponseEntity<List<Mesa>> listarChamandoGarcom();
+    ResponseEntity<Mesa> atualizarMesa(Long numero, MesaDto mesaDto);
+    ResponseEntity<Mesa> atualizarStatusMesa(Long numero, String status);
+    ResponseEntity<Mesa> atualizarChamarGarcom(Long numero, boolean chamarGarcom);
     void excluirMesa(Long numero);
+
+    // ResponseEntity<Mesa> fecharMesa(Long numero);
 }

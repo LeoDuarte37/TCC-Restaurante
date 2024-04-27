@@ -8,8 +8,6 @@ import org.springframework.data.repository.query.Param;
 import java.util.List;
 
 public interface MesaRepository extends JpaRepository<Mesa, Long> {
-
     public List<Mesa> findAllByStatusOrderByNumero(@Param("status") StatusMesa status);
-
     public List<Mesa> findAllByChamarGarcomTrue();
 }
