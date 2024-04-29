@@ -11,6 +11,13 @@ public class Grupo07Application {
 
 		// REFATORAR O RETORNO DOS MÉTODOS e TERMINAR OS MAPPERS
 
+		// Videos e blog: Padrão Dto e Mapper
+		// https://www.youtube.com/watch?v=2GTgDLkDWPQ&list=PLGxZ4Rq3BOBpwaVgAPxTxhdX_TfSVlTcY&index=43
+		// https://www.youtube.com/watch?v=qeM3PHD4qoQ
+		// https://www.youtube.com/watch?v=lmzpyCNyziI
+		// https://marioalvial.medium.com/blindando-sua-api-spring-boot-com-o-padr%C3%A3o-dto-44f97020d1a0
+
+
 		// http://localhost:8080/h2-console
 
 		// https://docs.spring.io/spring-data/jpa/reference/jpa/query-methods.html
