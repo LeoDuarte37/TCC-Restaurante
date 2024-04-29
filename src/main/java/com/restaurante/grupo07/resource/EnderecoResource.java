@@ -1,11 +1,14 @@
 package com.restaurante.grupo07.resource;
 
 import com.restaurante.grupo07.model.Endereco;
-import com.restaurante.grupo07.resource.dto.EnderecoDto;
+import com.restaurante.grupo07.dto.EnderecoDto;
 import com.restaurante.grupo07.service.EnderecoService;
 import jakarta.validation.Valid;
+import jakarta.validation.constraints.NotNull;
 import lombok.RequiredArgsConstructor;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
+import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -15,25 +18,29 @@ import java.util.List;
 @RequiredArgsConstructor
 public class EnderecoResource {
 
+    @Autowired
     private final EnderecoService enderecoService;
     @PostMapping
-    public ResponseEntity<Endereco> adicionarEndereco(@Valid @RequestBody EnderecoDto enderecoDto) {
-        return enderecoService.adicionarEndereco(enderecoDto);
+    @Transactional
+    public ResponseEntity<Endereco> adicionar(@Valid @RequestBody EnderecoDto enderecoDto) {
+        return enderecoService.adicionar(enderecoDto);
     }
     @GetMapping("/{id}")
-    public ResponseEntity<Endereco> buscarEnderecoPorId(@PathVariable("id") Long id) {
-        return enderecoService.buscarEnderecoPorId(id);
+    public ResponseEntity<Endereco> buscarPorId(@PathVariable("id") @NotNull Long id) {
+        return enderecoService.buscarPorId(id);
     }
     @GetMapping("/listar")
-    public ResponseEntity<List<Endereco>> listarEnderecos() {
-        return enderecoService.listarEnderecos();
+    public ResponseEntity<List<Endereco>> listar() {
+        return enderecoService.listar();
     }
-    @PutMapping("/{id}")
-    public ResponseEntity<Endereco> atualizarEndereco(@PathVariable("id") Long id, @Valid @RequestBody EnderecoDto enderecoDto) {
-        return enderecoService.atualizarEndereco(id, enderecoDto);
+    @PutMapping
+    @Transactional
+    public ResponseEntity<Endereco> atualizar(@Valid @RequestBody EnderecoDto enderecoDto) {
+        return enderecoService.atualizar(enderecoDto);
     }
     @DeleteMapping("/{id}")
-    public void excluirEndereco(@PathVariable("id") Long id) {
-        enderecoService.excluirPedido(id);
+    @Transactional
+    public void excluir(@PathVariable("id") @NotNull Long id) {
+        enderecoService.excluir(id);
     }
 }

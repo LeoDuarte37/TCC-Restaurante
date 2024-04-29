@@ -1,18 +1,18 @@
 package com.restaurante.grupo07.service;
 
 import com.restaurante.grupo07.model.Categoria;
-import com.restaurante.grupo07.resource.dto.CategoriaDto;
+import com.restaurante.grupo07.dto.CategoriaDto;
 import org.springframework.http.ResponseEntity;
 
 import java.util.List;
 
 public interface CategoriaService {
-    ResponseEntity<Categoria> adicionarCategoria(CategoriaDto categoriaDto);
-    ResponseEntity<Categoria> buscarCategoriaPorId(Long id);
-    ResponseEntity<List<Categoria>> buscarCategoriasPorNome(String nome);
-    ResponseEntity<List<Categoria>> listarCategorias();
-    ResponseEntity<List<Categoria>> listarCategoriasDisponiveis();
-    ResponseEntity<Categoria> editarCategoria(Long id, CategoriaDto categoriaDto);
-    ResponseEntity<Categoria> editarStatusCategoria(Long id, boolean disponivel);
-    void excluirCategoria(Long id);
+    ResponseEntity<Categoria> adicionar(CategoriaDto categoriaDto);
+    ResponseEntity<Categoria> buscarPorId(Long id);
+    ResponseEntity<List<Categoria>> buscarPorNome(String nome);
+    ResponseEntity<List<Categoria>> listar();
+    ResponseEntity<List<Categoria>> listarDisponiveis();
+    ResponseEntity<Categoria> atualizar(CategoriaDto categoriaDto);
+    ResponseEntity<Categoria> atualizarStatus(Long id, boolean disponivel);
+    void excluir(Long id);
 }

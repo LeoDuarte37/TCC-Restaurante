@@ -1,14 +1,14 @@
 package com.restaurante.grupo07.resource;
 
-import com.restaurante.grupo07.model.Perfil;
 import com.restaurante.grupo07.model.Usuario;
-import com.restaurante.grupo07.resource.dto.PerfilDto;
-import com.restaurante.grupo07.resource.dto.UsuarioDto;
-import com.restaurante.grupo07.service.PerfilService;
+import com.restaurante.grupo07.dto.UsuarioDto;
 import com.restaurante.grupo07.service.UsuarioService;
 import jakarta.validation.Valid;
+import jakarta.validation.constraints.NotNull;
 import lombok.RequiredArgsConstructor;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
+import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -18,25 +18,29 @@ import java.util.List;
 @RequiredArgsConstructor
 public class UsuarioResource {
 
+    @Autowired
     private final UsuarioService usuarioService;
     @PostMapping
-    public ResponseEntity<Usuario> adicionarUsuario(@Valid @RequestBody UsuarioDto usuarioDto) {
-        return usuarioService.adicionarUsuario(usuarioDto);
+    @Transactional
+    public ResponseEntity<Usuario> adicionar(@Valid @RequestBody UsuarioDto usuarioDto) {
+        return usuarioService.adicionar(usuarioDto);
     }
     @GetMapping("/{id}")
-    public ResponseEntity<Usuario> buscarUsuarioPorId(@PathVariable("id") Long id) {
-        return usuarioService.buscarUsuarioPorId(id);
+    public ResponseEntity<Usuario> buscarPorId(@PathVariable("id") @NotNull Long id) {
+        return usuarioService.buscarPorId(id);
     }
     @GetMapping("/listar")
-    public ResponseEntity<List<Usuario>> listarUsuarios() {
-        return usuarioService.listarUsuarios();
+    public ResponseEntity<List<Usuario>> listar() {
+        return usuarioService.listar();
     }
-    @PutMapping("/{id}")
-    public ResponseEntity<Usuario> atualizarUsuario(@PathVariable("id") Long id, @Valid @RequestBody UsuarioDto usuarioDto) {
-        return usuarioService.atualizarUsuario(id, usuarioDto);
+    @PutMapping
+    @Transactional
+    public ResponseEntity<Usuario> atualizar(@Valid @RequestBody UsuarioDto usuarioDto) {
+        return usuarioService.atualizar(usuarioDto);
     }
     @DeleteMapping("/{id}")
-    public void excluirUsuario(@PathVariable("id") Long id) {
-        usuarioService.excluirUsuario(id);
+    @Transactional
+    public void excluir(@PathVariable("id") @NotNull Long id) {
+        usuarioService.excluir(id);
     }
 }

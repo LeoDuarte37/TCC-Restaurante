@@ -1,11 +1,15 @@
 package com.restaurante.grupo07.resource;
 
 import com.restaurante.grupo07.model.Categoria;
-import com.restaurante.grupo07.resource.dto.CategoriaDto;
+import com.restaurante.grupo07.dto.CategoriaDto;
 import com.restaurante.grupo07.service.CategoriaService;
 import jakarta.validation.Valid;
+import jakarta.validation.constraints.NotBlank;
+import jakarta.validation.constraints.NotNull;
 import lombok.RequiredArgsConstructor;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
+import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -15,37 +19,42 @@ import java.util.List;
 @RequiredArgsConstructor
 public class CategoriaResource {
 
+    @Autowired
     private final CategoriaService categoriaService;
     @PostMapping
-    public ResponseEntity<Categoria> adicionarCategoria(@Valid @RequestBody CategoriaDto categoriaDto) {
-        return categoriaService.adicionarCategoria(categoriaDto);
+    @Transactional
+    public ResponseEntity<Categoria> adicionar(@Valid @RequestBody CategoriaDto categoriaDto) {
+        return categoriaService.adicionar(categoriaDto);
     }
     @GetMapping("/{id}")
-    public ResponseEntity<Categoria> buscarCategoriaPorId(@PathVariable("id") Long id) {
-        return categoriaService.buscarCategoriaPorId(id);
+    public ResponseEntity<Categoria> buscarPorId(@PathVariable("id") @NotNull Long id) {
+        return categoriaService.buscarPorId(id);
     }
     @GetMapping("/{nome}")
-    public ResponseEntity<List<Categoria>> buscarCategoriasPorNome(@PathVariable("nome") String nome) {
-        return categoriaService.buscarCategoriasPorNome(nome);
+    public ResponseEntity<List<Categoria>> buscarPorNome(@PathVariable("nome") @NotBlank String nome) {
+        return categoriaService.buscarPorNome(nome);
     }
     @GetMapping("/listar")
-    public ResponseEntity<List<Categoria>> listarCategorias() {
-        return categoriaService.listarCategorias();
+    public ResponseEntity<List<Categoria>> listar() {
+        return categoriaService.listar();
     }
     @GetMapping("/listar/disponiveis")
-    public ResponseEntity<List<Categoria>> listarCategoriasDisponiveis() {
-        return categoriaService.listarCategoriasDisponiveis();
+    public ResponseEntity<List<Categoria>> listarDisponiveis() {
+        return categoriaService.listarDisponiveis();
     }
-    @PutMapping("/{id}")
-    public ResponseEntity<Categoria> atualizarCategoria(@PathVariable("id") Long id, @Valid @RequestBody CategoriaDto categoriaDto) {
-        return categoriaService.editarCategoria(id, categoriaDto);
+    @PutMapping
+    @Transactional
+    public ResponseEntity<Categoria> atualizar(@Valid @RequestBody CategoriaDto categoriaDto) {
+        return categoriaService.atualizar(categoriaDto);
     }
     @PatchMapping("/{id}")
-    public ResponseEntity<Categoria> atualizarStatusCategoria(@PathVariable("id") Long id, @Valid @RequestBody boolean disponivel) {
-        return categoriaService.editarStatusCategoria(id, disponivel);
+    @Transactional
+    public ResponseEntity<Categoria> atualizarStatus(@PathVariable("id") @NotNull Long id, @RequestBody @NotNull boolean disponivel) {
+        return categoriaService.atualizarStatus(id, disponivel);
     }
     @DeleteMapping("/{id}")
-    public void excluirCategoria(@PathVariable("id") Long id) {
-        categoriaService.excluirCategoria(id);
+    @Transactional
+    public void excluir(@PathVariable("id") @NotNull Long id) {
+        categoriaService.excluir(id);
     }
 }

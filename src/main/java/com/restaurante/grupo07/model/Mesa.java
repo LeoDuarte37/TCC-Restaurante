@@ -16,6 +16,7 @@ import lombok.*;
 public class Mesa {
 
     @Id
+    @NotNull(message = "atributo numero é obrigatório!")
     private Long numero;
 
     @Builder.Default

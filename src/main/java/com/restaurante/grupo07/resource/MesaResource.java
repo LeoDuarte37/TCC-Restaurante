@@ -1,11 +1,15 @@
 package com.restaurante.grupo07.resource;
 
 import com.restaurante.grupo07.model.Mesa;
-import com.restaurante.grupo07.resource.dto.MesaDto;
+import com.restaurante.grupo07.dto.MesaDto;
 import com.restaurante.grupo07.service.MesaService;
 import jakarta.validation.Valid;
+import jakarta.validation.constraints.NotBlank;
+import jakarta.validation.constraints.NotNull;
 import lombok.RequiredArgsConstructor;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
+import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -15,41 +19,47 @@ import java.util.List;
 @RequiredArgsConstructor
 public class MesaResource {
 
+    @Autowired
     private final MesaService mesaService;
     @PostMapping
-    public ResponseEntity<Mesa> adicionarMesa(@Valid @RequestBody MesaDto mesaDto) {
-        return mesaService.adicionarMesa(mesaDto);
+    @Transactional
+    public ResponseEntity<Mesa> adicionar(@Valid @RequestBody MesaDto mesaDto) {
+        return mesaService.adicionar(mesaDto);
     }
     @GetMapping("/{numero}")
-    public ResponseEntity<Mesa> buscarMesaPorNumero(@PathVariable("numero") Long numero) {
-        return mesaService.buscarMesaPorNumero(numero);
+    public ResponseEntity<Mesa> buscarPorNumero(@PathVariable("numero") @NotNull Long numero) {
+        return mesaService.buscarPorNumero(numero);
     }
     @GetMapping("/listar")
-    public ResponseEntity<List<Mesa>> listarMesas() {
-        return mesaService.listarMesas();
+    public ResponseEntity<List<Mesa>> listar() {
+        return mesaService.listar();
     }
     @GetMapping("/listar/status/{status}")
-    public ResponseEntity<List<Mesa>> listarMesasPorStatus(@PathVariable("status") String status) {
-        return mesaService.listarMesasPorStatus(status);
+    public ResponseEntity<List<Mesa>> listarPorStatus(@PathVariable("status") @NotBlank String status) {
+        return mesaService.listarPorStatus(status);
     }
     @GetMapping("/listar/chamandoGarcom")
     public ResponseEntity<List<Mesa>> listarChamandoGarcom() {
         return mesaService.listarChamandoGarcom();
     }
-    @PutMapping("/{id}")
-    public ResponseEntity<Mesa> atualizarMesa(@PathVariable("id") Long id, @Valid @RequestBody MesaDto mesaDto) {
-        return mesaService.atualizarMesa(id, mesaDto);
+    @PutMapping
+    @Transactional
+    public ResponseEntity<Mesa> atualizar(@Valid @RequestBody MesaDto mesaDto) {
+        return mesaService.atualizar(mesaDto);
     }
-    @PatchMapping("/{id}/atualizarStatus")
-    public ResponseEntity<Mesa> atualizarStatusMesa(@PathVariable("id") Long id, @RequestBody String status) {
-        return mesaService.atualizarStatusMesa(id, status);
+    @PatchMapping("/{numero}/atualizarStatus")
+    @Transactional
+    public ResponseEntity<Mesa> atualizarStatus(@PathVariable("numero") @NotNull Long numero, @RequestBody @NotBlank String status) {
+        return mesaService.atualizarStatus(numero, status);
     }
-    @PatchMapping("/{id}/atualizarChamarGarcom")
-    public ResponseEntity<Mesa> atualizarChamarGarcom(@PathVariable("id") Long id, @RequestBody boolean chamarGarcom) {
-        return mesaService.atualizarChamarGarcom(id, chamarGarcom);
+    @PatchMapping("/{numero}/atualizarChamarGarcom")
+    @Transactional
+    public ResponseEntity<Mesa> atualizarChamarGarcom(@PathVariable("numero") @NotNull Long numero, @RequestBody @NotNull boolean chamarGarcom) {
+        return mesaService.atualizarChamarGarcom(numero, chamarGarcom);
     }
     @DeleteMapping("/{id}")
-    public void excluirMesa(@PathVariable("id") Long id) {
-        mesaService.excluirMesa(id);
+    @Transactional
+    public void excluir(@PathVariable("id") @NotNull Long id) {
+        mesaService.excluir(id);
     }
 }
