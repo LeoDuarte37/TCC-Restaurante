@@ -1,7 +1,6 @@
 package com.restaurante.grupo07.resource;
 
 import com.restaurante.grupo07.model.Item;
-import com.restaurante.grupo07.dto.ItemDto;
 import com.restaurante.grupo07.service.ItemService;
 import jakarta.validation.Valid;
 import jakarta.validation.constraints.NotNull;

@@ -3,7 +3,6 @@ package com.restaurante.grupo07.service;
 import java.util.List;
 
 import com.restaurante.grupo07.model.Item;
-import com.restaurante.grupo07.dto.ItemDto;
 import org.springframework.http.ResponseEntity;
 
 public interface ItemService {

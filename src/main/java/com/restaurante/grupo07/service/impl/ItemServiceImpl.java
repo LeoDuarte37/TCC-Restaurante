@@ -2,7 +2,6 @@ package com.restaurante.grupo07.service.impl;
 
 import com.restaurante.grupo07.model.Item;
 import com.restaurante.grupo07.repository.ItemRepository;
-import com.restaurante.grupo07.dto.ItemDto;
 import com.restaurante.grupo07.service.ItemService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;

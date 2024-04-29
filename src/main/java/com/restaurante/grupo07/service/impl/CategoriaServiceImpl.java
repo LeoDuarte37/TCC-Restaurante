@@ -1,13 +1,13 @@
 package com.restaurante.grupo07.service.impl;
 
+import com.restaurante.grupo07.dto.CategoriaDto;
+import com.restaurante.grupo07.dto.mapper.CategoriaMapper;
 import com.restaurante.grupo07.model.Categoria;
 import com.restaurante.grupo07.repository.CategoriaRepository;
-import com.restaurante.grupo07.dto.CategoriaDto;
 import com.restaurante.grupo07.service.CategoriaService;
+import jakarta.persistence.EntityNotFoundException;
 import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.HttpStatus;
-import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -18,50 +18,51 @@ public class CategoriaServiceImpl implements CategoriaService {
 
     @Autowired
     private final CategoriaRepository categoriaRepository;
+
+    @Autowired
+    private final CategoriaMapper categoriaMapper;
     @Override
-    public ResponseEntity<Categoria> adicionar(CategoriaDto categoriaDto) {
-        Categoria categoria = new Categoria(
-                categoriaDto.nome(),
-                categoriaDto.foto(),
-                categoriaDto.disponivel()
-        );
-        return ResponseEntity.status(HttpStatus.CREATED).body(categoriaRepository.save(categoria));
+    public CategoriaDto adicionar(com.restaurante.grupo07.dto.CategoriaDto categoriaDto) {
+        Categoria categoria = categoriaMapper.toEntity(categoriaDto);
+        //return categoriaRepository.save(categoria);
     }
 
     @Override
-    public ResponseEntity<Categoria> buscarPorId(Long id) {
-        return categoriaRepository.findById(id).map(resposta -> ResponseEntity.ok(resposta))
-                .orElse(ResponseEntity.status(HttpStatus.NOT_FOUND).build());
+    public CategoriaDto buscarPorId(Long id) {
+        return null;
     }
 
     @Override
-    public ResponseEntity<List<Categoria>> buscarPorNome(String nome) {
-        return ResponseEntity.ok(categoriaRepository.findAllByNomeContainingIgnoreCase(nome));
+    public List<CategoriaDto> buscarPorNome(String nome) {
+        //return categoriaRepository.findAllByNomeContainingIgnoreCase(nome);
     }
 
     @Override
-    public ResponseEntity<List<Categoria>> listar() {
-        return ResponseEntity.ok(categoriaRepository.findAll());
+    public List<CategoriaDto> listar() {
+        //return categoriaRepository.findAll();
     }
 
     @Override
-    public ResponseEntity<List<Categoria>> listarDisponiveis() {
-        return ResponseEntity.ok(categoriaRepository.findByDisponivelTrue());
+    public List<CategoriaDto> listarDisponiveis() {
+        //return categoriaRepository.findByDisponivelTrue();
     }
 
     @Override
-    public ResponseEntity<Categoria> atualizar(CategoriaDto categoriaDto) {
+    public CategoriaDto atualizar(CategoriaDto categoriaDto) {
 
         return categoriaRepository.findById(categoriaDto.id())
-                .map(resposta -> ResponseEntity.status(HttpStatus.CREATED)
-                        .body(categoriaRepository.save(categoria)));
+                .map(entity -> {
+                    entity.setNome(categoriaDto.nome());
+                    entity.setFoto(categoriaDto.foto());
+                    entity.setDisponivel(categoriaDto.disponivel());
+                    return categoriaMapper.toDto(categoriaRepository.save(entity));
 
-        // return ResponseEntity.status(HttpStatus.CREATED).body(categoriaRepository.save(categoria));
+                }).orElseThrow(() -> new EntityNotFoundException());
 
     }
 
     @Override
-    public ResponseEntity<Categoria> atualizarStatus(Long id, boolean disponivel) {
+    public CategoriaDto atualizarStatus(Long id, boolean disponivel) {
         return null;
     }
 

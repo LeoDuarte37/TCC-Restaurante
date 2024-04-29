@@ -1,6 +1,5 @@
 package com.restaurante.grupo07;
 
-import com.restaurante.grupo07.enumeration.StatusMesa;
 import com.restaurante.grupo07.enumeration.StatusPedido;
 import com.restaurante.grupo07.model.*;
 import com.restaurante.grupo07.repository.*;
