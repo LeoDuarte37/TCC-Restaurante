@@ -1,12 +1,11 @@
 package com.restaurante.grupo07.service.impl;
 
-import com.restaurante.grupo07.model.Perfil;
+import com.restaurante.grupo07.dto.mapper.PerfilMapper;
 import com.restaurante.grupo07.repository.PerfilRepository;
 import com.restaurante.grupo07.dto.PerfilDto;
 import com.restaurante.grupo07.service.PerfilService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -17,23 +16,27 @@ public class PerfilServiceImpl implements PerfilService {
 
     @Autowired
     private final PerfilRepository perfilRepository;
+
+    @Autowired
+    private final PerfilMapper perfilMapper;
+
     @Override
-    public ResponseEntity<Perfil> adicionar(PerfilDto perfilDto) {
+    public PerfilDto adicionar(PerfilDto perfilDto) {
         return null;
     }
 
     @Override
-    public ResponseEntity<Perfil> buscarPorId(Long id) {
+    public PerfilDto buscarPorId(Long id) {
         return null;
     }
 
     @Override
-    public ResponseEntity<List<Perfil>> listar() {
+    public List<PerfilDto> listar() {
         return null;
     }
 
     @Override
-    public ResponseEntity<Perfil> atualizar(PerfilDto perfilDto) {
+    public PerfilDto atualizar(PerfilDto perfilDto) {
         return null;
     }
 

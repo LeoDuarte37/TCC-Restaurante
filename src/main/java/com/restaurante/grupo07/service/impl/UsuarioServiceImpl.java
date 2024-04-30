@@ -1,12 +1,11 @@
 package com.restaurante.grupo07.service.impl;
 
-import com.restaurante.grupo07.model.Usuario;
+import com.restaurante.grupo07.dto.mapper.UsuarioMapper;
 import com.restaurante.grupo07.repository.UsuarioRepository;
 import com.restaurante.grupo07.dto.UsuarioDto;
 import com.restaurante.grupo07.service.UsuarioService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -17,23 +16,27 @@ public class UsuarioServiceImpl implements UsuarioService {
 
     @Autowired
     private final UsuarioRepository usuarioRepository;
+
+    @Autowired
+    private final UsuarioMapper usuarioMapper;
+
     @Override
-    public ResponseEntity<Usuario> adicionar(UsuarioDto usuarioDto) {
+    public UsuarioDto adicionar(UsuarioDto usuarioDto) {
         return null;
     }
 
     @Override
-    public ResponseEntity<Usuario> buscarPorId(Long id) {
+    public UsuarioDto buscarPorId(Long id) {
         return null;
     }
 
     @Override
-    public ResponseEntity<List<Usuario>> listar() {
+    public List<UsuarioDto> listar() {
         return null;
     }
 
     @Override
-    public ResponseEntity<Usuario> atualizar(UsuarioDto usuarioDto) {
+    public UsuarioDto atualizar(UsuarioDto usuarioDto) {
         return null;
     }
 

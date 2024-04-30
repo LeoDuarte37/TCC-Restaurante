@@ -1,12 +1,11 @@
 package com.restaurante.grupo07.service.impl;
 
-import com.restaurante.grupo07.model.Mesa;
+import com.restaurante.grupo07.dto.mapper.MesaMapper;
 import com.restaurante.grupo07.repository.MesaRepository;
 import com.restaurante.grupo07.dto.MesaDto;
 import com.restaurante.grupo07.service.MesaService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -17,43 +16,47 @@ public class MesaServiceImpl implements MesaService {
 
     @Autowired
     private final MesaRepository mesaRepository;
+
+    @Autowired
+    private final MesaMapper mesaMapper;
+
     @Override
-    public ResponseEntity<Mesa> adicionar(MesaDto mesaDto) {
+    public MesaDto adicionar(MesaDto mesaDto) {
         return null;
     }
 
     @Override
-    public ResponseEntity<Mesa> buscarPorNumero(Long numero) {
+    public MesaDto buscarPorNumero(Long numero) {
         return null;
     }
 
     @Override
-    public ResponseEntity<List<Mesa>> listar() {
+    public List<MesaDto> listar() {
         return null;
     }
 
     @Override
-    public ResponseEntity<List<Mesa>> listarPorStatus(String status) {
+    public List<MesaDto> listarPorStatus(String status) {
         return null;
     }
 
     @Override
-    public ResponseEntity<List<Mesa>> listarChamandoGarcom() {
+    public List<MesaDto> listarChamandoGarcom() {
         return null;
     }
 
     @Override
-    public ResponseEntity<Mesa> atualizar(MesaDto mesaDto) {
+    public MesaDto atualizar(MesaDto mesaDto) {
         return null;
     }
 
     @Override
-    public ResponseEntity<Mesa> atualizarStatus(Long numero, String status) {
+    public MesaDto atualizarStatus(Long numero, String status) {
         return null;
     }
 
     @Override
-    public ResponseEntity<Mesa> atualizarChamarGarcom(Long numero, boolean chamarGarcom) {
+    public MesaDto atualizarChamarGarcom(Long numero, boolean chamarGarcom) {
         return null;
     }
 

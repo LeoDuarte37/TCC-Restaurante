@@ -1,18 +1,16 @@
 package com.restaurante.grupo07.service;
 
-import com.restaurante.grupo07.model.Produto;
 import com.restaurante.grupo07.dto.ProdutoDto;
-import org.springframework.http.ResponseEntity;
 
 import java.util.List;
 
 public interface ProdutoService {
-    ResponseEntity<Produto> adicionar(ProdutoDto produtoDto);
-    ResponseEntity<Produto> buscarPorId(Long id);
-    ResponseEntity<List<Produto>> listar();
-    ResponseEntity<List<Produto>> listarDisponiveis();
-    ResponseEntity<List<Produto>> listarPorNome(String nome);
-    ResponseEntity<Produto> atualizar(ProdutoDto produtoDto);
-    ResponseEntity<Produto> atualizarStatus(Long id, boolean disponivel);
+    ProdutoDto adicionar(ProdutoDto produtoDto);
+    ProdutoDto buscarPorId(Long id);
+    List<ProdutoDto> listar();
+    List<ProdutoDto> listarDisponiveis();
+    List<ProdutoDto> listarPorNome(String nome);
+    ProdutoDto atualizar(ProdutoDto produtoDto);
+    ProdutoDto atualizarStatus(Long id, boolean disponivel);
     void excluir(Long id);
 }

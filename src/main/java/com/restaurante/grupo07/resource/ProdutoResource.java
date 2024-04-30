@@ -24,35 +24,42 @@ public class ProdutoResource {
 
     @PostMapping
     @Transactional
-    public ResponseEntity<Produto> adicionar(@Valid @RequestBody ProdutoDto produtoDto) {
+    public ProdutoDto adicionar(@Valid @RequestBody ProdutoDto produtoDto) {
         return produtoService.adicionar(produtoDto);
     }
+
     @GetMapping("/{id}")
-    public ResponseEntity<Produto> buscarPorId(@PathVariable("id") @NotNull Long id) {
+    public ProdutoDto buscarPorId(@PathVariable("id") @NotNull Long id) {
         return produtoService.buscarPorId(id);
     }
+
     @GetMapping("/listar")
-    public ResponseEntity<List<Produto>> listar() {
+    public List<ProdutoDto> listar() {
         return produtoService.listar();
     }
+
     @GetMapping("/listar/disponiveis")
-    public ResponseEntity<List<Produto>> listarDisponiveis() {
+    public List<ProdutoDto> listarDisponiveis() {
         return produtoService.listarDisponiveis();
     }
+
     @GetMapping("/listar/nome/{nome}")
-    public ResponseEntity<List<Produto>> listarPorNome(@PathVariable("nome") @NotBlank String nome) {
+    public List<ProdutoDto> listarPorNome(@PathVariable("nome") @NotBlank String nome) {
         return produtoService.listarPorNome(nome);
     }
+
     @PutMapping
     @Transactional
-    public ResponseEntity<Produto> atualizar(@Valid @RequestBody ProdutoDto produtoDto) {
+    public ProdutoDto atualizar(@Valid @RequestBody ProdutoDto produtoDto) {
         return produtoService.atualizar(produtoDto);
     }
+
     @PatchMapping("/{id}")
     @Transactional
-    public ResponseEntity<Produto> atualizarStatus(@PathVariable("id") @NotNull Long id, @RequestBody @NotNull boolean disponivel) {
+    public ProdutoDto atualizarStatus(@PathVariable("id") @NotNull Long id, @RequestBody @NotNull boolean disponivel) {
         return produtoService.atualizarStatus(id, disponivel);
     }
+
     @DeleteMapping("/{id}")
     @Transactional
     public void excluir(@PathVariable("id") @NotNull Long id) {
