@@ -22,7 +22,7 @@ public class CategoriaServiceImpl implements CategoriaService {
     @Autowired
     private final CategoriaMapper categoriaMapper;
     @Override
-    public CategoriaDto adicionar(com.restaurante.grupo07.dto.CategoriaDto categoriaDto) {
+    public CategoriaDto adicionar(CategoriaDto categoriaDto) {
         Categoria categoria = categoriaMapper.toEntity(categoriaDto);
         //return categoriaRepository.save(categoria);
     }
@@ -58,7 +58,6 @@ public class CategoriaServiceImpl implements CategoriaService {
                     return categoriaMapper.toDto(categoriaRepository.save(entity));
 
                 }).orElseThrow(() -> new EntityNotFoundException());
-
     }
 
     @Override

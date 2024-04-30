@@ -32,4 +32,11 @@ public class Item {
     @ManyToOne(fetch = FetchType.LAZY)
     @JsonIgnoreProperties("item")
     private Pedido pedido;
+
+    public Item(Produto produto, int quantidade, String observacao, Pedido Pedido){
+        this.produto = produto;
+        this.quantidade = quantidade;
+        this.observacao = observacao;
+        this.pedido = pedido;
+    }
 }
