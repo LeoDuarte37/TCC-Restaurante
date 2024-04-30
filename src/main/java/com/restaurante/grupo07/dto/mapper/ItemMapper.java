@@ -1,5 +1,9 @@
 package com.restaurante.grupo07.dto.mapper;
 
+import com.restaurante.grupo07.dto.ItemDto;
+import com.restaurante.grupo07.model.Item;
+import org.springframework.stereotype.Component;
+
 @Component
 public class ItemMapper {
 

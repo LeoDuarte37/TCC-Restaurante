@@ -1,10 +1,13 @@
 package com.restaurante.grupo07.dto;
 
 
-public record MesaDto (
-        Long numero,
+import com.restaurante.grupo07.model.Restaurante;
+import jakarta.validation.constraints.NotNull;
+
+public record MesaDto(
+        @NotNull Long numero,
+        @NotNull Restaurante restaurante,
         boolean chamarGarcom,
-        Long idRestaurante,
         String status
     ) {
 }

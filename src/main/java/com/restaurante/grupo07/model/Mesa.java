@@ -19,14 +19,19 @@ public class Mesa {
     @NotNull(message = "atributo numero é obrigatório!")
     private Long numero;
 
-    @Builder.Default
-    private boolean chamarGarcom = false;
-
     @NotNull(message = "Atributo restaurante é obrigatório!")
     @ManyToOne(fetch = FetchType.LAZY)
     private Restaurante restaurante;
 
+    @Builder.Default
+    private boolean chamarGarcom = false;
+
     @Enumerated(EnumType.STRING)
     @Builder.Default
     private StatusMesa status = StatusMesa.DISPONIVEL;
+
+    public Mesa(Long numero, Restaurante restaurante) {
+        this.numero = numero;
+        this.restaurante = restaurante;
+    }
 }

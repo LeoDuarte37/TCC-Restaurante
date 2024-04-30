@@ -22,7 +22,7 @@ public class Restaurante {
     @NotBlank(message = "Atributo nome é obrigatório!")
     private String nome;
 
-    @NotNull(message = "Atributo cnpj é obrigatório!")
+    @NotBlank(message = "Atributo cnpj é obrigatório!")
     private String cnpj;
 
     @NotNull(message = "Atributo endereco é obrigatório!")
@@ -32,4 +32,11 @@ public class Restaurante {
     @NotNull(message = "Atributo contato é obrigatório!")
     @OneToOne(fetch = FetchType.LAZY)
     private Contato contato;
+
+    public Restaurante(String nome, String cnpj, Endereco endereco, Contato contato) {
+        this.nome = nome;
+        this.cnpj = cnpj;
+        this.endereco = endereco;
+        this.contato = contato;
+    }
 }

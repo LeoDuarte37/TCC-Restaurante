@@ -33,7 +33,7 @@ public class Item {
     @JsonIgnoreProperties("item")
     private Pedido pedido;
 
-    public Item(Produto produto, int quantidade, String observacao, Pedido Pedido){
+    public Item(Produto produto, int quantidade, String observacao, Pedido pedido){
         this.produto = produto;
         this.quantidade = quantidade;
         this.observacao = observacao;

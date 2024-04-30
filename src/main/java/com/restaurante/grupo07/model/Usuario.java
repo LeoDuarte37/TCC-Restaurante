@@ -24,4 +24,9 @@ public class Usuario {
     @NotNull(message = "Atributo contato é obrigatório!")
     @OneToOne(fetch = FetchType.LAZY)
     private Contato contato;
+
+    public Usuario(String nome, Contato contato) {
+        this.nome = nome;
+        this.contato = contato;
+    }
 }

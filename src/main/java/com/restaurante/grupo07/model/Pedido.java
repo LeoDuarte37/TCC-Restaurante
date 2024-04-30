@@ -4,7 +4,6 @@ import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.restaurante.grupo07.enumeration.StatusPedido;
 import jakarta.persistence.*;
-import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.NotNull;
 import lombok.*;
 import org.hibernate.annotations.UpdateTimestamp;
@@ -30,15 +29,24 @@ public class Pedido {
     @JsonIgnore
     private Mesa mesa;
 
+    @NotNull
     @OneToMany(fetch = FetchType.EAGER, mappedBy = "pedido", cascade = CascadeType.REMOVE)
     @JsonIgnoreProperties("pedido")
     private List<Item> item;
 
+    @NotNull
     private float total;
 
     @UpdateTimestamp
     private LocalDateTime data;
 
     @Enumerated(EnumType.STRING)
-    private StatusPedido status;
+    @Builder.Default
+    private StatusPedido status = StatusPedido.REALIZADO;
+
+    public Pedido(Mesa mesa, List<Item> item, float total) {
+        this.mesa = mesa;
+        this.item = item;
+        this.total = total;
+    }
 }

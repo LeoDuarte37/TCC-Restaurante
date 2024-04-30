@@ -1,9 +1,12 @@
 package com.restaurante.grupo07.dto;
 
 
+import jakarta.validation.constraints.NotBlank;
+import jakarta.validation.constraints.NotNull;
+
 public record ContatoDto (
         Long id,
-        String email,
-        String telefone
+        @NotNull @NotBlank String email,
+        @NotNull @NotBlank String telefone
     ) {
 }

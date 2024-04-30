@@ -38,4 +38,13 @@ public class Produto {
     @ManyToOne(fetch = FetchType.LAZY)
     @JsonIgnoreProperties("produto")
     private Categoria categoria;
+
+    public Produto(String nome, String descricao, String foto, float valor, boolean disponivel, Categoria categoria) {
+        this.nome = nome;
+        this.descricao = descricao;
+        this.foto = foto;
+        this.valor = valor;
+        this.disponivel = disponivel;
+        this.categoria = categoria;
+    }
 }

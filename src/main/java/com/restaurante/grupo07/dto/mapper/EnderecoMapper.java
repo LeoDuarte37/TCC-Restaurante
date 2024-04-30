@@ -19,7 +19,6 @@ public class EnderecoMapper {
 
     public Endereco toEntity(EnderecoDto enderecoDto) {
         return new Endereco(
-                enderecoDto.id(),
                 enderecoDto.rua(),
                 enderecoDto.bairro(),
                 enderecoDto.cidade(),

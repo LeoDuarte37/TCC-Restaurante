@@ -30,4 +30,11 @@ public class Endereco {
     @NotBlank(message = "Atributo uf é obrigatório!")
     @Size(min = 2, max = 2)
     private String uf;
+
+    public Endereco(String rua, String bairro, String cidade, String uf) {
+        this.rua = rua;
+        this.bairro = bairro;
+        this.cidade = cidade;
+        this.uf = uf;
+    }
 }
