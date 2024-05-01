@@ -10,6 +10,7 @@ public class MesaMapper {
 
     public MesaDto toDto(Mesa mesa) {
         return new MesaDto(
+                mesa.getId(),
                 mesa.getNumero(),
                 mesa.getRestaurante(),
                 mesa.isChamarGarcom(),

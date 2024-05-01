@@ -16,6 +16,9 @@ import lombok.*;
 public class Mesa {
 
     @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private Long id;
+
     @NotNull(message = "atributo numero é obrigatório!")
     private Long numero;
 

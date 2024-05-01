@@ -6,14 +6,14 @@ import java.util.List;
 
 public interface MesaService {
     MesaDto adicionar(MesaDto mesaDto);
-    MesaDto buscarPorNumero(Long numero);
+    MesaDto buscarPorId(Long id);
     List<MesaDto> listar();
     List<MesaDto> listarPorStatus(String status);
     List<MesaDto> listarChamandoGarcom();
     MesaDto atualizar(MesaDto mesaDto);
-    MesaDto atualizarStatus(Long numero, String status);
-    MesaDto atualizarChamarGarcom(Long numero, boolean chamarGarcom);
-    void excluir(Long numero);
+    MesaDto atualizarStatus(Long id, String status);
+    MesaDto atualizarChamarGarcom(Long id, boolean chamarGarcom);
+    void excluir(Long id);
 
     // ResponseEntity<Mesa> fecharMesa(Long numero);
 }
