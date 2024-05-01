@@ -21,30 +21,41 @@ public class CategoriaServiceImpl implements CategoriaService {
 
     @Autowired
     private final CategoriaMapper categoriaMapper;
+
     @Override
     public CategoriaDto adicionar(CategoriaDto categoriaDto) {
-        Categoria categoria = categoriaMapper.toEntity(categoriaDto);
-        //return categoriaRepository.save(categoria);
+        return categoriaMapper.toDto(categoriaRepository.save(categoriaMapper.toEntity(categoriaDto)));
     }
 
     @Override
     public CategoriaDto buscarPorId(Long id) {
-        return null;
+        return categoriaRepository.findById(id)
+                .map(entity -> categoriaMapper(entity))
+                .orElseThrow(() -> new ResponseStatusException(HttpStatus.NOT_FOUND));
     }
 
     @Override
     public List<CategoriaDto> buscarPorNome(String nome) {
-        //return categoriaRepository.findAllByNomeContainingIgnoreCase(nome);
+        return categoriaRepository.findAllByNomeContainingIgnoreCase(nome)
+                .stream()
+                .map(entity -> categoriaMapper(entity))
+                .collect(Collectors.toList());
     }
 
     @Override
     public List<CategoriaDto> listar() {
-        //return categoriaRepository.findAll();
+        return categoriaRepository.findAll()
+                .stream()
+                .map(entity -> categoriaMapper.toDto(entity))
+                .collect(Collectors.toList());
     }
 
     @Override
     public List<CategoriaDto> listarDisponiveis() {
-        //return categoriaRepository.findByDisponivelTrue();
+        return categoriaRepository.findByDisponivelTrue()
+                .stream()
+                .map(entity -> categoriaMapper.toDto(entity))
+                .collect(Collectors.toList());
     }
 
     @Override
@@ -57,16 +68,27 @@ public class CategoriaServiceImpl implements CategoriaService {
                     entity.setDisponivel(categoriaDto.disponivel());
                     return categoriaMapper.toDto(categoriaRepository.save(entity));
 
-                }).orElseThrow(() -> new EntityNotFoundException());
+                }).orElseThrow(() -> new ResponseStatusException(HttpStatus.NOT_FOUND));
     }
 
     @Override
     public CategoriaDto atualizarStatus(Long id, boolean disponivel) {
-        return null;
+        return categoriaRepository.findById(id)
+                .map(entity -> {
+                    entity.setDisponivel(disponivel);
+                    return categoriaMapper(entity);
+                })
+                .orElseThrow(() -> new ResponseStatusException(HttpStatus.NOT_FOUND));
     }
 
     @Override
     public void excluir(Long id) {
+        Optional<Categoria> categoria = categoriaRepository.findById(id);
 
+        if (categoria.isEmpty()) {
+            throw new ResponseStatusException(HttpStatus.NOT_FOUND);
+        }
+
+        categoriaRepository.deleteById(id);
     }
 }

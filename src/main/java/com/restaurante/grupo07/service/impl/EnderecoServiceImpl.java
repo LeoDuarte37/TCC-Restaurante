@@ -22,26 +22,45 @@ public class EnderecoServiceImpl implements EnderecoService {
 
     @Override
     public EnderecoDto adicionar(EnderecoDto enderecoDto) {
-        return null;
+        return enderecoMapper.toDto(enderecoRepository.save(enderecoMapper.toEntity(enderecoDto)));
     }
 
     @Override
     public EnderecoDto buscarPorId(Long id) {
-        return null;
+        return enderecoRepository.findById(id)
+                .map(entity -> enderecoMapper.toDto(entity))
+                .orElseThrow(() -> new ResponseStatusException(HttpStatus.NOT_FOUND));
     }
 
     @Override
     public List<EnderecoDto> listar() {
-        return null;
+        return enderecoRepository.findAll()
+                .stream()
+                .map(entity -> enderecoMapper.toDto(entity))
+                .collect(Collectors.toList());
     }
 
     @Override
     public EnderecoDto atualizar(EnderecoDto enderecoDto) {
-        return null;
+        return enderecoRepository.findById(enderecoDto.id())
+                .map(entity -> {
+                    entity.setRua(enderecoDto.rua());
+                    entity.setBairro(enderecoDto.bairro());
+                    entity.setCidade(enderecoDto.cidade());
+                    entity.setUf(enderecoDto.uf());
+                    return enderecoMapper.toDto(entity);
+
+                }).orElseThrow(() -> new ResponseStatusException(HttpStatus.NOT_FOUND));
     }
 
     @Override
     public void excluir(Long id) {
+        Optional<Endereco> endereco = enderecoRepository.findById(id);
 
+        if (endereco.isEmpty()) {
+            throw new ResponseStatusException(HttpStatus.NOT_FOUND);
+        }
+
+        enderecoRepository.deleteById(id);
     }
 }

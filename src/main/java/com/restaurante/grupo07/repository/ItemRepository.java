@@ -8,6 +8,7 @@ import org.springframework.data.repository.query.Param;
 import java.util.List;
 
 public interface ItemRepository extends JpaRepository<Item, Long> {
+    
     @Query(value = "select i.id, i.produto, i.quantidade, i.observacao, i.pedido from Item i inner join i.pedido p where p.id = ?1")
     public List<Item> findAllByPedido(@Param("pedido") Long id);
 }

@@ -22,31 +22,47 @@ public class ItemServiceImpl implements ItemService {
 
     @Override
     public ItemDto adicionar(ItemDto itemDto) {
-        return null;
+        return itemMapper.toDto(itemRepository.save(itemMapper.toEntity(itemDto)));
     }
 
     @Override
     public ItemDto buscarPorId(Long id) {
-        return null;
+        return itemRepository.findById(id)
+                .map(entity -> itemMapper.toDto(entity))
+                .orElseThrow(() -> new ResponseStatusException(HttpStatus.NOT_FOUND));
     }
 
     @Override
     public List<ItemDto> listar() {
-        return null;
+        return itemRepository.findAll()
+                .stream()
+                .map(entity -> itemMapper.toDto(entity))
+                .collect(Collectors.toList());
     }
 
     @Override
     public List<ItemDto> listarPorPedido(Long id) {
-        return null;
+        return itemRepository.findAllByPedido(id)
+                .stream()
+                .map(entity -> itemMapper.toDto(entity))
+                .collect(Collectors.toList());
     }
 
     @Override
     public ItemDto atualizar(ItemDto itemDto) {
-        return null;
+        return itemRepository.findById(itemDto.id())
+                .map(entity -> itemMapper.toDto(entity))
+                .orElseThrow(() -> new ResponseStatusException(HttpStatus.NOT_FOUND));
     }
 
     @Override
     public void excluir(Long id) {
+        Optional<Item> item = itemRepository.findById(id);
 
+        if (item.isEmpty()) {
+            throw new ResponseStatusException(HttpStatus.NOT_FOUND);
+        }
+
+        itemRepository.deleteById(id);
     }
 }

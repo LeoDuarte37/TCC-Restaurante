@@ -21,6 +21,7 @@ public class CategoriaResource {
     private final CategoriaService categoriaService;
 
     @PostMapping
+    @ResponseStatus(HttpStatus.CREATED)
     @Transactional
     public CategoriaDto adicionar(@Valid @RequestBody CategoriaDto categoriaDto) {
         return categoriaService.adicionar(categoriaDto);
@@ -35,6 +36,7 @@ public class CategoriaResource {
     public List<CategoriaDto> buscarPorNome(@PathVariable("nome") @NotBlank String nome) {
         return categoriaService.buscarPorNome(nome);
     }
+    
     @GetMapping("/listar")
     public List<CategoriaDto> listar() {
         return categoriaService.listar();
@@ -58,6 +60,7 @@ public class CategoriaResource {
     }
 
     @DeleteMapping("/{id}")
+    @ResponseStatus(HttpStatus.NO_CONTENT)
     @Transactional
     public void excluir(@PathVariable("id") @NotNull Long id) {
         categoriaService.excluir(id);
