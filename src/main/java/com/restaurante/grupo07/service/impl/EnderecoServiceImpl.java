@@ -1,14 +1,19 @@
 package com.restaurante.grupo07.service.impl;
 
 import com.restaurante.grupo07.dto.mapper.EnderecoMapper;
+import com.restaurante.grupo07.model.Endereco;
 import com.restaurante.grupo07.repository.EnderecoRepository;
 import com.restaurante.grupo07.dto.EnderecoDto;
 import com.restaurante.grupo07.service.EnderecoService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
+import org.springframework.web.server.ResponseStatusException;
 
 import java.util.List;
+import java.util.Optional;
+import java.util.stream.Collectors;
 
 @Service
 @RequiredArgsConstructor

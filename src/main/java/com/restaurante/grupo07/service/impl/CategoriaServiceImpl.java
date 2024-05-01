@@ -5,12 +5,15 @@ import com.restaurante.grupo07.dto.mapper.CategoriaMapper;
 import com.restaurante.grupo07.model.Categoria;
 import com.restaurante.grupo07.repository.CategoriaRepository;
 import com.restaurante.grupo07.service.CategoriaService;
-import jakarta.persistence.EntityNotFoundException;
 import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
+import org.springframework.web.server.ResponseStatusException;
 
 import java.util.List;
+import java.util.Optional;
+import java.util.stream.Collectors;
 
 @Service
 @RequiredArgsConstructor
@@ -30,7 +33,7 @@ public class CategoriaServiceImpl implements CategoriaService {
     @Override
     public CategoriaDto buscarPorId(Long id) {
         return categoriaRepository.findById(id)
-                .map(entity -> categoriaMapper(entity))
+                .map(entity -> categoriaMapper.toDto(entity))
                 .orElseThrow(() -> new ResponseStatusException(HttpStatus.NOT_FOUND));
     }
 
@@ -38,7 +41,7 @@ public class CategoriaServiceImpl implements CategoriaService {
     public List<CategoriaDto> buscarPorNome(String nome) {
         return categoriaRepository.findAllByNomeContainingIgnoreCase(nome)
                 .stream()
-                .map(entity -> categoriaMapper(entity))
+                .map(entity -> categoriaMapper.toDto(entity))
                 .collect(Collectors.toList());
     }
 
@@ -76,7 +79,7 @@ public class CategoriaServiceImpl implements CategoriaService {
         return categoriaRepository.findById(id)
                 .map(entity -> {
                     entity.setDisponivel(disponivel);
-                    return categoriaMapper(entity);
+                    return categoriaMapper.toDto(entity);
                 })
                 .orElseThrow(() -> new ResponseStatusException(HttpStatus.NOT_FOUND));
     }
