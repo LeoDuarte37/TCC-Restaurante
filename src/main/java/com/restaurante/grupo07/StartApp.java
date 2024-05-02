@@ -34,7 +34,7 @@ public class StartApp implements CommandLineRunner {
 
     @Override
     public void run(String... args) throws Exception {
-        Endereco end = new Endereco();
+        /*Endereco end = new Endereco();
         end.setRua("Av General");
         end.setBairro("Jardim São Jorge");
         end.setCidade("São Paulo");
@@ -91,18 +91,18 @@ public class StartApp implements CommandLineRunner {
         item.setPedido(pedido);
         itemRepository.save(item);
 
-//
-//        for (Object[] p : pedidoRepository.findAllByMesa(1L)) {
-//            System.out.println(p);
-//        }
-//
-//        for (Pedido p : pedidoRepository.findAllByStatusOrderByDataDesc(StatusPedido.doStatus("R"))) {
-//            System.out.println(p.getId());
-//            System.out.println(p.getItem());
-//            System.out.println(p.getStatus());
-//            System.out.println(p.getMesa().getNumero());
-//            System.out.println(p.getTotal());
-//            System.out.println(p.getData());
-//        }
+
+        for (Object[] p : pedidoRepository.findAllByMesa(1L)) {
+            System.out.println(p);
+        }
+
+        for (Pedido p : pedidoRepository.findAllByStatusOrderByDataDesc(StatusPedido.doStatus("R"))) {
+            System.out.println(p.getId());
+            System.out.println(p.getItem());
+            System.out.println(p.getStatus());
+            System.out.println(p.getMesa().getNumero());
+            System.out.println(p.getTotal());
+            System.out.println(p.getData());
+        }*/
     }
 }

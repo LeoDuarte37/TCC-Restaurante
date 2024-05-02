@@ -47,7 +47,7 @@ public class UsuarioServiceImpl implements UsuarioService {
 
     @Override
     public UsuarioDto atualizar(UsuarioDto usuarioDto) {
-        usuarioRepository.findById(usuarioDto.id())
+        return usuarioRepository.findById(usuarioDto.id())
                 .map(entity -> {
                     entity.setNome(usuarioDto.nome());
                     entity.setContato(usuarioDto.contato());
