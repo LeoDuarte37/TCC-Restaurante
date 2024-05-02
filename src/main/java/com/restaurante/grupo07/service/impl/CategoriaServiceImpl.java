@@ -79,7 +79,7 @@ public class CategoriaServiceImpl implements CategoriaService {
         return categoriaRepository.findById(id)
                 .map(entity -> {
                     entity.setDisponivel(disponivel);
-                    return categoriaMapper.toDto(entity);
+                    return categoriaMapper.toDto(categoriaRepository.save(entity));
                 })
                 .orElseThrow(() -> new ResponseStatusException(HttpStatus.NOT_FOUND));
     }

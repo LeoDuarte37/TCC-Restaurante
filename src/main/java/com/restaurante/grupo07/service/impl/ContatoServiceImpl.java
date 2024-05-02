@@ -51,7 +51,7 @@ public class ContatoServiceImpl implements ContatoService {
                 .map(entity -> {
                     entity.setEmail(contatoDto.email());
                     entity.setTelefone(contatoDto.telefone());
-                    return contatoMapper.toDto(entity);
+                    return contatoMapper.toDto(contatoRepository.save(entity));
                 }).orElseThrow(() -> new ResponseStatusException(HttpStatus.NOT_FOUND));
     }
 

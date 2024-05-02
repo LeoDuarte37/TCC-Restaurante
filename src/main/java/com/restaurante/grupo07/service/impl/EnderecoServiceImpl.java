@@ -53,7 +53,7 @@ public class EnderecoServiceImpl implements EnderecoService {
                     entity.setBairro(enderecoDto.bairro());
                     entity.setCidade(enderecoDto.cidade());
                     entity.setUf(enderecoDto.uf());
-                    return enderecoMapper.toDto(entity);
+                    return enderecoMapper.toDto(enderecoRepository.save(entity));
 
                 }).orElseThrow(() -> new ResponseStatusException(HttpStatus.NOT_FOUND));
     }

@@ -26,11 +26,11 @@ public class Restaurante {
     private String cnpj;
 
     @NotNull(message = "Atributo endereco é obrigatório!")
-    @OneToOne(fetch = FetchType.LAZY)
+    @OneToOne(fetch = FetchType.LAZY, cascade = {CascadeType.ALL, CascadeType.PERSIST})
     private Endereco endereco;
 
     @NotNull(message = "Atributo contato é obrigatório!")
-    @OneToOne(fetch = FetchType.LAZY)
+    @OneToOne(fetch = FetchType.LAZY, cascade = {CascadeType.ALL, CascadeType.PERSIST})
     private Contato contato;
 
     public Restaurante(String nome, String cnpj, Endereco endereco, Contato contato) {

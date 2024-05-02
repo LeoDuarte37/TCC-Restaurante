@@ -5,6 +5,7 @@ import com.restaurante.grupo07.enumeration.StatusMesa;
 import com.restaurante.grupo07.model.Mesa;
 import com.restaurante.grupo07.repository.MesaRepository;
 import com.restaurante.grupo07.dto.MesaDto;
+import com.restaurante.grupo07.repository.RestauranteRepository;
 import com.restaurante.grupo07.service.MesaService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -26,9 +27,16 @@ public class MesaServiceImpl implements MesaService {
     @Autowired
     private final MesaMapper mesaMapper;
 
+    @Autowired
+    private final RestauranteRepository restauranteRepository;
+
     @Override
     public MesaDto adicionar(MesaDto mesaDto) {
-        return mesaMapper.toDto(mesaRepository.save(mesaMapper.toEntity(mesaDto)));
+        if (restauranteRepository.existsById(mesaDto.restaurante().getId())){
+            return mesaMapper.toDto(mesaRepository.save(mesaMapper.toEntity(mesaDto)));
+        }
+
+        throw new ResponseStatusException(HttpStatus.NOT_FOUND, "Restaurante não encontrado!");
     }
 
     @Override
@@ -68,7 +76,7 @@ public class MesaServiceImpl implements MesaService {
                 .map(entity -> {
                     entity.setNumero(mesaDto.numero());
                     entity.setRestaurante(mesaDto.restaurante());
-                    return mesaMapper.toDto(entity);
+                    return mesaMapper.toDto(mesaRepository.save(entity));
 
                 }).orElseThrow(() -> new ResponseStatusException(HttpStatus.NOT_FOUND));
     }
@@ -78,7 +86,7 @@ public class MesaServiceImpl implements MesaService {
         return mesaRepository.findById(id)
                 .map(entity -> {
                     entity.setStatus(StatusMesa.doStatus(status));
-                    return mesaMapper.toDto(entity);
+                    return mesaMapper.toDto(mesaRepository.save(entity));
 
                 }).orElseThrow(() -> new ResponseStatusException(HttpStatus.NOT_FOUND));
     }
@@ -88,7 +96,7 @@ public class MesaServiceImpl implements MesaService {
         return mesaRepository.findById(id)
                 .map(entity -> {
                     entity.setChamarGarcom(chamarGarcom);
-                    return mesaMapper.toDto(entity);
+                    return mesaMapper.toDto(mesaRepository.save(entity));
 
                 }).orElseThrow(() -> new ResponseStatusException(HttpStatus.NOT_FOUND));
     }

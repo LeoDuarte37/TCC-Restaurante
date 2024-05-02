@@ -9,6 +9,7 @@ import lombok.*;
 import org.hibernate.annotations.UpdateTimestamp;
 
 import java.time.LocalDateTime;
+import java.util.ArrayList;
 import java.util.List;
 
 @AllArgsConstructor
@@ -29,10 +30,9 @@ public class Pedido {
     @JsonIgnore
     private Mesa mesa;
 
-    @NotNull
-    @OneToMany(fetch = FetchType.EAGER, mappedBy = "pedido", cascade = CascadeType.REMOVE)
+    @OneToMany(mappedBy = "pedido", cascade = {CascadeType.ALL, CascadeType.PERSIST})
     @JsonIgnoreProperties("pedido")
-    private List<Item> item;
+    private List<Item> item = new ArrayList<>();
 
     @NotNull
     private float total;

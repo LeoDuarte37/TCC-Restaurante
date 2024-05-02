@@ -4,6 +4,8 @@ import com.restaurante.grupo07.dto.ItemDto;
 import com.restaurante.grupo07.dto.mapper.ItemMapper;
 import com.restaurante.grupo07.model.Item;
 import com.restaurante.grupo07.repository.ItemRepository;
+import com.restaurante.grupo07.repository.PedidoRepository;
+import com.restaurante.grupo07.repository.ProdutoRepository;
 import com.restaurante.grupo07.service.ItemService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -23,11 +25,25 @@ public class ItemServiceImpl implements ItemService {
     private final ItemRepository itemRepository;
 
     @Autowired
+    private final ProdutoRepository produtoRepository;
+
+    @Autowired
+    private final PedidoRepository pedidoRepository;
+
+    @Autowired
     private final ItemMapper itemMapper;
 
     @Override
     public ItemDto adicionar(ItemDto itemDto) {
-        return itemMapper.toDto(itemRepository.save(itemMapper.toEntity(itemDto)));
+        if (produtoRepository.existsById(itemDto.produto().getId())) {
+            if (pedidoRepository.existsById(itemDto.pedido().getId())) {
+                return itemMapper.toDto(itemRepository.save(itemMapper.toEntity(itemDto)));
+            }
+
+            throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "Pedido nao encontrado!");
+        }
+
+        throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "Produto nao encontrado!");
     }
 
     @Override
@@ -55,9 +71,19 @@ public class ItemServiceImpl implements ItemService {
 
     @Override
     public ItemDto atualizar(ItemDto itemDto) {
-        return itemRepository.findById(itemDto.id())
-                .map(entity -> itemMapper.toDto(entity))
-                .orElseThrow(() -> new ResponseStatusException(HttpStatus.NOT_FOUND));
+        if (produtoRepository.existsById(itemDto.produto().getId())) {
+            return itemRepository.findById(itemDto.id())
+                    .map(entity -> {
+                        entity.setProduto(itemDto.produto());
+                        entity.setQuantidade(itemDto.quantidade());
+                        entity.setObservacao(itemDto.observacao());
+                        entity.setPedido(itemDto.pedido());
+                        return itemMapper.toDto(itemRepository.save(entity));
+
+                    }).orElseThrow(() -> new ResponseStatusException(HttpStatus.NOT_FOUND, "Item não encontrado!"));
+        }
+
+        throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "Produto nao encontrado!");
     }
 
     @Override

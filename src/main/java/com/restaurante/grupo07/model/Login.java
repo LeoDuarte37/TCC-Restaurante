@@ -25,10 +25,10 @@ public class Login {
     private String senha;
 
     @NotNull(message = "Atributo usuario é obrigatório!")
-    @OneToOne(fetch = FetchType.LAZY)
+    @OneToOne(fetch = FetchType.LAZY, cascade = {CascadeType.ALL, CascadeType.PERSIST})
     private Usuario usuario;
 
     @NotNull(message = "Atributo perfil é obrigatório!")
-    @OneToOne(fetch = FetchType.LAZY)
+    @OneToOne(fetch = FetchType.LAZY, cascade = {CascadeType.ALL, CascadeType.PERSIST})
     private Perfil perfil;
 }

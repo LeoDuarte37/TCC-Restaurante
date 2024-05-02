@@ -22,7 +22,7 @@ public class Usuario {
     private String nome;
 
     @NotNull(message = "Atributo contato é obrigatório!")
-    @OneToOne(fetch = FetchType.LAZY)
+    @OneToOne(fetch = FetchType.LAZY, cascade = {CascadeType.ALL, CascadeType.PERSIST})
     private Contato contato;
 
     public Usuario(String nome, Contato contato) {
