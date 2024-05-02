@@ -33,14 +33,15 @@ public class CategoriaResource {
         return categoriaService.buscarPorId(id);
     }
 
-    @GetMapping("/{nome}")
-    public List<CategoriaDto> buscarPorNome(@PathVariable("nome") @NotBlank String nome) {
-        return categoriaService.buscarPorNome(nome);
-    }
     
     @GetMapping("/listar")
     public List<CategoriaDto> listar() {
         return categoriaService.listar();
+    }
+    
+    @GetMapping("/listar/nome/{nome}")
+    public List<CategoriaDto> listarPorNome(@PathVariable("nome") @NotBlank String nome) {
+        return categoriaService.listarPorNome(nome);
     }
 
     @GetMapping("/listar/disponiveis")

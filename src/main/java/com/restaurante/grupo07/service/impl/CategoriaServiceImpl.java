@@ -38,7 +38,7 @@ public class CategoriaServiceImpl implements CategoriaService {
     }
 
     @Override
-    public List<CategoriaDto> buscarPorNome(String nome) {
+    public List<CategoriaDto> listarPorNome(String nome) {
         return categoriaRepository.findAllByNomeContainingIgnoreCase(nome)
                 .stream()
                 .map(entity -> categoriaMapper.toDto(entity))

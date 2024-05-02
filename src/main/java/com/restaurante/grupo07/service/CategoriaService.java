@@ -7,7 +7,7 @@ import java.util.List;
 public interface CategoriaService {
     CategoriaDto adicionar(CategoriaDto categoriaDto);
     CategoriaDto buscarPorId(Long id);
-    List<CategoriaDto> buscarPorNome(String nome);
+    List<CategoriaDto> listarPorNome(String nome);
     List<CategoriaDto> listar();
     List<CategoriaDto> listarDisponiveis();
     CategoriaDto atualizar(CategoriaDto categoriaDto);

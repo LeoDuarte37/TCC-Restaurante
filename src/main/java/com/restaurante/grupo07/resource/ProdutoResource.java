@@ -38,14 +38,14 @@ public class ProdutoResource {
         return produtoService.listar();
     }
 
-    @GetMapping("/listar/disponiveis")
-    public List<ProdutoDto> listarDisponiveis() {
-        return produtoService.listarDisponiveis();
-    }
-
     @GetMapping("/listar/nome/{nome}")
     public List<ProdutoDto> listarPorNome(@PathVariable("nome") @NotBlank String nome) {
         return produtoService.listarPorNome(nome);
+    }
+
+    @GetMapping("/listar/disponiveis")
+    public List<ProdutoDto> listarDisponiveis() {
+        return produtoService.listarDisponiveis();
     }
 
     @PutMapping
