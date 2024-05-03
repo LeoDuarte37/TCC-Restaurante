@@ -75,13 +75,12 @@ public class CategoriaServiceImpl implements CategoriaService {
     }
 
     @Override
-    public CategoriaDto atualizarStatus(Long id, boolean disponivel) {
+    public CategoriaDto atualizarStatus(Long id, String disponivel) {
         return categoriaRepository.findById(id)
                 .map(entity -> {
-                    entity.setDisponivel(disponivel);
+                    entity.setDisponivel(Boolean.valueOf(disponivel));
                     return categoriaMapper.toDto(categoriaRepository.save(entity));
-                })
-                .orElseThrow(() -> new ResponseStatusException(HttpStatus.NOT_FOUND));
+                }).orElseThrow(() -> new ResponseStatusException(HttpStatus.NOT_FOUND));
     }
 
     @Override

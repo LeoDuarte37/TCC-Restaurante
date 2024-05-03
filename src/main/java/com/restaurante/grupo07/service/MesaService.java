@@ -12,7 +12,7 @@ public interface MesaService {
     List<MesaDto> listarChamandoGarcom();
     MesaDto atualizar(MesaDto mesaDto);
     MesaDto atualizarStatus(Long id, String status);
-    MesaDto atualizarChamarGarcom(Long id, boolean chamarGarcom);
+    MesaDto atualizarChamarGarcom(Long id, String chamarGarcom);
     void excluir(Long id);
 
     // ResponseEntity<Mesa> fecharMesa(Long numero);

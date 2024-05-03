@@ -11,6 +11,6 @@ public interface CategoriaService {
     List<CategoriaDto> listar();
     List<CategoriaDto> listarDisponiveis();
     CategoriaDto atualizar(CategoriaDto categoriaDto);
-    CategoriaDto atualizarStatus(Long id, boolean disponivel);
+    CategoriaDto atualizarStatus(Long id, String disponivel);
     void excluir(Long id);
 }

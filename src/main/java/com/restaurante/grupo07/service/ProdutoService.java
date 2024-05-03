@@ -11,6 +11,6 @@ public interface ProdutoService {
     List<ProdutoDto> listarDisponiveis();
     List<ProdutoDto> listarPorNome(String nome);
     ProdutoDto atualizar(ProdutoDto produtoDto);
-    ProdutoDto atualizarStatus(Long id, boolean disponivel);
+    ProdutoDto atualizarStatus(Long id, String disponivel);
     void excluir(Long id);
 }

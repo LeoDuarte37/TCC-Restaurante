@@ -57,7 +57,7 @@ public class CategoriaResource {
 
     @PatchMapping("/{id}")
     @Transactional
-    public CategoriaDto atualizarStatus(@PathVariable("id") @NotNull Long id, @RequestBody @NotNull boolean disponivel) {
+    public CategoriaDto atualizarStatus(@PathVariable("id") @NotNull Long id, @RequestBody @NotNull String disponivel) {
         return categoriaService.atualizarStatus(id, disponivel);
     }
 

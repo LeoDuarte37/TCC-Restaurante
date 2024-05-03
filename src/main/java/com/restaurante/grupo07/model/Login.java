@@ -16,9 +16,9 @@ import lombok.*;
 public class Login {
 
     @Id
-    @NotBlank(message = "Atributo login é obrigatório!")
+    @NotBlank(message = "Atributo username é obrigatório!")
     @Size(min = 5)
-    private String login;
+    private String username;
 
     @NotBlank(message = "Atributo senha é obrigatório!")
     @Size(min = 5)

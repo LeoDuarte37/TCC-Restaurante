@@ -69,7 +69,7 @@ public class MesaResource {
     @PatchMapping("/{id}/atualizarChamarGarcom")
     @ResponseStatus(HttpStatus.OK)
     @Transactional
-    public MesaDto atualizarChamarGarcom(@PathVariable("id") @NotNull Long id, @RequestBody @NotNull boolean chamarGarcom) {
+    public MesaDto atualizarChamarGarcom(@PathVariable("id") @NotNull Long id, @RequestBody String chamarGarcom) {
         return mesaService.atualizarChamarGarcom(id, chamarGarcom);
     }
 

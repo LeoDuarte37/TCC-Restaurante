@@ -3,6 +3,7 @@ package com.restaurante.grupo07.model;
 import jakarta.persistence.*;
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.NotNull;
+import jakarta.validation.constraints.Size;
 import lombok.*;
 import org.hibernate.validator.constraints.br.CNPJ;
 
@@ -23,6 +24,7 @@ public class Restaurante {
     private String nome;
 
     @NotBlank(message = "Atributo cnpj é obrigatório!")
+    @Size(min = 14, max = 14)
     private String cnpj;
 
     @NotNull(message = "Atributo endereco é obrigatório!")

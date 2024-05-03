@@ -1,6 +1,5 @@
 package com.restaurante.grupo07.resource;
 
-import com.restaurante.grupo07.model.Produto;
 import com.restaurante.grupo07.dto.ProdutoDto;
 import com.restaurante.grupo07.service.ProdutoService;
 import jakarta.validation.Valid;
@@ -8,7 +7,6 @@ import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.NotNull;
 import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.ResponseEntity;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.bind.annotation.*;
 
@@ -56,7 +54,7 @@ public class ProdutoResource {
 
     @PatchMapping("/{id}")
     @Transactional
-    public ProdutoDto atualizarStatus(@PathVariable("id") @NotNull Long id, @RequestBody @NotNull boolean disponivel) {
+    public ProdutoDto atualizarStatus(@PathVariable("id") @NotNull Long id, @RequestBody String disponivel) {
         return produtoService.atualizarStatus(id, disponivel);
     }
 
