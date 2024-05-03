@@ -76,6 +76,8 @@ public class MesaServiceImpl implements MesaService {
                 .map(entity -> {
                     entity.setNumero(mesaDto.numero());
                     entity.setRestaurante(mesaDto.restaurante());
+                    entity.setChamarGarcom(mesaDto.chamarGarcom());
+                    entity.setStatus(StatusMesa.doStatus(mesaDto.status()));
                     return mesaMapper.toDto(mesaRepository.save(entity));
 
                 }).orElseThrow(() -> new ResponseStatusException(HttpStatus.NOT_FOUND));

@@ -14,14 +14,15 @@ public class MesaMapper {
                 mesa.getNumero(),
                 mesa.getRestaurante(),
                 mesa.isChamarGarcom(),
-                mesa.getStatus().toString()
+                String.valueOf(mesa.getStatus())
         );
     }
 
     public Mesa toEntity(MesaDto mesaDto) {
         return new Mesa(
                 mesaDto.numero(),
-                mesaDto.restaurante()
+                mesaDto.restaurante(),
+                mesaDto.status()
         );
     }
 }

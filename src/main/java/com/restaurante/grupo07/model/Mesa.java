@@ -23,18 +23,18 @@ public class Mesa {
     private Long numero;
 
     @NotNull(message = "Atributo restaurante é obrigatório!")
-    @ManyToOne(fetch = FetchType.LAZY)
+    @ManyToOne
     private Restaurante restaurante;
 
     @Builder.Default
     private boolean chamarGarcom = false;
 
     @Enumerated(EnumType.STRING)
-    @Builder.Default
-    private StatusMesa status = StatusMesa.DISPONIVEL;
+    private StatusMesa status;
 
-    public Mesa(Long numero, Restaurante restaurante) {
+    public Mesa(Long numero, Restaurante restaurante, String status) {
         this.numero = numero;
         this.restaurante = restaurante;
+        this.status = StatusMesa.doStatus(status);
     }
 }

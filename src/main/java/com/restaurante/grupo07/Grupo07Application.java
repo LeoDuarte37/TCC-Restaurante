@@ -18,6 +18,10 @@ public class Grupo07Application {
 		// https://marioalvial.medium.com/blindando-sua-api-spring-boot-com-o-padr%C3%A3o-dto-44f97020d1a0
 
 
+		// Atualização parcial:
+		// https://www.youtube.com/watch?v=wVMKnPM9F4E
+		// https://www.youtube.com/watch?v=6AJh4cJNOn0
+
 		// http://localhost:8080/h2-console
 
 		// https://docs.spring.io/spring-data/jpa/reference/jpa/query-methods.html
