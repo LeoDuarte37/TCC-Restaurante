@@ -13,6 +13,7 @@ public record PedidoDto (
         Long id,
 
         @NotNull
+        @JsonIgnoreProperties(value = {"chamarGarcom", "status", "cnpj", "endereco", "contato"})
         Mesa mesa,
 
         @NotNull

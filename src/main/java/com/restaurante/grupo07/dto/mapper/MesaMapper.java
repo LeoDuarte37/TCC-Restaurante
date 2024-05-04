@@ -22,6 +22,7 @@ public class MesaMapper {
         return Mesa.builder()
                 .numero(mesaDto.numero())
                 .restaurante(mesaDto.restaurante())
+                .status(StatusMesa.doStatus("D"))
                 .build();
     }
 }

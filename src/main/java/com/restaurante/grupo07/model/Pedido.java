@@ -1,12 +1,12 @@
 package com.restaurante.grupo07.model;
 
-import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.restaurante.grupo07.enumeration.StatusPedido;
 import jakarta.persistence.*;
 import jakarta.validation.constraints.NotNull;
 import lombok.*;
 import org.hibernate.annotations.UpdateTimestamp;
+import org.hibernate.validator.constraints.UniqueElements;
 
 import java.time.LocalDateTime;
 import java.util.ArrayList;
@@ -25,13 +25,15 @@ public class Pedido {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @NotNull(message = "Atributo mesa é obrigatório!")
     @ManyToOne
+    @NotNull(message = "Atributo mesa é obrigatório!")
+    @JsonIgnoreProperties(value = {"chamarGarcom", "status"})
     private Mesa mesa;
 
-    @OneToMany(fetch = FetchType.LAZY, mappedBy = "pedido", cascade = {CascadeType.ALL, CascadeType.PERSIST})
-    @JsonIgnoreProperties("pedido")
-    private List<Item> item;
+    @NotNull
+    @ElementCollection
+    @CollectionTable(name = "TB_PEDIDO_ITEM")
+    private List<Item> item = new ArrayList<>();
 
     @UpdateTimestamp
     private LocalDateTime data;

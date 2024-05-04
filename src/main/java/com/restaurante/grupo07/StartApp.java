@@ -16,18 +16,22 @@ public class StartApp implements CommandLineRunner {
 
     @Autowired
     private EnderecoRepository enderecoRepository;
+
     @Autowired
     private ContatoRepository contatoRepository;
+
     @Autowired
     private RestauranteRepository restauranteRepository;
+
     @Autowired
     private MesaRepository mesaRepository;
+
     @Autowired
     private CategoriaRepository categoriaRepository;
+
     @Autowired
     private ProdutoRepository produtoRepository;
-    @Autowired
-    private ItemRepository itemRepository;
+
     @Autowired
     private PedidoRepository pedidoRepository;
 

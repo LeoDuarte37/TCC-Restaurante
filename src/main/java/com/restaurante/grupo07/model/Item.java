@@ -7,20 +7,15 @@ import jakarta.validation.constraints.NotNull;
 import lombok.*;
 
 @AllArgsConstructor
-@RequiredArgsConstructor
-@Builder
+@NoArgsConstructor
 @Getter
 @Setter
-@Entity
-@Table(name = "tb_item")
+@Embeddable
 public class Item {
 
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long id;
-
+    @ManyToOne
     @NotNull(message = "Atributo produto é obrigatório!")
-    @OneToOne(fetch = FetchType.LAZY)
+    @JsonIgnoreProperties(value = {"foto", "descricao", "disponivel", "categoria"})
     private Produto produto;
 
     @NotNull(message = "Atributo quantidade é obrigatório!")
@@ -28,15 +23,4 @@ public class Item {
     private int quantidade;
 
     private String observacao;
-
-    @ManyToOne
-    @JsonIgnoreProperties("item")
-    private Pedido pedido;
-
-    public Item(Produto produto, int quantidade, String observacao, Pedido pedido){
-        this.produto = produto;
-        this.quantidade = quantidade;
-        this.observacao = observacao;
-        this.pedido = pedido;
-    }
 }
