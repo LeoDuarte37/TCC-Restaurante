@@ -11,8 +11,8 @@ public interface MesaService {
     List<MesaDto> listarPorStatus(String status);
     List<MesaDto> listarChamandoGarcom();
     MesaDto atualizar(MesaDto mesaDto);
-    MesaDto atualizarStatus(Long id, String status);
-    MesaDto atualizarChamarGarcom(Long id, String chamarGarcom);
+    MesaDto atualizarStatus(MesaDto mesaDto);
+    MesaDto atualizarChamarGarcom(MesaDto mesaDto);
     void excluir(Long id);
 
     // ResponseEntity<Mesa> fecharMesa(Long numero);

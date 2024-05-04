@@ -29,7 +29,7 @@ public class Item {
 
     private String observacao;
 
-    @ManyToOne(fetch = FetchType.LAZY)
+    @ManyToOne
     @JsonIgnoreProperties("item")
     private Pedido pedido;
 

@@ -12,7 +12,6 @@ public class PedidoMapper {
                 pedido.getId(),
                 pedido.getMesa(),
                 pedido.getItem(),
-                pedido.getTotal(),
                 pedido.getData(),
                 pedido.getStatus().toString()
         );
@@ -21,8 +20,7 @@ public class PedidoMapper {
     public Pedido toEntity(PedidoDto pedidoDto) {
         return new Pedido(
                 pedidoDto.mesa(),
-                pedidoDto.item(),
-                pedidoDto.total()
+                pedidoDto.item()
         );
     }
 }

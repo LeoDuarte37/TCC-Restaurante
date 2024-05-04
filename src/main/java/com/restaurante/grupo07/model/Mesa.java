@@ -32,9 +32,9 @@ public class Mesa {
     @Enumerated(EnumType.STRING)
     private StatusMesa status;
 
-    public Mesa(Long numero, Restaurante restaurante, String status) {
+    public Mesa(Long numero, Restaurante restaurante) {
         this.numero = numero;
         this.restaurante = restaurante;
-        this.status = StatusMesa.doStatus(status);
+        this.status = StatusMesa.doStatus("D");
     }
 }

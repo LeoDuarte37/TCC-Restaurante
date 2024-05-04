@@ -13,12 +13,7 @@ public record PedidoDto (
         Long id,
         @NotNull Mesa mesa,
         @NotNull @JsonIgnoreProperties("pedido") List<Item> item,
-        @NotNull float total,
         LocalDateTime data,
         String status
     ) {
-
-    //    public PedidoDto(Long id, Long idMesa, List<Item> item, float valor, String status) {
-    //        this(id, idMesa, item, valor, null, status);
-    //    }
 }

@@ -84,20 +84,20 @@ public class MesaServiceImpl implements MesaService {
     }
 
     @Override
-    public MesaDto atualizarStatus(Long id, String status) {
-        return mesaRepository.findById(id)
+    public MesaDto atualizarStatus(MesaDto mesaDto) {
+        return mesaRepository.findById(mesaDto.id())
                 .map(entity -> {
-                    entity.setStatus(StatusMesa.doStatus(status));
+                    entity.setStatus(StatusMesa.doStatus(mesaDto.status()));
                     return mesaMapper.toDto(mesaRepository.save(entity));
 
                 }).orElseThrow(() -> new ResponseStatusException(HttpStatus.NOT_FOUND));
     }
 
     @Override
-    public MesaDto atualizarChamarGarcom(Long id, String chamarGarcom) {
-        return mesaRepository.findById(id)
+    public MesaDto atualizarChamarGarcom(MesaDto mesaDto) {
+        return mesaRepository.findById(mesaDto.id())
                 .map(entity -> {
-                    entity.setChamarGarcom(Boolean.valueOf(chamarGarcom));
+                    entity.setChamarGarcom(mesaDto.chamarGarcom());
                     return mesaMapper.toDto(mesaRepository.save(entity));
 
                 }).orElseThrow(() -> new ResponseStatusException(HttpStatus.NOT_FOUND));

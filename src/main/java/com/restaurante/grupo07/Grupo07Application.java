@@ -9,7 +9,7 @@ public class Grupo07Application {
 	public static void main(String[] args) {
 		SpringApplication.run(Grupo07Application.class, args);
 
-		// REFATORAR O RETORNO DOS MÉTODOS e TERMINAR OS MAPPERS
+		// Transformar a tabela item em embedable
 
 		// Videos e blog: Padrão Dto e Mapper
 		// https://www.youtube.com/watch?v=2GTgDLkDWPQ&list=PLGxZ4Rq3BOBpwaVgAPxTxhdX_TfSVlTcY&index=43
@@ -61,6 +61,24 @@ public class Grupo07Application {
 			FROM tb_produto P
 			INNER JOIN tb_categoria C
 			ON P.categoria_id = C.id;
+
+
+
+
+			INSERT INTO tb_endereco(id, rua, bairro, cidade, uf)
+			VALUES (1, 'General Asdrubal', 'Jardim Arpoador', 'São Paulo', 'SP');
+
+			INSERT INTO tb_contato(id, email, telefone)
+			VALUES (1, 'restaurante@gmail.com', '121123132');
+
+			INSERT INTO tb_restaurante(id, nome, cnpj, endereco_id, contato_id)
+			VALUES (1, 'Restaurante', '12345678901234', 1, 1);
+
+			INSERT INTO tb_categoria(id, nome, foto, disponivel)
+			VALUES (1, 'Comida', 'comida.png', true);
+
+			INSERT INTO tb_produto(id, nome, descricao, foto, valor, disponivel, categoria_id)
+			VALUES (1, 'arroz', 'comida tradicional', 'arroz.png', 12, true, 1);
 		 */
 	}
 

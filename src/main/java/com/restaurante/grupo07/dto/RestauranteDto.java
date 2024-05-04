@@ -11,7 +11,7 @@ import jakarta.validation.constraints.Size;
 public record RestauranteDto (
         Long id,
         @NotNull @NotBlank String nome,
-        @NotNull @NotBlank @Size(min = 14, max = 14) @JsonIgnore String cnpj,
+        @NotNull @NotBlank @Size(min = 14, max = 14) String cnpj,
         @NotNull Endereco endereco,
         @NotNull Contato contato
     ) {

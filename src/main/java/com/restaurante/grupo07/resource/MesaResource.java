@@ -59,18 +59,18 @@ public class MesaResource {
         return mesaService.atualizar(mesaDto);
     }
 
-    @PatchMapping("/{id}/atualizarStatus")
+    @PatchMapping("/atualizarStatus")
     @ResponseStatus(HttpStatus.OK)
     @Transactional
-    public MesaDto atualizarStatus(@PathVariable("id") @NotNull Long id, @RequestBody @NotBlank String status) {
-        return mesaService.atualizarStatus(id, status);
+    public MesaDto atualizarStatus(@RequestBody MesaDto mesaDto) {
+        return mesaService.atualizarStatus(mesaDto);
     }
 
-    @PatchMapping("/{id}/atualizarChamarGarcom")
+    @PatchMapping("/atualizarChamarGarcom")
     @ResponseStatus(HttpStatus.OK)
     @Transactional
-    public MesaDto atualizarChamarGarcom(@PathVariable("id") @NotNull Long id, @RequestBody String chamarGarcom) {
-        return mesaService.atualizarChamarGarcom(id, chamarGarcom);
+    public MesaDto atualizarChamarGarcom(@RequestBody MesaDto mesaDto) {
+        return mesaService.atualizarChamarGarcom(mesaDto);
     }
 
     @DeleteMapping("/{id}")

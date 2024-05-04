@@ -82,7 +82,6 @@ public class PedidoServiceImpl implements PedidoService {
                 .map(entity -> {
                     entity.setMesa(pedidoDto.mesa());
                     entity.setItem(pedidoDto.item());
-                    entity.setTotal(pedidoDto.total());
                     return pedidoMapper.toDto(pedidoRepository.save(entity));
 
                 }).orElseThrow(() -> new ResponseStatusException(HttpStatus.NOT_FOUND, "Pedido não encontrado!"));

@@ -26,27 +26,22 @@ public class Pedido {
     private Long id;
 
     @NotNull(message = "Atributo mesa é obrigatório!")
-    @ManyToOne(fetch = FetchType.EAGER)
-    @JsonIgnore
+    @ManyToOne
     private Mesa mesa;
 
-    @OneToMany(mappedBy = "pedido", cascade = {CascadeType.ALL, CascadeType.PERSIST})
+    @OneToMany(fetch = FetchType.LAZY, mappedBy = "pedido", cascade = {CascadeType.ALL, CascadeType.PERSIST})
     @JsonIgnoreProperties("pedido")
-    private List<Item> item = new ArrayList<>();
-
-    @NotNull
-    private float total;
+    private List<Item> item;
 
     @UpdateTimestamp
     private LocalDateTime data;
 
     @Enumerated(EnumType.STRING)
-    @Builder.Default
-    private StatusPedido status = StatusPedido.REALIZADO;
+    private StatusPedido status;
 
-    public Pedido(Mesa mesa, List<Item> item, float total) {
+    public Pedido(Mesa mesa, List<Item> item) {
         this.mesa = mesa;
         this.item = item;
-        this.total = total;
+        this.status = StatusPedido.doStatus("R");
     }
 }
