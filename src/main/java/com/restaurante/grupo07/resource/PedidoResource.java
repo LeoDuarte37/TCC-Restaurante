@@ -53,10 +53,10 @@ public class PedidoResource {
         return pedidoService.atualizar(pedidoDto);
     }
 
-    @PatchMapping("/{id}/atualizarStatus")
+    @PatchMapping("/atualizarStatus")
     @Transactional
-    public PedidoDto atualizarStatus(@PathVariable("id") @NotNull Long id, @RequestBody @NotBlank String status) {
-        return pedidoService.atualizarStatus(id, status);
+    public PedidoDto atualizarStatus(@RequestBody PedidoDto pedidoDto) {
+        return pedidoService.atualizarStatus(id);
     }
 
     @DeleteMapping("/{id}")

@@ -11,6 +11,6 @@ public interface PedidoService {
     List<Object[]> listarPorMesa(Long mesa);
     List<PedidoDto> listarPorStatus(String status);
     PedidoDto atualizar(PedidoDto pedidoDto);
-    PedidoDto atualizarStatus(Long id, String status);
+    PedidoDto atualizarStatus(PedidoDto pedidoDto);
     void excluir(Long id);
 }

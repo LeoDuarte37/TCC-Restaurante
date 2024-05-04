@@ -54,8 +54,8 @@ public class ProdutoResource {
 
     @PatchMapping("/{id}")
     @Transactional
-    public ProdutoDto atualizarStatus(@PathVariable("id") @NotNull Long id, @RequestBody String disponivel) {
-        return produtoService.atualizarStatus(id, disponivel);
+    public ProdutoDto atualizarStatus(@RequestBody ProdutoDto produtoDto) {
+        return produtoService.atualizarStatus(produtoDto);
     }
 
     @DeleteMapping("/{id}")

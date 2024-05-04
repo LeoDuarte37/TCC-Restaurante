@@ -55,10 +55,10 @@ public class CategoriaResource {
         return categoriaService.atualizar(categoriaDto);
     }
 
-    @PatchMapping("/{id}")
+    @PatchMapping
     @Transactional
-    public CategoriaDto atualizarStatus(@PathVariable("id") @NotNull Long id, @RequestBody @NotNull String disponivel) {
-        return categoriaService.atualizarStatus(id, disponivel);
+    public CategoriaDto atualizarStatus(@RequestBody CategoriaDto categoriaDto) {
+        return categoriaService.atualizarStatus(categoriaDto);
     }
 
     @DeleteMapping("/{id}")

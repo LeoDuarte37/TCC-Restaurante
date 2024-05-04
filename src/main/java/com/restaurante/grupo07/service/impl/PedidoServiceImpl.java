@@ -88,10 +88,10 @@ public class PedidoServiceImpl implements PedidoService {
     }
 
     @Override
-    public PedidoDto atualizarStatus(Long id, String status) {
-        return pedidoRepository.findById(id)
+    public PedidoDto atualizarStatus(PedidoDto pedidoDto) {
+        return pedidoRepository.findById(pedidoDto.id())
                 .map(entity -> {
-                    entity.setStatus(StatusPedido.doStatus(status));
+                    entity.setStatus(StatusPedido.doStatus(pedidoDto.status()));
                     return pedidoMapper.toDto(pedidoRepository.save(entity));
 
                 }).orElseThrow(() -> new ResponseStatusException(HttpStatus.NOT_FOUND, "Pedido não encontrado!"));

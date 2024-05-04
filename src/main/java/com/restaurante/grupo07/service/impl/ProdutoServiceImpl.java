@@ -89,10 +89,10 @@ public class ProdutoServiceImpl implements ProdutoService {
     }
 
     @Override
-    public ProdutoDto atualizarStatus(Long id, String disponivel) {
-        return produtoRepository.findById(id)
+    public ProdutoDto atualizarStatus(ProdutoDto produtoDto) {
+        return produtoRepository.findById(produtoDto.id())
                 .map(entity -> {
-                    entity.setDisponivel(Boolean.valueOf(disponivel));
+                    entity.setDisponivel(produtoDto.disponivel());
                     return produtoMapper.toDto(produtoRepository.save(entity));
 
                 }).orElseThrow(() -> new ResponseStatusException(HttpStatus.NOT_FOUND, "Produto não encontrado!"));
