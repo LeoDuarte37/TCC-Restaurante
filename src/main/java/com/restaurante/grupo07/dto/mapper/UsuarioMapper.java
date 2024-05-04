@@ -16,9 +16,9 @@ public class UsuarioMapper {
     }
 
     public Usuario toEntity(UsuarioDto usuarioDto) {
-        return new Usuario(
-                usuarioDto.nome(),
-                usuarioDto.contato()
-        );
+        return Usuario.builder()
+                .nome(usuarioDto.nome())
+                .contato(usuarioDto.contato())
+                .build();
     }
 }

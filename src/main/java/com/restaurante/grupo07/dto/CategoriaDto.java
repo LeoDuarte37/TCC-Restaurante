@@ -10,9 +10,17 @@ import java.util.List;
 
 public record CategoriaDto (
         Long id,
-        @NotNull @NotBlank String nome,
-        @NotNull @NotBlank String foto,
-        @NotNull boolean disponivel,
-        @JsonIgnoreProperties("categoria") List<Produto> produto
+
+        @NotBlank
+        String nome,
+
+        @NotBlank
+        String foto,
+
+        @NotNull
+        boolean disponivel,
+
+        @JsonIgnoreProperties("categoria")
+        List<Produto> produto
     ){
 }

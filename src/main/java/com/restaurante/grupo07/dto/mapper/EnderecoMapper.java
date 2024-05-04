@@ -18,11 +18,11 @@ public class EnderecoMapper {
     }
 
     public Endereco toEntity(EnderecoDto enderecoDto) {
-        return new Endereco(
-                enderecoDto.rua(),
-                enderecoDto.bairro(),
-                enderecoDto.cidade(),
-                enderecoDto.uf()
-        );
+        return Endereco.builder()
+                .rua(enderecoDto.rua())
+                .bairro(enderecoDto.bairro())
+                .cidade(enderecoDto.cidade())
+                .uf(enderecoDto.uf())
+                .build();
     }
 }

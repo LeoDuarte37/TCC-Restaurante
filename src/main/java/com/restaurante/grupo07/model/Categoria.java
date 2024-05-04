@@ -33,10 +33,4 @@ public class Categoria {
     @OneToMany(fetch = FetchType.LAZY, mappedBy = "categoria", cascade = CascadeType.REMOVE)
     @JsonIgnoreProperties("categoria")
     private List<Produto> produto;
-
-    public Categoria(String nome, String foto, boolean disponivel) {
-        this.nome = nome;
-        this.foto = foto;
-        this.disponivel = disponivel;
-    }
 }

@@ -6,7 +6,11 @@ import jakarta.validation.constraints.NotNull;
 
 public record ContatoDto (
         Long id,
-        @NotNull @NotBlank String email,
-        @NotNull @NotBlank String telefone
+
+        @NotBlank
+        String email,
+
+        @NotBlank
+        String telefone
     ) {
 }

@@ -11,9 +11,16 @@ import java.util.List;
 
 public record PedidoDto (
         Long id,
-        @NotNull Mesa mesa,
-        @NotNull @JsonIgnoreProperties("pedido") List<Item> item,
+
+        @NotNull
+        Mesa mesa,
+
+        @NotNull
+        @JsonIgnoreProperties("pedido")
+        List<Item> item,
+
         LocalDateTime data,
+
         String status
     ) {
 }

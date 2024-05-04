@@ -10,9 +10,19 @@ import jakarta.validation.constraints.Size;
 
 public record RestauranteDto (
         Long id,
-        @NotNull @NotBlank String nome,
-        @NotNull @NotBlank @Size(min = 14, max = 14) String cnpj,
-        @NotNull Endereco endereco,
-        @NotNull Contato contato
+
+        @NotBlank
+        @Size(max = 25)
+        String nome,
+
+        @NotBlank
+        @Size(min = 14, max = 14)
+        String cnpj,
+
+        @NotNull
+        Endereco endereco,
+
+        @NotNull
+        Contato contato
     ) {
 }

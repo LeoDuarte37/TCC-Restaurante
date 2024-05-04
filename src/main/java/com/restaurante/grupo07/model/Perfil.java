@@ -23,9 +23,4 @@ public class Perfil {
 
     @NotBlank(message = "Atributo nome é obrigatório!")
     private String nome;
-
-    public Perfil(int nivel, String nome) {
-        this.nivel = nivel;
-        this.nome = nome;
-    }
 }

@@ -19,9 +19,9 @@ public class MesaMapper {
     }
 
     public Mesa toEntity(MesaDto mesaDto) {
-        return new Mesa(
-                mesaDto.numero(),
-                mesaDto.restaurante()
-        );
+        return Mesa.builder()
+                .numero(mesaDto.numero())
+                .restaurante(mesaDto.restaurante())
+                .build();
     }
 }

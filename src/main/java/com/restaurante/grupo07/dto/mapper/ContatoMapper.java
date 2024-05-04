@@ -16,6 +16,9 @@ public class ContatoMapper {
     }
 
     public Contato toEntity(ContatoDto contatoDto) {
-        return new Contato(contatoDto.email(), contatoDto.telefone());
+        return Contato.builder()
+                .email(contatoDto.email())
+                .telefone(contatoDto.telefone())
+                .build();
     }
 }

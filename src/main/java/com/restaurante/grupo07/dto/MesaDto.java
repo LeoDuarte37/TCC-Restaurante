@@ -7,11 +7,16 @@ import jakarta.validation.constraints.NotNull;
 
 public record MesaDto(
         Long id,
-        @NotNull Long numero,
+
+        @NotNull
+        Long numero,
+
         @NotNull
         @JsonIgnoreProperties(value = {"nome", "cnpj", "endereco", "contato"})
         Restaurante restaurante,
+
         boolean chamarGarcom,
+
         String status
     ) {
 }

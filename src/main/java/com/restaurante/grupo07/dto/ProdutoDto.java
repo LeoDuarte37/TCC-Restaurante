@@ -8,11 +8,24 @@ import jakarta.validation.constraints.NotNull;
 
 public record ProdutoDto (
         Long id,
-        @NotNull @NotBlank String nome,
-        @NotNull @NotBlank String descricao,
-        @NotNull @NotBlank String foto,
-        @NotNull float valor,
-        @NotNull boolean disponivel,
-        @NotNull @JsonIgnoreProperties("produto") Categoria categoria
+
+        @NotBlank
+        String nome,
+
+        @NotBlank
+        String descricao,
+
+        @NotBlank
+        String foto,
+
+        @NotNull
+        float valor,
+
+        @NotNull
+        boolean disponivel,
+
+        @NotNull
+        @JsonIgnoreProperties("produto")
+        Categoria categoria
     ) {
 }

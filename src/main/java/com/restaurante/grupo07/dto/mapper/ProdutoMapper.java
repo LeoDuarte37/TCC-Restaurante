@@ -9,9 +9,6 @@ import org.springframework.stereotype.Component;
 @Component
 public class ProdutoMapper {
 
-    @Autowired
-    private CategoriaRepository categoriaRepository;
-
     public ProdutoDto toDto(Produto produto) {
         return new ProdutoDto(
                 produto.getId(),
@@ -25,22 +22,13 @@ public class ProdutoMapper {
     }
 
     public Produto toEntity(ProdutoDto produtoDto) {
-        return new Produto(
-                produtoDto.nome(),
-                produtoDto.descricao(),
-                produtoDto.foto(),
-                produtoDto.valor(),
-                produtoDto.disponivel(),
-                produtoDto.categoria()
-        );
-
-//        return Produto.builder()
-//                .nome(produtoDto.nome())
-//                .descricao(produtoDto.descricao())
-//                .foto(produtoDto.foto())
-//                .valor(produtoDto.valor())
-//                .disponivel(produtoDto.disponivel())
-//                .categoria(categoriaRepository.getReId(produtoDto.categoria()))
-//                .build();
+        return Produto.builder()
+                .nome(produtoDto.nome())
+                .descricao(produtoDto.descricao())
+                .foto(produtoDto.foto())
+                .valor(produtoDto.valor())
+                .disponivel(produtoDto.disponivel())
+                .categoria(produtoDto.categoria())
+                .build();
     }
 }

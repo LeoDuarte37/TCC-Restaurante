@@ -6,9 +6,17 @@ import jakarta.validation.constraints.NotNull;
 
 public record EnderecoDto (
         Long id,
-        @NotNull @NotBlank String rua,
-        @NotNull @NotBlank String bairro,
-        @NotNull @NotBlank String cidade,
-        @NotNull @NotBlank String uf
+
+        @NotBlank
+        String rua,
+
+        @NotBlank
+        String bairro,
+
+        @NotBlank
+        String cidade,
+
+        @NotBlank
+        String uf
     ) {
 }

@@ -18,6 +18,10 @@ public class CategoriaMapper {
     }
 
     public Categoria toEntity(CategoriaDto categoriaDto) {
-        return new Categoria(categoriaDto.nome(), categoriaDto.foto(), categoriaDto.disponivel());
+        return Categoria.builder()
+                .nome(categoriaDto.nome())
+                .foto(categoriaDto.foto())
+                .disponivel(categoriaDto.disponivel())
+                .build();
     }
 }

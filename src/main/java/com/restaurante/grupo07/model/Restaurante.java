@@ -21,6 +21,7 @@ public class Restaurante {
     private Long id;
 
     @NotBlank(message = "Atributo nome é obrigatório!")
+    @Size(max = 25)
     private String nome;
 
     @NotBlank(message = "Atributo cnpj é obrigatório!")
@@ -34,11 +35,4 @@ public class Restaurante {
     @NotNull(message = "Atributo contato é obrigatório!")
     @OneToOne(fetch = FetchType.LAZY, cascade = {CascadeType.ALL, CascadeType.PERSIST})
     private Contato contato;
-
-    public Restaurante(String nome, String cnpj, Endereco endereco, Contato contato) {
-        this.nome = nome;
-        this.cnpj = cnpj;
-        this.endereco = endereco;
-        this.contato = contato;
-    }
 }

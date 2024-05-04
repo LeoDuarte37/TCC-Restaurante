@@ -38,10 +38,4 @@ public class Pedido {
 
     @Enumerated(EnumType.STRING)
     private StatusPedido status;
-
-    public Pedido(Mesa mesa, List<Item> item) {
-        this.mesa = mesa;
-        this.item = item;
-        this.status = StatusPedido.doStatus("R");
-    }
 }

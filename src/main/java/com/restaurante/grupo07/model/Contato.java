@@ -25,9 +25,4 @@ public class Contato {
 
     @NotBlank(message = "Atributo telefone é obrigatório!")
     private String telefone;
-
-    public Contato(String email, String telefone) {
-        this.email = email;
-        this.telefone = telefone;
-    }
 }

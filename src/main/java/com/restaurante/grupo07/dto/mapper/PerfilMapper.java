@@ -16,9 +16,9 @@ public class PerfilMapper {
     }
 
     public Perfil toEntity(PerfilDto perfilDto) {
-        return new Perfil(
-                perfilDto.nivel(),
-                perfilDto.nome()
-        );
+        return Perfil.builder()
+                .nivel(perfilDto.nivel())
+                .nome(perfilDto.nome())
+                .build();
     }
 }

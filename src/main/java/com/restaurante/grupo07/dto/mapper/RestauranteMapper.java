@@ -18,11 +18,11 @@ public class RestauranteMapper {
     }
 
     public Restaurante toEntity(RestauranteDto restauranteDto) {
-        return new Restaurante(
-                restauranteDto.nome(),
-                restauranteDto.cnpj(),
-                restauranteDto.endereco(),
-                restauranteDto.contato()
-        );
+        return Restaurante.builder()
+                .nome(restauranteDto.nome())
+                .cnpj(restauranteDto.cnpj())
+                .endereco(restauranteDto.endereco())
+                .contato(restauranteDto.contato())
+                .build();
     }
 }
