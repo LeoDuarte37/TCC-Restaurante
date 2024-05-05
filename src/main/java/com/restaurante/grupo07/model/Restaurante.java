@@ -7,6 +7,8 @@ import jakarta.validation.constraints.Size;
 import lombok.*;
 import org.hibernate.validator.constraints.br.CNPJ;
 
+import java.util.List;
+
 @AllArgsConstructor
 @RequiredArgsConstructor
 @Builder
@@ -29,10 +31,10 @@ public class Restaurante {
     private String cnpj;
 
     @NotNull(message = "Atributo endereco é obrigatório!")
-    @OneToOne(fetch = FetchType.LAZY, cascade = {CascadeType.ALL, CascadeType.PERSIST})
+    @Embedded
     private Endereco endereco;
 
     @NotNull(message = "Atributo contato é obrigatório!")
-    @OneToOne(fetch = FetchType.LAZY, cascade = {CascadeType.ALL, CascadeType.PERSIST})
+    @Embedded
     private Contato contato;
 }

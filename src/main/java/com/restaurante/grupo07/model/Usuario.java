@@ -6,6 +6,8 @@ import jakarta.validation.constraints.NotNull;
 import jakarta.validation.constraints.Size;
 import lombok.*;
 
+import java.util.List;
+
 @AllArgsConstructor
 @RequiredArgsConstructor
 @Builder
@@ -24,6 +26,6 @@ public class Usuario {
     private String nome;
 
     @NotNull(message = "Atributo contato é obrigatório!")
-    @OneToOne(fetch = FetchType.LAZY, cascade = {CascadeType.ALL, CascadeType.PERSIST})
+    @Embedded
     private Contato contato;
 }

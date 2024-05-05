@@ -6,17 +6,11 @@ import jakarta.validation.constraints.Size;
 import lombok.*;
 
 @AllArgsConstructor
-@RequiredArgsConstructor
-@Builder
+@NoArgsConstructor
 @Getter
 @Setter
-@Entity
-@Table(name = "tb_endereco")
+@Embeddable
 public class Endereco {
-
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long id;
 
     @NotBlank(message = "Atributo rua é obrigatório!")
     private String rua;
