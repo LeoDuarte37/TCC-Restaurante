@@ -38,7 +38,7 @@ public class PedidoResource {
     }
 
     @GetMapping("/listar/mesa/{mesa}")
-    public List<Object[]> listarPorMesa(@PathVariable("mesa") @NotNull Long mesa) {
+    public List<PedidoDto> listarPorMesa(@PathVariable("mesa") @NotNull Long mesa) {
         return pedidoService.listarPorMesa(mesa);
     }
 

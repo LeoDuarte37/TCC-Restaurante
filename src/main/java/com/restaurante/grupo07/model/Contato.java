@@ -12,7 +12,6 @@ import lombok.*;
 @Embeddable
 public class Contato {
 
-
     @NotBlank(message = "Atributo email é obrigatório!")
     @Email(message = "Atributo email deverá ser um email válido!")
     private String email;

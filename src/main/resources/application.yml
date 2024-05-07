@@ -15,4 +15,10 @@ spring:
   jpa:
     show-sql: true
     defer-datasource-initialization: true
-    database-platform: org.hibernate.dialect.H2Dialect 
+    database-platform: org.hibernate.dialect.H2Dialect
+
+security:
+  config:
+    prefix: Bearer
+    key: SECRET_KEY
+    expiration: 3600000

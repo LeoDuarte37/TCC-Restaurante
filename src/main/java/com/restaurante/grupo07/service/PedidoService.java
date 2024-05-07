@@ -8,7 +8,7 @@ public interface PedidoService {
     PedidoDto adicionar(PedidoDto pedidoDto);
     PedidoDto buscarPorId(Long id);
     List<PedidoDto> listar();
-    List<Object[]> listarPorMesa(Long mesa);
+    List<PedidoDto> listarPorMesa(Long mesa);
     List<PedidoDto> listarPorStatus(String status);
     PedidoDto atualizar(PedidoDto pedidoDto);
     PedidoDto atualizarStatus(PedidoDto pedidoDto);

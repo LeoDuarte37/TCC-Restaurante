@@ -1,9 +1,11 @@
 package com.restaurante.grupo07.model;
 
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import jakarta.persistence.*;
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.NotNull;
 import lombok.*;
+import org.springframework.stereotype.Component;
 
 @AllArgsConstructor
 @RequiredArgsConstructor
@@ -12,15 +14,13 @@ import lombok.*;
 @Setter
 @Entity
 @Table(name = "tb_perfil")
+@JsonIgnoreProperties({"hibernateLazyInitializer", "handler"})
 public class Perfil {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long id;
+    @NotNull
+    private Long nivel;
 
-    @NotNull(message = "Atributo nivel é obrigatório!")
-    private int nivel;
-
-    @NotBlank(message = "Atributo nome é obrigatório!")
+    @NotBlank
     private String nome;
 }

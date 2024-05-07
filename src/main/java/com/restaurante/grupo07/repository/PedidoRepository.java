@@ -10,6 +10,6 @@ import java.util.List;
 
 public interface PedidoRepository extends JpaRepository<Pedido, Long> {
     public List<Pedido> findAllByStatusOrderByDataDesc(@Param("status") StatusPedido status);
-    @Query(value = "select p.id, p.item, p.data, p.status, m.numero from Pedido p inner join p.mesa m where m.numero = ?1")
-    public List<Object[]> findAllByMesa(@Param("mesa") Long mesa);
+    @Query(value = "select p from Pedido p inner join p.mesa m where m.numero = ?1")
+    public List<Pedido> findAllByMesa(@Param("mesa") Long mesa);
 }

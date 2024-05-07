@@ -40,9 +40,9 @@ public class PedidoServiceImpl implements PedidoService {
 
                     }
 
-                    throw new ResponseStatusException(HttpStatus.NOT_ACCEPTABLE, "Mesa ainda não foi aberta por um cliente!");
+                    throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "Mesa ainda não foi aberta por um cliente!");
 
-                }).orElseThrow(() -> new ResponseStatusException(HttpStatus.BAD_REQUEST, "Mesa não encontrada"));
+                }).orElseThrow(() -> new ResponseStatusException(HttpStatus.NOT_FOUND, "Mesa não encontrada"));
 
     }
 
@@ -62,9 +62,10 @@ public class PedidoServiceImpl implements PedidoService {
     }
 
     @Override
-    public List<Object[]> listarPorMesa(Long mesa) {
+    public List<PedidoDto> listarPorMesa(Long mesa) {
         return pedidoRepository.findAllByMesa(mesa)
                 .stream()
+                .map(entity -> pedidoMapper.toDto(entity))
                 .collect(Collectors.toList());
     }
 

@@ -1,6 +1,6 @@
 package com.restaurante.grupo07.resource;
 
-import com.restaurante.grupo07.dto.PerfilDto;
+import com.restaurante.grupo07.model.Perfil;
 import com.restaurante.grupo07.service.PerfilService;
 import jakarta.validation.Valid;
 import jakarta.validation.constraints.NotNull;
@@ -21,29 +21,29 @@ public class PerfilResource {
 
     @PostMapping
     @Transactional
-    public PerfilDto adicionar(@Valid @RequestBody PerfilDto perfilDto) {
-        return perfilService.adicionar(perfilDto);
+    public Perfil adicionar(@Valid @RequestBody Perfil perfil) {
+        return perfilService.adicionar(perfil);
     }
 
-    @GetMapping("/{id}")
-    public PerfilDto buscarPorId(@PathVariable("id") @NotNull Long id) {
-        return perfilService.buscarPorId(id);
+    @GetMapping("/{nivel}")
+    public Perfil buscarPorId(@PathVariable("nivel") @NotNull Long nivel) {
+        return perfilService.buscarPorId(nivel);
     }
 
     @GetMapping("/listar")
-    public List<PerfilDto> listar() {
+    public List<Perfil> listar() {
         return perfilService.listar();
     }
 
     @PutMapping
     @Transactional
-    public PerfilDto atualizar(@Valid @RequestBody PerfilDto perfilDto) {
-        return perfilService.atualizar(perfilDto);
+    public Perfil atualizar(@Valid @RequestBody Perfil perfil) {
+        return perfilService.atualizar(perfil);
     }
 
-    @DeleteMapping("/{id}")
+    @DeleteMapping("/{nivel}")
     @Transactional
-    public void excluir(@PathVariable("id") @NotNull Long id) {
-        perfilService.excluir(id);
+    public void excluir(@PathVariable("nivel") @NotNull Long nivel) {
+        perfilService.excluir(nivel);
     }
 }

@@ -19,7 +19,7 @@ public class UsuarioResource {
     @Autowired
     private final UsuarioService usuarioService;
 
-    @PostMapping
+    @PostMapping("/cliente")
     @Transactional
     public UsuarioDto adicionar(@Valid @RequestBody UsuarioDto usuarioDto) {
         return usuarioService.adicionar(usuarioDto);

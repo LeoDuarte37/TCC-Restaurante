@@ -1,13 +1,17 @@
 package com.restaurante.grupo07.service;
 
+import com.restaurante.grupo07.model.Perfil;
+
 import java.util.List;
 
-import com.restaurante.grupo07.dto.PerfilDto;
-
 public interface PerfilService {
-    PerfilDto adicionar(PerfilDto perfilDto);
-    PerfilDto buscarPorId(Long id);
-    List<PerfilDto> listar();
-    PerfilDto atualizar(PerfilDto perfilDto);
-    void excluir(Long id);
+    Perfil adicionar(Perfil perfil);
+
+    Perfil buscarPorId(Long nivel);
+
+    List<Perfil> listar();
+
+    Perfil atualizar(Perfil perfil);
+
+    void excluir(Long nivel);
 }

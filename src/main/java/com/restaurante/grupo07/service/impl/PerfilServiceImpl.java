@@ -1,17 +1,15 @@
 package com.restaurante.grupo07.service.impl;
 
-import com.restaurante.grupo07.dto.mapper.PerfilMapper;
 import com.restaurante.grupo07.model.Perfil;
 import com.restaurante.grupo07.repository.PerfilRepository;
-import com.restaurante.grupo07.dto.PerfilDto;
 import com.restaurante.grupo07.service.PerfilService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
-import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.server.ResponseStatusException;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 import java.util.stream.Collectors;
@@ -23,49 +21,45 @@ public class PerfilServiceImpl implements PerfilService {
     @Autowired
     private final PerfilRepository perfilRepository;
 
-    @Autowired
-    private final PerfilMapper perfilMapper;
 
     @Override
-    public PerfilDto adicionar(PerfilDto perfilDto) {
-        return perfilMapper.toDto(perfilRepository.save(perfilMapper.toEntity(perfilDto)));
+    public Perfil adicionar(Perfil perfil) {
+        if (perfilRepository.existsById(perfil.getNivel())) {
+            throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "Já existe um perfil com o nivel de acesso");
+        }
+
+        return perfilRepository.save(perfil);
     }
 
     @Override
-    public PerfilDto buscarPorId(Long id) {
-        return perfilRepository.findById(id)
-                .map(entity -> perfilMapper.toDto(entity))
+    public Perfil buscarPorId(Long nivel) {
+        return perfilRepository.findById(nivel)
                 .orElseThrow(() -> new ResponseStatusException(HttpStatus.NOT_FOUND, "Perfil não encontrado!"));
     }
 
     @Override
-    public List<PerfilDto> listar() {
-        return perfilRepository.findAll()
-                .stream()
-                .map(entity -> perfilMapper.toDto(entity))
-                .collect(Collectors.toList());
+    public List<Perfil> listar() {
+        return new ArrayList<>(perfilRepository.findAll());
     }
 
     @Override
-    public PerfilDto atualizar(PerfilDto perfilDto) {
-        return perfilRepository.findById(perfilDto.id())
+    public Perfil atualizar(Perfil perfil) {
+        return perfilRepository.findById(perfil.getNivel())
                 .map(entity -> {
-                    entity.setNivel(perfilDto.nivel());
-                    entity.setNome(perfilDto.nome());
-                    return perfilMapper.toDto(perfilRepository.save(entity));
-
+                    entity.setNome(perfil.getNome());
+                    return perfilRepository.save(entity);
                 })
                 .orElseThrow(() -> new ResponseStatusException(HttpStatus.NOT_FOUND, "Perfil não encontrado!"));
     }
 
     @Override
-    public void excluir(Long id) {
-        Optional<Perfil> perfil = perfilRepository.findById(id);
+    public void excluir(Long nivel) {
+        Optional<Perfil> perfil = perfilRepository.findById(nivel);
 
         if (perfil.isEmpty()) {
             throw new ResponseStatusException(HttpStatus.NOT_FOUND, "Perfil não encontrado!");
         }
 
-        perfilRepository.deleteById(id);
+        perfilRepository.deleteById(nivel);
     }
 }
