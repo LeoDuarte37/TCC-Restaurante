@@ -26,11 +26,6 @@ public class UsuarioServiceImpl implements UsuarioService {
     private final UsuarioMapper usuarioMapper;
 
     @Override
-    public UsuarioDto adicionar(UsuarioDto usuarioDto) {
-        return usuarioMapper.toDto(usuarioRepository.save(usuarioMapper.toEntity(usuarioDto)));
-    }
-
-    @Override
     public UsuarioDto buscarPorId(Long id) {
         return usuarioRepository.findById(id)
                 .map(entity -> usuarioMapper.toDto(entity))

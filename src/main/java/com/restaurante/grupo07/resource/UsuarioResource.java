@@ -19,12 +19,6 @@ public class UsuarioResource {
     @Autowired
     private final UsuarioService usuarioService;
 
-    @PostMapping("/cliente")
-    @Transactional
-    public UsuarioDto adicionar(@Valid @RequestBody UsuarioDto usuarioDto) {
-        return usuarioService.adicionar(usuarioDto);
-    }
-
     @GetMapping("/{id}")
     public UsuarioDto buscarPorId(@PathVariable("id") @NotNull Long id) {
         return usuarioService.buscarPorId(id);
