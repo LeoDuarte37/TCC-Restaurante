@@ -8,13 +8,13 @@ import org.springframework.stereotype.Component;
 @Component
 public class LoginMapper {
 
-    public UsuarioDto toUsuarioDto(Login login) {
-        return new UsuarioDto(
-                login.getUsuario().getId(),
-                login.getUsuario().getNome(),
-                login.getUsuario().getContato(),
-                login.getUsuario().getPerfil()
+    public LoginDto toDto(Login login) {
+        return new LoginDto(
+                login.getUsername(),
+                login.getSenha(),
+                login.getUsuario()
         );
+
     }
 
     public Login toEntity(LoginDto loginDto) {
@@ -23,5 +23,14 @@ public class LoginMapper {
                 .senha(loginDto.senha())
                 .usuario(loginDto.usuario())
                 .build();
+    }
+
+    public UsuarioDto toUsuarioDto(Login login) {
+        return new UsuarioDto(
+                login.getUsuario().getId(),
+                login.getUsuario().getNome(),
+                login.getUsuario().getContato(),
+                login.getUsuario().getPerfil()
+        );
     }
 }

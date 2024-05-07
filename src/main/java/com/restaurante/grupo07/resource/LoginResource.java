@@ -14,6 +14,8 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import java.util.Optional;
+
 @RestController
 @RequestMapping("/login")
 @RequiredArgsConstructor
@@ -24,13 +26,13 @@ public class LoginResource {
 
     @PostMapping
     @Transactional
-    public SessaoDto logar(@Valid @RequestBody LogarDto logarDto) {
-        return loginService.logar(logarDto);
+    public Optional<SessaoDto> logar(@Valid @RequestBody Optional<LogarDto> logarDto) {
+        return loginService.autenticar(logarDto);
     }
 
-    @PostMapping("/registrar")
+    @PostMapping("/cadastrar")
     @Transactional
-    public UsuarioDto adicionar(@Valid @RequestBody LoginDto loginDto) {
-        return loginService.adicionar(loginDto);
+    public Optional<UsuarioDto> cadastrar(@Valid @RequestBody LoginDto loginDto) {
+        return loginService.cadastrar(loginDto);
     }
 }

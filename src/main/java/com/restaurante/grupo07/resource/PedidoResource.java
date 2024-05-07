@@ -53,7 +53,7 @@ public class PedidoResource {
         return pedidoService.atualizar(pedidoDto);
     }
 
-    @PatchMapping("/atualizarStatus")
+    @PatchMapping("/atualizar/status")
     @Transactional
     public PedidoDto atualizarStatus(@RequestBody PedidoDto pedidoDto) {
         return pedidoService.atualizarStatus(pedidoDto);

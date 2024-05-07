@@ -59,14 +59,14 @@ public class MesaResource {
         return mesaService.atualizar(mesaDto);
     }
 
-    @PatchMapping("/atualizarStatus")
+    @PatchMapping("/atualizar/status")
     @ResponseStatus(HttpStatus.OK)
     @Transactional
     public MesaDto atualizarStatus(@RequestBody MesaDto mesaDto) {
         return mesaService.atualizarStatus(mesaDto);
     }
 
-    @PatchMapping("/atualizarChamarGarcom")
+    @PatchMapping("/atualizar/chamarGarcom")
     @ResponseStatus(HttpStatus.OK)
     @Transactional
     public MesaDto atualizarChamarGarcom(@RequestBody MesaDto mesaDto) {

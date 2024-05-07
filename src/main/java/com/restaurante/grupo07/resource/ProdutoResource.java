@@ -52,7 +52,7 @@ public class ProdutoResource {
         return produtoService.atualizar(produtoDto);
     }
 
-    @PatchMapping("/{id}")
+    @PatchMapping("/atualizar/status")
     @Transactional
     public ProdutoDto atualizarStatus(@RequestBody ProdutoDto produtoDto) {
         return produtoService.atualizarStatus(produtoDto);

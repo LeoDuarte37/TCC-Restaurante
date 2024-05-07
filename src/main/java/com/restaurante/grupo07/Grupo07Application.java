@@ -9,7 +9,14 @@ public class Grupo07Application {
 	public static void main(String[] args) {
 		SpringApplication.run(Grupo07Application.class, args);
 
-		// Transformar a tabela item em embedable
+		// Testar!!!
+
+		// https://github.com/digitalinnovationone/dio-springboot/blob/main/dio-spring-security-jwt/src/main/java/dio/dio/spring/security/jwt/security/WebSecurityConfig.java
+		// https://github.com/ecommerceGrupo03/ReVende/blob/dev/reVende/src/main/java/com/reVende/projeto/Service/UsuarioService.java
+		// https://github.com/conteudoGeneration/cookbook_java_fullstack/blob/main/04_spring/17.md
+		// https://glysns.gitbook.io/spring-framework/spring-web/introducao
+
+
 
 		// Videos e blog: Padrão Dto e Mapper
 		// https://www.youtube.com/watch?v=2GTgDLkDWPQ&list=PLGxZ4Rq3BOBpwaVgAPxTxhdX_TfSVlTcY&index=43

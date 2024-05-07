@@ -7,7 +7,6 @@ import jakarta.validation.constraints.NotNull;
 import jakarta.validation.constraints.Size;
 
 public record LoginDto(
-        Long id,
 
         @NotBlank
         @Size(min = 5, max = 25)

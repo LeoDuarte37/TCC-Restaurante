@@ -1,4 +1,4 @@
-package com.restaurante.grupo07;
+package com.restaurante.grupo07.init;
 
 import com.restaurante.grupo07.model.Perfil;
 import com.restaurante.grupo07.repository.PerfilRepository;
@@ -21,20 +21,19 @@ public class StartApp implements CommandLineRunner {
 
         Perfil admin = new Perfil();
         admin.setNivel(1L);
-        admin.setNome("Administrador");
+        admin.setNome("ADMINISTRADOR");
 
         Perfil caixa = new Perfil();
         caixa.setNivel(2L);
-        caixa.setNome("Caixa");
+        caixa.setNome("CAIXA");
 
         Perfil garcom = new Perfil();
         garcom.setNivel(3L);
-        garcom.setNome("Garçom");
+        garcom.setNome("GARCOM");
 
         Perfil cozinha = new Perfil();
         cozinha.setNivel(4L);
-        cozinha.setNome("Cozinha");
-
+        cozinha.setNome("COZINHA");
 
         List<Perfil> perfisIniciais = new ArrayList<>(Arrays.asList(admin, caixa, garcom, cozinha));
 

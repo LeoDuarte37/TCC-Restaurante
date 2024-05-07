@@ -55,7 +55,7 @@ public class CategoriaResource {
         return categoriaService.atualizar(categoriaDto);
     }
 
-    @PatchMapping
+    @PatchMapping("/atualizar/status")
     @Transactional
     public CategoriaDto atualizarStatus(@RequestBody CategoriaDto categoriaDto) {
         return categoriaService.atualizarStatus(categoriaDto);

@@ -19,6 +19,6 @@ spring:
 
 security:
   config:
-    prefix: Bearer
-    key: SECRET_KEY
+    prefix: "Bearer "
+    key: "3288b5a38e055df0ddf0fc36c2bab5b59b5ac2d4314c01874c260f193c7b79f2"
     expiration: 3600000
