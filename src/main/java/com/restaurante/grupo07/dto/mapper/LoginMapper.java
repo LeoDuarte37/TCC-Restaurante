@@ -12,7 +12,8 @@ public class LoginMapper {
         return new UsuarioDto(
                 login.getUsuario().getId(),
                 login.getUsuario().getNome(),
-                login.getUsuario().getContato()
+                login.getUsuario().getContato(),
+                login.getUsuario().getPerfil()
         );
     }
 

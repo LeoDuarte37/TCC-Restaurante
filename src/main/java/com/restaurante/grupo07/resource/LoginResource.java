@@ -8,6 +8,7 @@ import com.restaurante.grupo07.service.LoginService;
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -22,12 +23,14 @@ public class LoginResource {
     private final LoginService loginService;
 
     @PostMapping
+    @Transactional
     public SessaoDto logar(@Valid @RequestBody LogarDto logarDto) {
         return loginService.logar(logarDto);
     }
 
     @PostMapping("/registrar")
-    public UsuarioDto adicionar(LoginDto loginDto) {
+    @Transactional
+    public UsuarioDto adicionar(@Valid @RequestBody LoginDto loginDto) {
         return loginService.adicionar(loginDto);
     }
 }

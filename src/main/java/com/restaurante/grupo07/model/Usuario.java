@@ -27,4 +27,8 @@ public class Usuario {
     @NotNull(message = "Atributo contato é obrigatório!")
     @Embedded
     private Contato contato;
+
+    @NotNull
+    @ManyToOne
+    private Perfil perfil;
 }

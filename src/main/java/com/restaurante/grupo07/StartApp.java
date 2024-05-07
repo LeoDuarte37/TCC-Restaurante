@@ -19,9 +19,9 @@ public class StartApp implements CommandLineRunner {
     @Override
     public void run(String... args) throws Exception {
 
-        Perfil cliente = new Perfil();
-        cliente.setNivel(1L);
-        cliente.setNome("Cliente");
+        Perfil admin = new Perfil();
+        admin.setNivel(1L);
+        admin.setNome("Administrador");
 
         Perfil caixa = new Perfil();
         caixa.setNivel(2L);
@@ -35,11 +35,8 @@ public class StartApp implements CommandLineRunner {
         cozinha.setNivel(4L);
         cozinha.setNome("Cozinha");
 
-        Perfil admin = new Perfil();
-        admin.setNivel(5L);
-        admin.setNome("Administrador");
 
-        List<Perfil> perfisIniciais = new ArrayList<>(Arrays.asList(cliente, caixa, garcom, cozinha, admin));
+        List<Perfil> perfisIniciais = new ArrayList<>(Arrays.asList(admin, caixa, garcom, cozinha));
 
         perfisIniciais.forEach(perfil -> perfilRepository.save(perfil));
     }

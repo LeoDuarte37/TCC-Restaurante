@@ -62,6 +62,11 @@ public class Grupo07Application {
 			INNER JOIN tb_categoria C
 			ON P.categoria_id = C.id;
 
+			-- Buscar usuarios por nivel de perfil:
+			SELECT usuario_id, U.nome, U.email, perfil_nivel
+			FROM TB_LOGIN L
+			INNER JOIN TB_USUARIO U
+			WHERE perfil_nivel = 3;
 
 
 

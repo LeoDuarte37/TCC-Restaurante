@@ -1,6 +1,6 @@
 package com.restaurante.grupo07.dto;
 
-
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.restaurante.grupo07.model.Contato;
 import com.restaurante.grupo07.model.Perfil;
 import jakarta.validation.constraints.NotBlank;
@@ -15,6 +15,9 @@ public record UsuarioDto (
         String nome,
 
         @NotNull
-        Contato contato
+        Contato contato,
+
+        @NotNull
+        Perfil perfil
     ) {
 }

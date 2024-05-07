@@ -24,9 +24,6 @@ public class LoginServiceImpl implements LoginService {
     @Autowired
     private final LoginMapper loginMapper;
 
-    @Autowired
-    private final UsuarioMapper usuarioMapper;
-
     @Override
     public SessaoDto logar(LogarDto logarDto) {
         return null;

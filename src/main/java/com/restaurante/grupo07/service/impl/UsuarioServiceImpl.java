@@ -46,6 +46,7 @@ public class UsuarioServiceImpl implements UsuarioService {
                 .map(entity -> {
                     entity.setNome(usuarioDto.nome());
                     entity.setContato(usuarioDto.contato());
+                    entity.setPerfil(usuarioDto.perfil());
                     return usuarioMapper.toDto(usuarioRepository.save(entity));
 
                 }).orElseThrow(() -> new ResponseStatusException(HttpStatus.NOT_FOUND, "Usuário não encontrado!"));

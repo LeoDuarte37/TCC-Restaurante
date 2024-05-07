@@ -18,9 +18,7 @@ public record LoginDto(
         String senha,
 
         @NotNull
-        Usuario usuario,
-
-        Perfil perfil
+        Usuario usuario
 
     ) {
 }

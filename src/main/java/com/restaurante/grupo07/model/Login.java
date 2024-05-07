@@ -27,8 +27,4 @@ public class Login {
     @NotNull(message = "Atributo usuario é obrigatório!")
     @OneToOne(fetch = FetchType.LAZY, cascade = {CascadeType.ALL, CascadeType.PERSIST}, orphanRemoval = true)
     private Usuario usuario;
-
-    @NotNull
-    @ManyToOne
-    private Perfil perfil;
 }
