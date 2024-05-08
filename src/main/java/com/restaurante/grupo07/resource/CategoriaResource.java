@@ -15,11 +15,11 @@ import java.util.List;
 
 @RestController
 @RequestMapping("/categoria")
-@RequiredArgsConstructor
+@CrossOrigin(origins = "*", allowedHeaders = "*")
 public class CategoriaResource {
 
     @Autowired
-    private final CategoriaService categoriaService;
+    private CategoriaService categoriaService;
 
     @PostMapping
     @ResponseStatus(HttpStatus.CREATED)
@@ -29,18 +29,18 @@ public class CategoriaResource {
     }
 
     @GetMapping("/{id}")
-    public CategoriaDto buscarPorId(@PathVariable("id") @NotNull Long id) {
+    public CategoriaDto buscarPorId(@PathVariable("id") Long id) {
         return categoriaService.buscarPorId(id);
     }
 
-    
+
     @GetMapping("/listar")
     public List<CategoriaDto> listar() {
         return categoriaService.listar();
     }
     
     @GetMapping("/listar/nome/{nome}")
-    public List<CategoriaDto> listarPorNome(@PathVariable("nome") @NotBlank String nome) {
+    public List<CategoriaDto> listarPorNome(@PathVariable("nome") String nome) {
         return categoriaService.listarPorNome(nome);
     }
 

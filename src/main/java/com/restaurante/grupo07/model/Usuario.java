@@ -21,14 +21,9 @@ public class Usuario {
     private Long id;
 
     @NotBlank(message = "Atributo nome é obrigatório!")
-    @Size(max = 70)
     private String nome;
 
     @NotNull(message = "Atributo contato é obrigatório!")
     @Embedded
     private Contato contato;
-
-    @NotNull
-    @ManyToOne
-    private Perfil perfil;
 }

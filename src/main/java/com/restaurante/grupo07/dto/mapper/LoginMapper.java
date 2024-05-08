@@ -12,7 +12,8 @@ public class LoginMapper {
         return new LoginDto(
                 login.getUsername(),
                 login.getSenha(),
-                login.getUsuario()
+                login.getUsuario(),
+                login.getPerfil()
         );
 
     }
@@ -22,6 +23,7 @@ public class LoginMapper {
                 .username(loginDto.username())
                 .senha(loginDto.senha())
                 .usuario(loginDto.usuario())
+                .perfil(loginDto.perfil())
                 .build();
     }
 
@@ -29,8 +31,7 @@ public class LoginMapper {
         return new UsuarioDto(
                 login.getUsuario().getId(),
                 login.getUsuario().getNome(),
-                login.getUsuario().getContato(),
-                login.getUsuario().getPerfil()
+                login.getUsuario().getContato()
         );
     }
 }

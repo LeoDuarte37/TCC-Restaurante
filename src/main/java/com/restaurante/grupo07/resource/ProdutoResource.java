@@ -14,11 +14,11 @@ import java.util.List;
 
 @RestController
 @RequestMapping("/produto")
-@RequiredArgsConstructor
+@CrossOrigin(origins = "*", allowedHeaders = "*")
 public class ProdutoResource {
 
     @Autowired
-    private final ProdutoService produtoService;
+    private ProdutoService produtoService;
 
     @PostMapping
     @Transactional

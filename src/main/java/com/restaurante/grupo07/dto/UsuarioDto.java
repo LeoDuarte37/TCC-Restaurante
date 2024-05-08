@@ -15,9 +15,6 @@ public record UsuarioDto (
         String nome,
 
         @NotNull
-        Contato contato,
-
-        @NotNull
-        Perfil perfil
+        Contato contato
     ) {
 }

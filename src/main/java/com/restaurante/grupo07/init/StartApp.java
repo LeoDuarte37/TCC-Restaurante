@@ -21,7 +21,7 @@ public class StartApp implements CommandLineRunner {
 
         Perfil admin = new Perfil();
         admin.setNivel(1L);
-        admin.setNome("ADMINISTRADOR");
+        admin.setNome("ADMIN");
 
         Perfil caixa = new Perfil();
         caixa.setNivel(2L);

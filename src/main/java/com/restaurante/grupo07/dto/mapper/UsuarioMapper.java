@@ -11,8 +11,7 @@ public class UsuarioMapper {
         return new UsuarioDto(
                 usuario.getId(),
                 usuario.getNome(),
-                usuario.getContato(),
-                usuario.getPerfil()
+                usuario.getContato()
         );
     }
 
@@ -20,7 +19,6 @@ public class UsuarioMapper {
         return Usuario.builder()
                 .nome(usuarioDto.nome())
                 .contato(usuarioDto.contato())
-                .perfil(usuarioDto.perfil())
                 .build();
     }
 }

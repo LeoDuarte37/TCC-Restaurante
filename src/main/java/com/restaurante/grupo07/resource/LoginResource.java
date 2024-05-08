@@ -32,7 +32,7 @@ public class LoginResource {
 
     @PostMapping("/cadastrar")
     @Transactional
-    public Optional<UsuarioDto> cadastrar(@Valid @RequestBody LoginDto loginDto) {
+    public Optional<LoginDto> cadastrar(@Valid @RequestBody LoginDto loginDto) {
         return loginService.cadastrar(loginDto);
     }
 }

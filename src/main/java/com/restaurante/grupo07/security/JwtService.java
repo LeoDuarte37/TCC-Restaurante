@@ -1,65 +1,52 @@
 package com.restaurante.grupo07.security;
 
-import io.jsonwebtoken.Claims;
-import io.jsonwebtoken.Jwts;
-import io.jsonwebtoken.SignatureAlgorithm;
-import io.jsonwebtoken.io.Decoders;
-import io.jsonwebtoken.security.Keys;
-import org.springframework.security.core.userdetails.UserDetails;
-import org.springframework.stereotype.Component;
+import com.auth0.jwt.JWT;
+import com.auth0.jwt.algorithms.Algorithm;
+import com.auth0.jwt.exceptions.JWTCreationException;
+import com.auth0.jwt.exceptions.JWTVerificationException;
+import com.restaurante.grupo07.model.Login;
+import org.springframework.stereotype.Service;
 
-import java.security.Key;
-import java.util.Date;
-import java.util.HashMap;
-import java.util.Map;
-import java.util.function.Function;
+import java.time.Instant;
+import java.time.LocalDateTime;
+import java.time.ZoneOffset;
 
-@Component
+@Service
 public class JwtService {
 
-    private Key getSignKey() {
-        byte[] keyBytes = Decoders.BASE64.decode(SecurityConfig.KEY);
-        return Keys.hmacShaKeyFor(keyBytes);
+    private static final String SECRET_KEY = "3288b5a38e055df0ddf0fc36c2bab5b59b5ac2d4314c01874c260f193c7b79f2";
+
+    public String generateToken(Login login) {
+        try {
+            Algorithm algorithm = Algorithm.HMAC256(SECRET_KEY);
+
+            return JWT.create()
+                    .withIssuer("auth-api")
+                    .withSubject(login.getUsername())
+                    .withExpiresAt(genExpirationDate())
+                    .sign(algorithm);
+
+        } catch (JWTCreationException exception) {
+            throw new RuntimeException("Erro ao gerar o token!", exception);
+        }
     }
 
-    private Claims extractAllClaims(String token) {
-        return Jwts.parserBuilder().setSigningKey(getSignKey()).build()
-                .parseClaimsJws(token).getBody();
+    public String validateToken(String token) {
+        try {
+            Algorithm algorithm = Algorithm.HMAC256(SECRET_KEY);
+
+            return JWT.require(algorithm)
+                    .withIssuer("auth-api")
+                    .build()
+                    .verify(token)
+                    .getSubject();
+
+        } catch (JWTVerificationException exception) {
+            throw new RuntimeException("Erro ao validar o token!", exception);
+        }
     }
 
-    public <T> T extractClaim(String token, Function<Claims, T> claimsResolver) {
-        final Claims claims = extractAllClaims(token);
-        return claimsResolver.apply(claims);
-    }
-
-    public String extractUsername(String token) {
-        return extractClaim(token, Claims::getSubject);
-    }
-
-    public Date extractExpiration(String token) {
-        return extractClaim(token, Claims::getExpiration);
-    }
-
-    private boolean isTokenExpired(String token) {
-        return extractExpiration(token).before(new Date());
-    }
-
-    public boolean validateToken(String token, UserDetails userDetails) {
-        final String username = extractUsername(token);
-        return (username.equals(userDetails.getUsername()) && !isTokenExpired(token));
-    }
-
-    private String createToken(Map<String, Object> claims, String username) {
-        return Jwts.builder()
-                .setClaims(claims)
-                .setSubject(username)
-                .setIssuedAt(new Date(System.currentTimeMillis()))
-                .setExpiration(new Date(System.currentTimeMillis() + SecurityConfig.EXPIRATION))
-                .signWith(getSignKey(), SignatureAlgorithm.HS256).compact();
-    }
-
-    public String generateToken(String username) {
-        Map<String, Object> claims = new HashMap<>();
-        return createToken(claims, username);
+    private Instant genExpirationDate() {
+        return LocalDateTime.now().plusHours(2).toInstant(ZoneOffset.of("-03:00"));
     }
 }

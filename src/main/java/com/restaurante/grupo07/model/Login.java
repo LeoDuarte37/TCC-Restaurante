@@ -17,14 +17,17 @@ public class Login {
 
     @Id
     @NotBlank(message = "Atributo username é obrigatório!")
-    @Size(min = 5, max = 25)
     private String username;
 
     @NotBlank(message = "Atributo senha é obrigatório!")
-    @Size(min = 5, max = 25)
+    @Size(min = 5, max = 1000)
     private String senha;
 
     @NotNull(message = "Atributo usuario é obrigatório!")
     @OneToOne(fetch = FetchType.LAZY, cascade = {CascadeType.ALL, CascadeType.PERSIST}, orphanRemoval = true)
     private Usuario usuario;
+
+    @NotNull
+    @ManyToOne
+    private Perfil perfil;
 }

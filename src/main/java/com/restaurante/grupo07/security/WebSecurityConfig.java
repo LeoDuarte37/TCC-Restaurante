@@ -8,7 +8,9 @@ import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.AuthenticationProvider;
 import org.springframework.security.authentication.dao.DaoAuthenticationProvider;
 import org.springframework.security.config.annotation.authentication.configuration.AuthenticationConfiguration;
+import org.springframework.security.config.annotation.method.configuration.EnableGlobalMethodSecurity;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
+import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.config.http.SessionCreationPolicy;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
@@ -19,14 +21,46 @@ import org.springframework.security.web.authentication.UsernamePasswordAuthentic
 import static org.springframework.security.config.Customizer.withDefaults;
 
 @Configuration
+@EnableWebSecurity
 public class WebSecurityConfig {
 
     @Autowired
     private JwtAuthFilter authFilter;
 
     @Bean
-    UserDetailsService userDetailsService() {
-        return new UserDetailsServiceImpl();
+    public SecurityFilterChain filterChain(HttpSecurity http) throws Exception {
+
+        // Referencia: https://docs.spring.io/spring-security/reference/servlet/authorization/authorize-http-requests.html
+
+        return http
+                .csrf(csrf -> csrf.disable())
+                .sessionManagement(session -> session.sessionCreationPolicy(SessionCreationPolicy.STATELESS))
+                .authorizeHttpRequests((authz) -> authz
+                        .requestMatchers(HttpMethod.POST,"/login", "/login/cadastrar").permitAll()
+
+                        .requestMatchers(HttpMethod.GET, "/mesa/listar", "/mesa/{id}").permitAll()
+                        .requestMatchers(HttpMethod.GET, "/mesa/listar/status/{status}").hasAnyRole("ADMIN", "CAIXA", "GARCOM", "COZINHA")
+                        .requestMatchers(HttpMethod.GET, "/mesa/listar/chamandoGarcom}").hasAnyRole("ADMIN", "CAIXA", "GARCOM", "COZINHA")
+                        .requestMatchers(HttpMethod.PUT, "/mesa").hasAnyRole("ADMIN", "CAIXA", "GARCOM", "COZINHA")
+                        .requestMatchers(HttpMethod.PATCH, "/mesa/atualizar/**").permitAll()
+
+                        .requestMatchers(HttpMethod.GET, "/categoria/listar", "/categoria/{id}").permitAll()
+                        .requestMatchers(HttpMethod.PATCH, "/categoria/atualizar/status").hasAnyRole("ADMIN", "CAIXA")
+
+                        .requestMatchers(HttpMethod.GET, "/produto/listar").permitAll()
+                        .requestMatchers(HttpMethod.GET, "/produto/{id}").permitAll()
+                        .requestMatchers(HttpMethod.GET, "/produto/listar/disponiveis").permitAll()
+                        .requestMatchers(HttpMethod.PATCH, "/produto/atualizar/status").hasAnyRole("ADMIN", "CAIXA")
+
+                        .requestMatchers(HttpMethod.POST, "/pedido").permitAll()
+                        .requestMatchers(HttpMethod.GET, "/pedido/listar/mesa/{mesa}").permitAll()
+                        .requestMatchers(HttpMethod.GET, "/pedido/**").hasAnyRole("ADMIN", "CAIXA", "GARCOM", "COZINHA")
+                        .requestMatchers(HttpMethod.PUT, "/pedido").hasAnyRole("ADMIN", "CAIXA")
+                        .requestMatchers(HttpMethod.PATCH, "/pedido/atualizar/status").hasAnyRole("ADMIN", "CAIXA", "GARCOM", "COZINHA")
+
+                        .anyRequest().hasRole("ADMIN")
+
+                ).addFilterBefore(authFilter, UsernamePasswordAuthenticationFilter.class).build();
     }
 
     @Bean
@@ -35,58 +69,7 @@ public class WebSecurityConfig {
     }
 
     @Bean
-    AuthenticationProvider authenticationProvider() {
-        DaoAuthenticationProvider authenticationProvider = new DaoAuthenticationProvider();
-        authenticationProvider.setUserDetailsService(userDetailsService());
-        authenticationProvider.setPasswordEncoder(passwordEncoder());
-
-        return authenticationProvider;
-    }
-
-    @Bean
     AuthenticationManager authenticationManager(AuthenticationConfiguration authenticationConfiguration) throws Exception {
         return authenticationConfiguration.getAuthenticationManager();
-    }
-
-    @Bean
-    public SecurityFilterChain filterChain(HttpSecurity http) throws Exception {
-
-        // Referencia: https://docs.spring.io/spring-security/reference/servlet/authorization/authorize-http-requests.html
-
-        http
-                .sessionManagement(management -> management
-                        .sessionCreationPolicy(SessionCreationPolicy.STATELESS))
-                        .csrf(csrf -> csrf.disable())
-                        .cors(withDefaults());
-
-        http
-                .authorizeHttpRequests((authz) -> authz
-                        .requestMatchers( HttpMethod.POST,"/login", "/login/cadastrar").permitAll()
-
-                        .requestMatchers(HttpMethod.GET, "/mesa").hasAnyRole("ADMINISTRADOR", "CAIXA", "GARCOM", "COZINHA")
-                        .requestMatchers(HttpMethod.PUT, "/mesa").hasAnyRole("ADMINISTRADOR", "CAIXA", "GARCOM", "COZINHA")
-                        .requestMatchers( HttpMethod.PATCH, "/mesa/atualizar/**").permitAll()
-
-                        .requestMatchers( HttpMethod.GET, "/categoria/listar", "/categoria/listar/**").permitAll()
-                        .requestMatchers( HttpMethod.PATCH, "/categoria/atualizar/status").hasAnyRole("ADMINISTRADOR", "CAIXA")
-
-                        .requestMatchers( HttpMethod.GET, "/produto/listar", "/produto/listar/**").permitAll()
-                        .requestMatchers( HttpMethod.PATCH, "/produto/atualizar/status").hasAnyRole("ADMINISTRADOR", "CAIXA")
-
-                        .requestMatchers( HttpMethod.POST, "/pedido").permitAll()
-                        .requestMatchers( HttpMethod.GET, "/pedido/listar/mesa/{mesa}").permitAll()
-                        .requestMatchers( HttpMethod.GET, "/pedido/**").hasAnyRole("ADMINISTRADOR", "CAIXA", "GARCOM", "COZINHA")
-                        .requestMatchers( HttpMethod.PUT, "/pedido").hasAnyRole("ADMINISTRADOR", "CAIXA")
-                        .requestMatchers( HttpMethod.PATCH, "/pedido/atualizar/status").hasAnyRole("ADMINISTRADOR", "CAIXA", "GARCOM", "COZINHA")
-
-                        .requestMatchers("/error/**").permitAll()
-                        .requestMatchers(HttpMethod.OPTIONS).permitAll()
-                        .anyRequest().hasRole("ADMINISTRADOR"))
-
-                .authenticationProvider(authenticationProvider())
-                .addFilterBefore(authFilter, UsernamePasswordAuthenticationFilter.class)
-                .httpBasic(withDefaults());
-
-        return http.build();
     }
 }

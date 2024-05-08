@@ -13,11 +13,14 @@ public record LoginDto(
         String username,
 
         @NotBlank
-        @Size(min = 5, max = 25)
+        @Size(min = 5)
         String senha,
 
         @NotNull
-        Usuario usuario
+        Usuario usuario,
+
+        @NotNull
+        Perfil perfil
 
     ) {
 }
