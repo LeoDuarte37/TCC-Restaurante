@@ -9,49 +9,17 @@ public class Grupo07Application {
 	public static void main(String[] args) {
 		SpringApplication.run(Grupo07Application.class, args);
 
-		// Testar!!!
+		// http://localhost:8080/h2-console
+
+		// https://github.com/giuliana-bezerra/spring-security-jwt/blob/main/src/main/java/br/com/giulianabezerra/springsecurityjwt/security/UserDetailsServiceImpl.java
 
 		// https://github.com/digitalinnovationone/dio-springboot/blob/main/dio-spring-security-jwt/src/main/java/dio/dio/spring/security/jwt/security/WebSecurityConfig.java
 		// https://github.com/ecommerceGrupo03/ReVende/blob/dev/reVende/src/main/java/com/reVende/projeto/Service/UsuarioService.java
 		// https://github.com/conteudoGeneration/cookbook_java_fullstack/blob/main/04_spring/17.md
 		// https://glysns.gitbook.io/spring-framework/spring-web/introducao
 
-
-
-		// Videos e blog: Padrão Dto e Mapper
-		// https://www.youtube.com/watch?v=2GTgDLkDWPQ&list=PLGxZ4Rq3BOBpwaVgAPxTxhdX_TfSVlTcY&index=43
-		// https://www.youtube.com/watch?v=qeM3PHD4qoQ
-		// https://www.youtube.com/watch?v=lmzpyCNyziI
-		// https://marioalvial.medium.com/blindando-sua-api-spring-boot-com-o-padr%C3%A3o-dto-44f97020d1a0
-
-
-		// Atualização parcial:
-		// https://www.youtube.com/watch?v=wVMKnPM9F4E
-		// https://www.youtube.com/watch?v=6AJh4cJNOn0
-
-		// http://localhost:8080/h2-console
-
-		// https://docs.spring.io/spring-data/jpa/reference/jpa/query-methods.html
-
-
-		// https://www.youtube.com/watch?v=nG2KTQnES1s
-
-
-		// Filtro de requisição/consulta
-		// https://dzone.com/articles/spring-web-service-response-filtering
-		// https://jfilter.sframework.org/projects/jfilter/1.0.18/
-
 		// Inner join com JPA
 		// https://pt.stackoverflow.com/questions/476236/como-fazer-inner-join-no-jpa-springboot
-		/*
-			Exemplo:
-
-			select m.id, m.nome, m.crm, e.descricao
-			from Medico m
-			inner join m.especialidade e
-		 */
-
-
 
 		/*
 			Comandos data.sql para testes

@@ -1,6 +1,7 @@
 package com.restaurante.grupo07.security;
 
 import com.restaurante.grupo07.model.Login;
+import lombok.RequiredArgsConstructor;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
@@ -8,33 +9,24 @@ import org.springframework.security.core.userdetails.UserDetails;
 import java.util.Collection;
 import java.util.List;
 
+@RequiredArgsConstructor
 public class UserDetailsImpl implements UserDetails {
 
-    private static final Long serialVersionUID = 1L;
-
-    private String username;
-    private String senha;
-    private List<SimpleGrantedAuthority> authorities;
-
-    public UserDetailsImpl(Login login, List<SimpleGrantedAuthority> authorities) {
-        this.username = login.getUsername();
-        this.senha = login.getSenha();
-        this.authorities = authorities;
-    }
+    private final Login login;
 
     @Override
     public Collection<? extends GrantedAuthority> getAuthorities() {
-        return authorities;
+        return List.of(() -> login.getPerfil().getNome());
     }
 
     @Override
     public String getPassword() {
-        return senha;
+        return login.getSenha();
     }
 
     @Override
     public String getUsername() {
-        return username;
+        return login.getUsername();
     }
 
     @Override
