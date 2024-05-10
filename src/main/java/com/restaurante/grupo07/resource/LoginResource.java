@@ -24,6 +24,9 @@ public class LoginResource {
     @Autowired
     private final LoginService loginService;
 
+    @Autowired
+    private final AuthenticationService authenticationService;
+
     @PostMapping
     @Transactional
     public Optional<SessaoDto> logar(@Valid @RequestBody Optional<LogarDto> logarDto) {
@@ -34,5 +37,10 @@ public class LoginResource {
     @Transactional
     public Optional<LoginDto> cadastrar(@Valid @RequestBody LoginDto loginDto) {
         return loginService.cadastrar(loginDto);
+    }
+
+    @PostMapping("/logar")
+    public String authenticate(Authentication authentication) {
+        return authenticationService.authenticate(authentication);
     }
 }
