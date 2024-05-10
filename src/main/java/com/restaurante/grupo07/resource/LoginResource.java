@@ -3,29 +3,22 @@ package com.restaurante.grupo07.resource;
 import com.restaurante.grupo07.dto.LogarDto;
 import com.restaurante.grupo07.dto.LoginDto;
 import com.restaurante.grupo07.dto.SessaoDto;
-import com.restaurante.grupo07.dto.UsuarioDto;
 import com.restaurante.grupo07.service.LoginService;
 import jakarta.validation.Valid;
+import jakarta.validation.constraints.NotNull;
 import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.transaction.annotation.Transactional;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.Optional;
 
 @RestController
 @RequestMapping("/login")
-@RequiredArgsConstructor
 public class LoginResource {
 
     @Autowired
-    private final LoginService loginService;
-
-    @Autowired
-    private final AuthenticationService authenticationService;
+    private LoginService loginService;
 
     @PostMapping
     @Transactional
@@ -39,8 +32,15 @@ public class LoginResource {
         return loginService.cadastrar(loginDto);
     }
 
-    @PostMapping("/logar")
-    public String authenticate(Authentication authentication) {
-        return authenticationService.authenticate(authentication);
+    @PutMapping
+    @Transactional
+    public Optional<LoginDto> atualizar(@Valid @RequestBody LoginDto loginDto) {
+        return loginService.atualizar(loginDto);
+    }
+
+    @DeleteMapping("/{username}")
+    @Transactional
+    public void excluir(@PathVariable("username") String username) {
+        loginService.excluir(username);
     }
 }

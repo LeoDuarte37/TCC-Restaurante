@@ -15,7 +15,6 @@ import java.util.List;
 
 @RestController
 @RequestMapping("/categoria")
-@CrossOrigin(origins = "*", allowedHeaders = "*")
 public class CategoriaResource {
 
     @Autowired
@@ -29,33 +28,39 @@ public class CategoriaResource {
     }
 
     @GetMapping("/{id}")
+    @ResponseStatus(HttpStatus.OK)
     public CategoriaDto buscarPorId(@PathVariable("id") Long id) {
         return categoriaService.buscarPorId(id);
     }
 
 
     @GetMapping("/listar")
+    @ResponseStatus(HttpStatus.OK)
     public List<CategoriaDto> listar() {
         return categoriaService.listar();
     }
     
     @GetMapping("/listar/nome/{nome}")
+    @ResponseStatus(HttpStatus.OK)
     public List<CategoriaDto> listarPorNome(@PathVariable("nome") String nome) {
         return categoriaService.listarPorNome(nome);
     }
 
     @GetMapping("/listar/disponiveis")
+    @ResponseStatus(HttpStatus.OK)
     public List<CategoriaDto> listarDisponiveis() {
         return categoriaService.listarDisponiveis();
     }
 
     @PutMapping
+    @ResponseStatus(HttpStatus.OK)
     @Transactional
     public CategoriaDto atualizar(@Valid @RequestBody CategoriaDto categoriaDto) {
         return categoriaService.atualizar(categoriaDto);
     }
 
     @PatchMapping("/atualizar/status")
+    @ResponseStatus(HttpStatus.OK)
     @Transactional
     public CategoriaDto atualizarStatus(@RequestBody CategoriaDto categoriaDto) {
         return categoriaService.atualizarStatus(categoriaDto);

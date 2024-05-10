@@ -8,5 +8,4 @@ public interface UsuarioService {
     UsuarioDto buscarPorId(Long id);
     List<UsuarioDto> listar();
     UsuarioDto atualizar(UsuarioDto usuarioDto);
-    void excluir(Long id);
 }

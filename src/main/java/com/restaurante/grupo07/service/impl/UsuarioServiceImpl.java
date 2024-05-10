@@ -51,14 +51,5 @@ public class UsuarioServiceImpl implements UsuarioService {
                 }).orElseThrow(() -> new ResponseStatusException(HttpStatus.NOT_FOUND, "Usuário não encontrado!"));
     }
 
-    @Override
-    public void excluir(Long id) {
-        Optional<Usuario> usuario = usuarioRepository.findById(id);
 
-        if (usuario.isEmpty()) {
-            throw new ResponseStatusException(HttpStatus.NOT_FOUND, "Usuário não encontrado!");
-        }
-
-        usuarioRepository.deleteById(id);
-    }
 }

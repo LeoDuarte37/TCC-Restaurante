@@ -3,13 +3,12 @@ package com.restaurante.grupo07.service.impl;
 import com.restaurante.grupo07.dto.LogarDto;
 import com.restaurante.grupo07.dto.LoginDto;
 import com.restaurante.grupo07.dto.SessaoDto;
-import com.restaurante.grupo07.dto.UsuarioDto;
 import com.restaurante.grupo07.dto.mapper.LoginMapper;
 import com.restaurante.grupo07.model.Login;
+import com.restaurante.grupo07.model.Usuario;
 import com.restaurante.grupo07.repository.LoginRepository;
 import com.restaurante.grupo07.security.JwtService;
 import com.restaurante.grupo07.service.LoginService;
-import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.security.authentication.AuthenticationManager;
@@ -22,17 +21,16 @@ import org.springframework.web.server.ResponseStatusException;
 import java.util.*;
 
 @Service
-@RequiredArgsConstructor
 public class LoginServiceImpl implements LoginService {
 
     @Autowired
-    private final LoginRepository loginRepository;
+    private LoginRepository loginRepository;
 
     @Autowired
-    private final LoginMapper loginMapper;
+    private LoginMapper loginMapper;
 
     @Autowired
-    private final JwtService jwtService;
+    private JwtService jwtService;
 
     @Autowired
     private AuthenticationManager authenticationManager;
@@ -56,7 +54,7 @@ public class LoginServiceImpl implements LoginService {
                 return Optional.of(
                         new SessaoDto(
                                 login.get().getUsername(),
-                                jwtService.generateToken(login.get())
+                                jwtService.gerarToken(login.get())
                         )
                 );
             }
@@ -91,5 +89,16 @@ public class LoginServiceImpl implements LoginService {
         }
 
         return Optional.empty();
+    }
+
+    @Override
+    public void excluir(String username) {
+        Optional<Login> login = loginRepository.findById(username);
+
+        if (login.isEmpty()) {
+            throw new ResponseStatusException(HttpStatus.NOT_FOUND, "Usuário não encontrado!");
+        }
+
+        loginRepository.deleteById(username);
     }
 }

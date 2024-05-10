@@ -1,43 +1,63 @@
 package com.restaurante.grupo07.security;
 
-import lombok.RequiredArgsConstructor;
+import com.auth0.jwt.JWT;
+import com.auth0.jwt.algorithms.Algorithm;
+import com.auth0.jwt.exceptions.JWTCreationException;
+import com.auth0.jwt.exceptions.JWTVerificationException;
 import com.restaurante.grupo07.model.Login;
+import com.restaurante.grupo07.repository.LoginRepository;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
+import org.springframework.security.core.userdetails.UserDetails;
+import org.springframework.security.core.userdetails.UserDetailsService;
+import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Service;
 
 import java.time.Instant;
-import java.util.stream.Collectors;
-
-import org.springframework.security.core.Authentication;
-import org.springframework.security.core.GrantedAuthority;
-import org.springframework.security.oauth2.jwt.JwtClaimsSet;
-import org.springframework.security.oauth2.jwt.JwtEncoder;
-import org.springframework.security.oauth2.jwt.JwtEncoderParameters;
-import org.springframework.stereotype.Service;
+import java.time.LocalDateTime;
+import java.time.ZoneOffset;
+import java.util.Optional;
 
 @Service
-@RequiredArgsConstructor
 public class JwtService {
 
-    @Autowired
-    private final JwtEncoder JwtEncoder;
+    @Value("${auth.jwt.token.secret}")
+    private String secretKey;
 
-    public String generateToken(Authentication authentication) {
-        Instant now = Instant.now();
-        long expiry = 36000L;
+    @Value("${auth.jwt.token.expiration}")
+    private Integer expiration;
 
-        String authority = authentication.getAuthorities()
-                            .stream()
-                            .map(() -> GrantedAuthority.getAuthority())
-                            .collect(Collectors.joining(" "));
+    public String validarToken(String token) {
+        try {
+            Algorithm algorithm = Algorithm.HMAC256(secretKey);
 
-        JwtClaimsSet claims = JwtClaimsSet.builder()
-                                .issuer("tcc-restaurante")
-                                .issuedAt(now)
-                                .expiresAt(now.plusSeconds(expiry))
-                                .subject(authentication.getName())
-                                .claim("authority", authority)
-                                .build();
+            return JWT.require(algorithm)
+                    .withIssuer("restaurante-api")
+                    .build()
+                    .verify(token)
+                    .getSubject();
 
-        return encoder.encode(JwtEncoderParameters.from(claims)).getTokenValue();
+        } catch (JWTVerificationException exception) {
+            throw new RuntimeException("Erro ao validar o token! " + exception.getMessage());
+        }
+    }
+
+    public String gerarToken(Login login) {
+        try {
+            Algorithm algorithm = Algorithm.HMAC256(secretKey);
+
+            return JWT.create()
+                    .withIssuer("restaurante-api")
+                    .withSubject(login.getUsername())
+                    .withExpiresAt(geraDataExpiracao(expiration))
+                    .sign(algorithm);
+
+        } catch (JWTCreationException exception) {
+            throw new RuntimeException("Erro ao gerar o token! " + exception.getMessage());
+        }
+    }
+
+    private Instant geraDataExpiracao(Integer expiration) {
+        return LocalDateTime.now().plusHours(expiration).toInstant(ZoneOffset.of("-03:00"));
     }
 }

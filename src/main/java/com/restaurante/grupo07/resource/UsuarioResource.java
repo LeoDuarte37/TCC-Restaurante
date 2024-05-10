@@ -34,10 +34,4 @@ public class UsuarioResource {
     public UsuarioDto atualizar(@Valid @RequestBody UsuarioDto usuarioDto) {
         return usuarioService.atualizar(usuarioDto);
     }
-
-    @DeleteMapping("/{id}")
-    @Transactional
-    public void excluir(@PathVariable("id") @NotNull Long id) {
-        usuarioService.excluir(id);
-    }
 }

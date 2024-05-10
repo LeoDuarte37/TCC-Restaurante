@@ -13,5 +13,6 @@ public interface LoginService {
     Optional<SessaoDto> autenticar(Optional<LogarDto> logarDto);
     Optional<LoginDto> cadastrar(LoginDto loginDto);
     Optional<LoginDto> atualizar(LoginDto loginDto);
+    void excluir(String username);
 }
 
