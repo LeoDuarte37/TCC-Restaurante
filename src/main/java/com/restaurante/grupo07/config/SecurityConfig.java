@@ -36,24 +36,39 @@ public class SecurityConfig {
                 .sessionManagement(session -> session.sessionCreationPolicy(SessionCreationPolicy.STATELESS))
                 .authorizeHttpRequests((authz) -> authz
                         .requestMatchers(HttpMethod.POST,"/login", "/login/cadastrar").permitAll()
+                        .requestMatchers(HttpMethod.PUT,"/login" ).hasRole("ADMIN")
+                        .requestMatchers(HttpMethod.DELETE,"/login/{username}").hasRole("ADMIN")
+
+                        .requestMatchers( "/usuario", "/usuario/**").hasRole("ADMIN")
+
+                        .requestMatchers( "/perfil", "/perfil/**").hasRole("ADMIN")
+
+                        .requestMatchers( "/restaurante", "/restaurante/**").hasRole("ADMIN")
 
                         .requestMatchers(HttpMethod.GET, "/mesa/listar").permitAll()
-                        .requestMatchers(HttpMethod.GET, "/mesa/listar/status/{status}").hasAnyRole("ADMIN", "CAIXA", "GARCOM", "COZINHA")
-                        .requestMatchers(HttpMethod.GET, "/mesa/listar/chamandoGarcom").hasAnyRole("ADMIN", "CAIXA", "GARCOM", "COZINHA")
+                        .requestMatchers(HttpMethod.GET, "/mesa/listar/**").hasAnyRole("ADMIN", "CAIXA", "GARCOM", "COZINHA")
                         .requestMatchers(HttpMethod.PUT, "/mesa").hasAnyRole("ADMIN", "CAIXA", "GARCOM", "COZINHA")
+                        .requestMatchers(HttpMethod.PATCH, "/mesa/atualizar/**").hasAnyRole("ADMIN", "CAIXA", "GARCOM", "COZINHA")
+                        .requestMatchers(HttpMethod.DELETE, "/mesa/{id}").hasRole("ADMIN")
 
-                        .requestMatchers("/categoria/listar").permitAll()
+                        .requestMatchers(HttpMethod.POST, "/categoria").hasAnyRole("ADMIN", "CAIXA")
+                        .requestMatchers(HttpMethod.GET,"/categoria/**").permitAll()
+                        .requestMatchers(HttpMethod.PUT, "/categoria").hasAnyRole("ADMIN", "CAIXA")
                         .requestMatchers(HttpMethod.PATCH, "/categoria/atualizar/status").hasAnyRole("ADMIN", "CAIXA")
+                        .requestMatchers(HttpMethod.DELETE, "/categoria/{id}").hasRole("ADMIN")
 
-                        .requestMatchers("/produto/listar").permitAll()
-                        .requestMatchers(HttpMethod.GET, "/produto/{id}").permitAll()
-                        .requestMatchers(HttpMethod.GET, "/produto/listar/disponiveis").permitAll()
+                        .requestMatchers(HttpMethod.POST, "/produto").hasAnyRole("ADMIN", "CAIXA")
+                        .requestMatchers(HttpMethod.GET,"/produto/**").permitAll()
+                        .requestMatchers(HttpMethod.PUT, "/produto").hasAnyRole("ADMIN", "CAIXA")
                         .requestMatchers(HttpMethod.PATCH, "/produto/atualizar/status").hasAnyRole("ADMIN", "CAIXA")
+                        .requestMatchers(HttpMethod.DELETE, "/produto/{id}").hasRole("ADMIN")
 
                         .requestMatchers(HttpMethod.POST, "/pedido").permitAll()
                         .requestMatchers(HttpMethod.GET, "/pedido/listar/mesa/{mesa}").permitAll()
+                        .requestMatchers(HttpMethod.GET, "/pedido/listar", "/pedido/listar/status/{status}").hasAnyRole("ADMIN", "CAIXA")
                         .requestMatchers(HttpMethod.PUT, "/pedido").hasAnyRole("ADMIN", "CAIXA")
                         .requestMatchers(HttpMethod.PATCH, "/pedido/atualizar/status").hasAnyRole("ADMIN", "CAIXA", "GARCOM", "COZINHA")
+                        .requestMatchers(HttpMethod.DELETE, "/pedido/{id}").hasAnyRole("ADMIN", "CAIXA")
 
                         .anyRequest().authenticated()
 

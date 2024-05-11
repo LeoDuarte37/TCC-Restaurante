@@ -13,11 +13,11 @@ import java.util.List;
 
 @RestController
 @RequestMapping("/usuario")
-@RequiredArgsConstructor
+@CrossOrigin(origins = "*", allowedHeaders = "*")
 public class UsuarioResource {
 
     @Autowired
-    private final UsuarioService usuarioService;
+    private UsuarioService usuarioService;
 
     @GetMapping("/{id}")
     public UsuarioDto buscarPorId(@PathVariable("id") @NotNull Long id) {

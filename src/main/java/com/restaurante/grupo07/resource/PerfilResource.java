@@ -13,11 +13,10 @@ import java.util.List;
 
 @RestController
 @RequestMapping("/perfil")
-@RequiredArgsConstructor
 public class PerfilResource {
 
     @Autowired
-    private final PerfilService perfilService;
+    private PerfilService perfilService;
 
     @PostMapping
     @Transactional

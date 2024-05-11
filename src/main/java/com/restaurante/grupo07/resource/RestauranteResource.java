@@ -13,11 +13,11 @@ import java.util.List;
 
 @RestController
 @RequestMapping("/restaurante")
-@RequiredArgsConstructor
+@CrossOrigin(origins = "*", allowedHeaders = "*")
 public class RestauranteResource {
 
     @Autowired
-    private final RestauranteService restauranteService;
+    private RestauranteService restauranteService;
 
     @PostMapping
     @Transactional

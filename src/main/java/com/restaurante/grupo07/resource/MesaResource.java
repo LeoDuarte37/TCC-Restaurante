@@ -14,6 +14,7 @@ import java.util.List;
 
 @RestController
 @RequestMapping("/mesa")
+@CrossOrigin(origins = "*", allowedHeaders = "*")
 public class MesaResource {
 
     @Autowired

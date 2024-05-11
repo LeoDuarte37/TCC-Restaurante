@@ -15,11 +15,10 @@ import java.util.List;
 
 @RestController
 @RequestMapping("/pedido")
-@RequiredArgsConstructor
 public class PedidoResource {
 
     @Autowired
-    private final PedidoService pedidoService;
+    private PedidoService pedidoService;
 
     @PostMapping
     @Transactional
