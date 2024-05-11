@@ -5,7 +5,6 @@ import com.restaurante.grupo07.dto.mapper.CategoriaMapper;
 import com.restaurante.grupo07.model.Categoria;
 import com.restaurante.grupo07.repository.CategoriaRepository;
 import com.restaurante.grupo07.service.CategoriaService;
-import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
@@ -16,14 +15,13 @@ import java.util.Optional;
 import java.util.stream.Collectors;
 
 @Service
-@RequiredArgsConstructor
 public class CategoriaServiceImpl implements CategoriaService {
 
     @Autowired
-    private final CategoriaRepository categoriaRepository;
+    private CategoriaRepository categoriaRepository;
 
     @Autowired
-    private final CategoriaMapper categoriaMapper;
+    private CategoriaMapper categoriaMapper;
 
     @Override
     public CategoriaDto adicionar(CategoriaDto categoriaDto) {

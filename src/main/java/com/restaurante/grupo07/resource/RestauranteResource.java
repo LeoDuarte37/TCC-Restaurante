@@ -4,7 +4,6 @@ import com.restaurante.grupo07.dto.RestauranteDto;
 import com.restaurante.grupo07.service.RestauranteService;
 import jakarta.validation.Valid;
 import jakarta.validation.constraints.NotNull;
-import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.bind.annotation.*;

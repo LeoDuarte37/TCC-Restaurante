@@ -11,16 +11,6 @@ public class Grupo07Application {
 
 		// http://localhost:8080/h2-console
 
-		// https://github.com/giuliana-bezerra/spring-security-jwt/blob/main/src/main/java/br/com/giulianabezerra/springsecurityjwt/security/UserDetailsServiceImpl.java
-
-		// https://github.com/digitalinnovationone/dio-springboot/blob/main/dio-spring-security-jwt/src/main/java/dio/dio/spring/security/jwt/security/WebSecurityConfig.java
-		// https://github.com/ecommerceGrupo03/ReVende/blob/dev/reVende/src/main/java/com/reVende/projeto/Service/UsuarioService.java
-		// https://github.com/conteudoGeneration/cookbook_java_fullstack/blob/main/04_spring/17.md
-		// https://glysns.gitbook.io/spring-framework/spring-web/introducao
-
-		// Inner join com JPA
-		// https://pt.stackoverflow.com/questions/476236/como-fazer-inner-join-no-jpa-springboot
-
 		/*
 			Comandos data.sql para testes
 

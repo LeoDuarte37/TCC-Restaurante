@@ -2,8 +2,6 @@ package com.restaurante.grupo07.dto.mapper;
 
 import com.restaurante.grupo07.dto.ProdutoDto;
 import com.restaurante.grupo07.model.Produto;
-import com.restaurante.grupo07.repository.CategoriaRepository;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
 @Component

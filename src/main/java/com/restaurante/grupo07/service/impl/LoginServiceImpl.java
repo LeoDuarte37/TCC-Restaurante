@@ -5,7 +5,6 @@ import com.restaurante.grupo07.dto.LoginDto;
 import com.restaurante.grupo07.dto.SessaoDto;
 import com.restaurante.grupo07.dto.mapper.LoginMapper;
 import com.restaurante.grupo07.model.Login;
-import com.restaurante.grupo07.model.Usuario;
 import com.restaurante.grupo07.repository.LoginRepository;
 import com.restaurante.grupo07.security.JwtService;
 import com.restaurante.grupo07.service.LoginService;
@@ -18,7 +17,8 @@ import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.springframework.web.server.ResponseStatusException;
 
-import java.util.*;
+import java.util.Objects;
+import java.util.Optional;
 
 @Service
 public class LoginServiceImpl implements LoginService {

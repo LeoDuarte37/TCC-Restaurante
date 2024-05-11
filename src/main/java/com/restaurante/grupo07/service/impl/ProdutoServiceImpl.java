@@ -1,12 +1,11 @@
 package com.restaurante.grupo07.service.impl;
 
+import com.restaurante.grupo07.dto.ProdutoDto;
 import com.restaurante.grupo07.dto.mapper.ProdutoMapper;
 import com.restaurante.grupo07.model.Produto;
 import com.restaurante.grupo07.repository.CategoriaRepository;
 import com.restaurante.grupo07.repository.ProdutoRepository;
-import com.restaurante.grupo07.dto.ProdutoDto;
 import com.restaurante.grupo07.service.ProdutoService;
-import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
@@ -17,17 +16,16 @@ import java.util.Optional;
 import java.util.stream.Collectors;
 
 @Service
-@RequiredArgsConstructor
 public class ProdutoServiceImpl implements ProdutoService {
 
     @Autowired
-    private final ProdutoRepository produtoRepository;
+    private ProdutoRepository produtoRepository;
 
     @Autowired
-    private final ProdutoMapper produtoMapper;
+    private ProdutoMapper produtoMapper;
 
     @Autowired
-    private final CategoriaRepository categoriaRepository;
+    private CategoriaRepository categoriaRepository;
 
     @Override
     public ProdutoDto adicionar(ProdutoDto produtoDto) {

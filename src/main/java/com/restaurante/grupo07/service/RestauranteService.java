@@ -1,8 +1,8 @@
 package com.restaurante.grupo07.service;
 
-import java.util.List;
-
 import com.restaurante.grupo07.dto.RestauranteDto;
+
+import java.util.List;
 
 public interface RestauranteService {
     RestauranteDto adicionar(RestauranteDto restauranteDto);

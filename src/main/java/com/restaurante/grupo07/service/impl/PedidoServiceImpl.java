@@ -1,14 +1,13 @@
 package com.restaurante.grupo07.service.impl;
 
+import com.restaurante.grupo07.dto.PedidoDto;
 import com.restaurante.grupo07.dto.mapper.PedidoMapper;
 import com.restaurante.grupo07.enumeration.StatusMesa;
 import com.restaurante.grupo07.enumeration.StatusPedido;
 import com.restaurante.grupo07.model.Pedido;
 import com.restaurante.grupo07.repository.MesaRepository;
 import com.restaurante.grupo07.repository.PedidoRepository;
-import com.restaurante.grupo07.dto.PedidoDto;
 import com.restaurante.grupo07.service.PedidoService;
-import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
@@ -19,17 +18,16 @@ import java.util.Optional;
 import java.util.stream.Collectors;
 
 @Service
-@RequiredArgsConstructor
 public class PedidoServiceImpl implements PedidoService {
 
     @Autowired
-    private final PedidoRepository pedidoRepository;
+    private PedidoRepository pedidoRepository;
 
     @Autowired
-    private final PedidoMapper pedidoMapper;
+    private PedidoMapper pedidoMapper;
 
     @Autowired
-    private final MesaRepository mesaRepository;
+    private MesaRepository mesaRepository;
 
     @Override
     public PedidoDto adicionar(PedidoDto pedidoDto) {
