@@ -5,6 +5,7 @@ import com.restaurante.grupo07.service.UsuarioService;
 import jakarta.validation.Valid;
 import jakarta.validation.constraints.NotNull;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.bind.annotation.*;
 
@@ -19,16 +20,19 @@ public class UsuarioResource {
     private UsuarioService usuarioService;
 
     @GetMapping("/{id}")
+    @ResponseStatus(HttpStatus.OK)
     public UsuarioDto buscarPorId(@PathVariable("id") @NotNull Long id) {
         return usuarioService.buscarPorId(id);
     }
 
     @GetMapping("/listar")
+    @ResponseStatus(HttpStatus.OK)
     public List<UsuarioDto> listar() {
         return usuarioService.listar();
     }
 
     @PutMapping
+    @ResponseStatus(HttpStatus.ACCEPTED)
     @Transactional
     public UsuarioDto atualizar(@Valid @RequestBody UsuarioDto usuarioDto) {
         return usuarioService.atualizar(usuarioDto);

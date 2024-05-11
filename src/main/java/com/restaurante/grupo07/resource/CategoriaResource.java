@@ -52,14 +52,14 @@ public class CategoriaResource {
     }
 
     @PutMapping
-    @ResponseStatus(HttpStatus.OK)
+    @ResponseStatus(HttpStatus.ACCEPTED)
     @Transactional
     public CategoriaDto atualizar(@Valid @RequestBody CategoriaDto categoriaDto) {
         return categoriaService.atualizar(categoriaDto);
     }
 
     @PatchMapping("/atualizar/status")
-    @ResponseStatus(HttpStatus.OK)
+    @ResponseStatus(HttpStatus.ACCEPTED)
     @Transactional
     public CategoriaDto atualizarStatus(@RequestBody CategoriaDto categoriaDto) {
         return categoriaService.atualizarStatus(categoriaDto);

@@ -52,21 +52,21 @@ public class MesaResource {
     }
 
     @PutMapping
-    @ResponseStatus(HttpStatus.OK)
+    @ResponseStatus(HttpStatus.ACCEPTED)
     @Transactional
     public MesaDto atualizar(@Valid @RequestBody MesaDto mesaDto) {
         return mesaService.atualizar(mesaDto);
     }
 
     @PatchMapping("/atualizar/status")
-    @ResponseStatus(HttpStatus.OK)
+    @ResponseStatus(HttpStatus.ACCEPTED)
     @Transactional
     public MesaDto atualizarStatus(@RequestBody MesaDto mesaDto) {
         return mesaService.atualizarStatus(mesaDto);
     }
 
     @PatchMapping("/atualizar/chamarGarcom")
-    @ResponseStatus(HttpStatus.OK)
+    @ResponseStatus(HttpStatus.ACCEPTED)
     @Transactional
     public MesaDto atualizarChamarGarcom(@RequestBody MesaDto mesaDto) {
         return mesaService.atualizarChamarGarcom(mesaDto);
