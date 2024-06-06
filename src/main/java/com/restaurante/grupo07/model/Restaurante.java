@@ -1,10 +1,18 @@
 package com.restaurante.grupo07.model;
 
-import jakarta.persistence.*;
+import jakarta.persistence.GenerationType;
+import jakarta.persistence.Entity;
+import jakarta.persistence.GeneratedValue;
+import jakarta.persistence.Id;
+import jakarta.persistence.Table;
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.NotNull;
 import jakarta.validation.constraints.Size;
-import lombok.*;
+import lombok.Builder;
+import lombok.AllArgsConstructor;
+import lombok.Getter;
+import lombok.RequiredArgsConstructor;
+import lombok.Setter;
 
 @AllArgsConstructor
 @RequiredArgsConstructor

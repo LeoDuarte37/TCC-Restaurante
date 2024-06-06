@@ -68,8 +68,9 @@ public class PedidoServiceImpl implements PedidoService {
     }
 
     @Override
-    public List<PedidoDto> listarPorStatus(String status) {
-        return pedidoRepository.findAllByStatusOrderByDataDesc(StatusPedido.doStatus(status))
+    public List<PedidoDto> listarPorStatus(ListarMesaPorStatusDto listarMesaPorStatusDto) {
+        return pedidoRepository.findAllByStatusOrderByDataDesc(listarMesaPorStatusDto.restauranteId(), 
+                    StatusPedido.doStatus(listarMesaPorStatusDto.status()))
                 .stream()
                 .map(entity -> pedidoMapper.toDto(entity))
                 .collect(Collectors.toList());

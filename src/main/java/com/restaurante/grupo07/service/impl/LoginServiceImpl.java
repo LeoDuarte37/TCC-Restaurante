@@ -53,8 +53,9 @@ public class LoginServiceImpl implements LoginService {
             if(login.isPresent()) {
                 return Optional.of(
                         new SessaoDto(
-                                login.get().getUsername(),
-                                jwtService.gerarToken(login.get())
+                            login.get().getUsername(),
+                            login.get().getPerfil().getNome(),
+                            jwtService.gerarToken(login.get())
                         )
                 );
             }

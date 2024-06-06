@@ -9,7 +9,9 @@ import org.springframework.data.repository.query.Param;
 import java.util.List;
 
 public interface PedidoRepository extends JpaRepository<Pedido, Long> {
-    public List<Pedido> findAllByStatusOrderByDataDesc(@Param("status") StatusPedido status);
+    @Query(value = "select p from Pedido p inner join p.restaurante r where r.id = ?1 and p.status = ?2 and p.data = CURRENT_DATE order by p.data desc")
+    public List<Pedido> findAllByStatusOrderByDataDesc(@Param("restaurante") Long restaurante, @Param("status") StatusPedido status);
+
     @Query(value = "select p from Pedido p inner join p.mesa m where m.numero = ?1")
     public List<Pedido> findAllByMesa(@Param("mesa") Long mesa);
 }

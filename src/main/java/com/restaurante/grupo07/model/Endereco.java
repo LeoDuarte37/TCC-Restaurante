@@ -1,19 +1,22 @@
 package com.restaurante.grupo07.model;
 
-import jakarta.persistence.Embeddable;
+import jakarta.persistence.*;
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.Size;
-import lombok.AllArgsConstructor;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
-import lombok.Setter;
+import lombok.*;
 
 @AllArgsConstructor
-@NoArgsConstructor
+@RequiredArgsConstructor
+@Builder
 @Getter
 @Setter
-@Embeddable
+@Entity
+@Table(name = "tb_endereco")
 public class Endereco {
+
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private Long id;
 
     @NotBlank(message = "Atributo rua é obrigatório!")
     private String rua;

@@ -1,10 +1,22 @@
 package com.restaurante.grupo07.model;
 
+import com.fasterxml.jackson.annotation.JsonFormat;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.restaurante.grupo07.enumeration.StatusPedido;
-import jakarta.persistence.*;
+import jakarta.persistence.Enumerated;
+import jakarta.persistence.GenerationType;
+import jakarta.persistence.Entity;
+import jakarta.persistence.GeneratedValue;
+import jakarta.persistence.Id;
+import jakarta.persistence.Table;
+import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.NotNull;
-import lombok.*;
+import jakarta.validation.constraints.Size;
+import lombok.Builder;
+import lombok.AllArgsConstructor;
+import lombok.Getter;
+import lombok.RequiredArgsConstructor;
+import lombok.Setter;
 import org.hibernate.annotations.UpdateTimestamp;
 
 import java.time.LocalDateTime;
@@ -34,6 +46,7 @@ public class Pedido {
     @CollectionTable(name = "TB_PEDIDO_ITEM")
     private List<Item> item = new ArrayList<>();
 
+    @JsonFormat(pattern="dd/MM/yyyy")
     @UpdateTimestamp
     private LocalDateTime data;
 

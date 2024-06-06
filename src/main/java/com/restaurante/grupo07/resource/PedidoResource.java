@@ -45,10 +45,10 @@ public class PedidoResource {
         return pedidoService.listarPorMesa(mesa);
     }
 
-    @GetMapping("/listar/status/{status}")
+    @GetMapping("/listar/status")
     @ResponseStatus(HttpStatus.OK)
-    public List<PedidoDto> listarPorStatus(@PathVariable("status") @NotBlank String status) {
-        return pedidoService.listarPorStatus(status);
+    public List<PedidoDto> listarPorStatus(@Valid @RequestBody ListarMesaPorStatusDto listarMesaPorStatusDto) {
+        return pedidoService.listarPorStatus(listarMesaPorStatusDto);
     }
 
     @PutMapping
