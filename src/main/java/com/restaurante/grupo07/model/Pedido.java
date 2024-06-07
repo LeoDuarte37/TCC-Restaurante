@@ -46,7 +46,7 @@ public class Pedido {
     @CollectionTable(name = "TB_PEDIDO_ITEM")
     private List<Item> item = new ArrayList<>();
 
-    @JsonFormat(pattern="dd/MM/yyyy")
+    @JsonFormat(pattern="dd/MM/yyyy HH:mm")
     @UpdateTimestamp
     private LocalDateTime data;
 
