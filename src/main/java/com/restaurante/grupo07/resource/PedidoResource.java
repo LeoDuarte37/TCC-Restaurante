@@ -1,5 +1,7 @@
 package com.restaurante.grupo07.resource;
 
+import com.restaurante.grupo07.dto.ListarMesaPorStatusDto;
+import com.restaurante.grupo07.dto.ListarPedidosPorMesaDto;
 import com.restaurante.grupo07.dto.PedidoDto;
 import com.restaurante.grupo07.service.PedidoService;
 import jakarta.validation.Valid;
@@ -39,10 +41,10 @@ public class PedidoResource {
         return pedidoService.listar();
     }
 
-    @GetMapping("/listar/mesa/{mesa}")
+    @GetMapping("/listar/mesa")
     @ResponseStatus(HttpStatus.OK)
-    public List<PedidoDto> listarPorMesa(@PathVariable("mesa") @NotNull Long mesa) {
-        return pedidoService.listarPorMesa(mesa);
+    public List<PedidoDto> listarPorMesa(@Valid @RequestBody ListarPedidosPorMesaDto listarPedidosPorMesaDto) {
+        return pedidoService.listarPorMesa(listarPedidosPorMesaDto);
     }
 
     @GetMapping("/listar/status")

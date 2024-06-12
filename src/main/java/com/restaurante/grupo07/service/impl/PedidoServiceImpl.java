@@ -1,5 +1,7 @@
 package com.restaurante.grupo07.service.impl;
 
+import com.restaurante.grupo07.dto.ListarMesaPorStatusDto;
+import com.restaurante.grupo07.dto.ListarPedidosPorMesaDto;
 import com.restaurante.grupo07.dto.PedidoDto;
 import com.restaurante.grupo07.dto.mapper.PedidoMapper;
 import com.restaurante.grupo07.enumeration.StatusMesa;
@@ -13,9 +15,12 @@ import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
 import org.springframework.web.server.ResponseStatusException;
 
+import java.util.HashSet;
 import java.util.List;
 import java.util.Optional;
+import java.util.Set;
 import java.util.stream.Collectors;
+import java.util.stream.Stream;
 
 @Service
 public class PedidoServiceImpl implements PedidoService {
@@ -60,8 +65,13 @@ public class PedidoServiceImpl implements PedidoService {
     }
 
     @Override
-    public List<PedidoDto> listarPorMesa(Long mesa) {
-        return pedidoRepository.findAllByMesa(mesa)
+    public List<PedidoDto> listarPorMesa(ListarPedidosPorMesaDto listarPedidosPorMesaDto) {
+        Set<StatusPedido> statusPedidos = listarPedidosPorMesaDto.statusPedidos()
+                .stream()
+                .map(status -> StatusPedido.doStatus(status))
+                .collect(Collectors.toSet());
+
+        return pedidoRepository.findAllByMesa(listarPedidosPorMesaDto.mesa(), statusPedidos)
                 .stream()
                 .map(entity -> pedidoMapper.toDto(entity))
                 .collect(Collectors.toList());

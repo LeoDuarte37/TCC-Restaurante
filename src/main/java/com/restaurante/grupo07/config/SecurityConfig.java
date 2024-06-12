@@ -73,7 +73,8 @@ public class SecurityConfig {
                         .requestMatchers(HttpMethod.DELETE, "/produto/{id}").hasAnyRole("ROOT", "ADMIN")
 
                         .requestMatchers(HttpMethod.POST, "/pedido").permitAll()
-                        .requestMatchers(HttpMethod.GET, "/pedido/listar/mesa/{mesa}").permitAll()
+                        .requestMatchers(HttpMethod.GET, "/pedido/listar/mesa")
+                                .hasAnyRole("ROOT", "ADMIN", "GERENTE", "CAIXA")
                         .requestMatchers(HttpMethod.GET, "/pedido/listar", "/pedido/listar/status")
                             .hasAnyRole("ROOT", "ADMIN", "GERENTE", "CAIXA")
                         .requestMatchers(HttpMethod.PUT, "/pedido")
