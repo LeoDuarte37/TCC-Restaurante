@@ -3,6 +3,7 @@ package com.restaurante.grupo07.dto;
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.restaurante.grupo07.model.Categoria;
+import com.restaurante.grupo07.model.Subcategoria;
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.NotNull;
 
@@ -26,6 +27,6 @@ public record ProdutoDto (
 
         @NotNull
         @JsonIgnoreProperties("produto")
-        Categoria categoria
+        Subcategoria subCategoria
     ) {
 }

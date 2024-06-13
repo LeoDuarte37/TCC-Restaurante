@@ -15,7 +15,7 @@ public class ProdutoMapper {
                 produto.getFoto(),
                 produto.getValor(),
                 produto.isDisponivel(),
-                produto.getCategoria()
+                produto.getSubcategoria()
         );
     }
 
@@ -26,7 +26,7 @@ public class ProdutoMapper {
                 .foto(produtoDto.foto())
                 .valor(produtoDto.valor())
                 .disponivel(produtoDto.disponivel())
-                .categoria(produtoDto.categoria())
+                .subcategoria(produtoDto.subCategoria())
                 .build();
     }
 }
