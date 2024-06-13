@@ -20,7 +20,6 @@ public class SubcategoriaMapper {
                 .id(subcategoriaDto.id())
                 .nome(subcategoriaDto.nome())
                 .disponivel(subcategoriaDto.disponivel())
-                .produto(subcategoriaDto.produto())
                 .categoria(subcategoriaDto.categoria())
                 .build();
     }

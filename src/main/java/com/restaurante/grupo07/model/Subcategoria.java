@@ -35,6 +35,7 @@ public class Subcategoria {
     @JsonIgnoreProperties("subcategoria")
     private List<Produto> produto;
 
+    @NotNull
     @ManyToOne
     @JsonIgnoreProperties("subcategoria")
     private Categoria categoria;

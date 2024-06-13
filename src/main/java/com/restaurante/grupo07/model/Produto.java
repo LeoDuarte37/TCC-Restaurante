@@ -38,6 +38,7 @@ public class Produto {
     @NotNull(message = "Atributo disponivel é obrigatório!")
     private boolean disponivel;
 
+    @NotNull
     @ManyToOne
     @JsonIgnoreProperties("produto")
     private Subcategoria subcategoria;
