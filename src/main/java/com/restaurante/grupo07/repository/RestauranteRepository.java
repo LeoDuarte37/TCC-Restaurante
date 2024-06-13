@@ -9,4 +9,6 @@ import java.util.UUID;
 
 public interface RestauranteRepository extends JpaRepository<Restaurante, Long> {
 
+    @Query(value = "select r from Restaurante r where r.uuid = :uuid")
+    public Restaurante findRestauranteByUuid(@Param("uuid") UUID uuid);
 }

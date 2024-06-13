@@ -52,8 +52,16 @@ public class CategoriaServiceImpl implements CategoriaService {
     }
 
     @Override
-    public List<CategoriaDto> listarDisponiveis() {
-        return categoriaRepository.findByDisponivelTrue()
+    public List<CategoriaDto> listarPorRestaurante(Long restauranteId) {
+        return categoriaRepository.findAllByRestaurante(restauranteId)
+                .stream()
+                .map(entity -> categoriaMapper.toDto(entity))
+                .collect(Collectors.toList());
+    }
+
+    @Override
+    public List<CategoriaDto> listarDisponiveisPorRestaurante(Long restauranteId) {
+        return categoriaRepository.findAllByRestauranteDisponivelTrue(restauranteId)
                 .stream()
                 .map(entity -> categoriaMapper.toDto(entity))
                 .collect(Collectors.toList());

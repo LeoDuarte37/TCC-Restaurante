@@ -3,6 +3,7 @@ package com.restaurante.grupo07.resource;
 import com.restaurante.grupo07.dto.CategoriaDto;
 import com.restaurante.grupo07.service.CategoriaService;
 import jakarta.validation.Valid;
+import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.NotNull;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -28,7 +29,7 @@ public class CategoriaResource {
 
     @GetMapping("/{id}")
     @ResponseStatus(HttpStatus.OK)
-    public CategoriaDto buscarPorId(@PathVariable("id") Long id) {
+    public CategoriaDto buscarPorId(@PathVariable("id") @NotNull Long id) {
         return categoriaService.buscarPorId(id);
     }
 
@@ -41,14 +42,20 @@ public class CategoriaResource {
     
     @GetMapping("/listar/nome/{nome}")
     @ResponseStatus(HttpStatus.OK)
-    public List<CategoriaDto> listarPorNome(@PathVariable("nome") String nome) {
+    public List<CategoriaDto> listarPorNome(@PathVariable("nome") @NotBlank String nome) {
         return categoriaService.listarPorNome(nome);
     }
 
-    @GetMapping("/listar/disponiveis")
+    @GetMapping("/listar/restaurante/{id}")
     @ResponseStatus(HttpStatus.OK)
-    public List<CategoriaDto> listarDisponiveis() {
-        return categoriaService.listarDisponiveis();
+    public List<CategoriaDto> listarPorRestaurante(@PathVariable("id") @NotNull Long id) {
+        return categoriaService.listarPorRestaurante(id);
+    }
+
+    @GetMapping("/listar/disponiveis/restaurante/{id}")
+    @ResponseStatus(HttpStatus.OK)
+    public List<CategoriaDto> listarDisponiveisPorRestaurante(@PathVariable("id") @NotNull Long id) {
+        return categoriaService.listarDisponiveisPorRestaurante(id);
     }
 
     @PutMapping

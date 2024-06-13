@@ -5,6 +5,7 @@ import com.restaurante.grupo07.dto.mapper.ProdutoMapper;
 import com.restaurante.grupo07.model.Produto;
 import com.restaurante.grupo07.repository.CategoriaRepository;
 import com.restaurante.grupo07.repository.ProdutoRepository;
+import com.restaurante.grupo07.repository.SubcategoriaRepository;
 import com.restaurante.grupo07.service.ProdutoService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -25,11 +26,11 @@ public class ProdutoServiceImpl implements ProdutoService {
     private ProdutoMapper produtoMapper;
 
     @Autowired
-    private CategoriaRepository categoriaRepository;
+    private SubcategoriaRepository subcategoriaRepository;
 
     @Override
     public ProdutoDto adicionar(ProdutoDto produtoDto) {
-        if (categoriaRepository.existsById(produtoDto.categoria().getId())) {
+        if (subcategoriaRepository.existsById(produtoDto.subCategoria().getId())) {
             return produtoMapper.toDto(produtoRepository.save(produtoMapper.toEntity(produtoDto)));
         }
 
@@ -69,7 +70,7 @@ public class ProdutoServiceImpl implements ProdutoService {
 
     @Override
     public ProdutoDto atualizar(ProdutoDto produtoDto) {
-        if (categoriaRepository.existsById(produtoDto.categoria().getId())) {
+        if (subcategoriaRepository.existsById(produtoDto.subCategoria().getId())) {
             return produtoRepository.findById(produtoDto.id())
                     .map(entity -> {
                         entity.setNome(produtoDto.nome());
@@ -77,7 +78,6 @@ public class ProdutoServiceImpl implements ProdutoService {
                         entity.setFoto(produtoDto.foto());
                         entity.setValor(produtoDto.valor());
                         entity.setDisponivel(produtoDto.disponivel());
-                        entity.setCategoria(produtoDto.categoria());
                         return produtoMapper.toDto(produtoRepository.save(entity));
 
                     }).orElseThrow(() -> new ResponseStatusException(HttpStatus.NOT_FOUND, "Produto não encontrado!"));

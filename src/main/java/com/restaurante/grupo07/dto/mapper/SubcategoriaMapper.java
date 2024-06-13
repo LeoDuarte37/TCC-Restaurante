@@ -17,7 +17,6 @@ public class SubcategoriaMapper {
 
     public Subcategoria toEntity(SubcategoriaDto subcategoriaDto) {
         return Subcategoria.builder()
-                .id(subcategoriaDto.id())
                 .nome(subcategoriaDto.nome())
                 .disponivel(subcategoriaDto.disponivel())
                 .categoria(subcategoriaDto.categoria())

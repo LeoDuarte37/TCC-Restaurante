@@ -9,9 +9,8 @@ public interface CategoriaService {
     CategoriaDto buscarPorId(Long id);
     List<CategoriaDto> listarPorNome(String nome);
     List<CategoriaDto> listar();
-    List<CategoriaDto> listarDisponiveis();
-    List<CategoriaDto> listarPorRestaurante();
-    List<CategoriaDto> listarDisponiveisPorRestaurante();
+    List<CategoriaDto> listarPorRestaurante(Long restauranteId);
+    List<CategoriaDto> listarDisponiveisPorRestaurante(Long restauranteId);
     CategoriaDto atualizar(CategoriaDto categoriaDto);
     CategoriaDto atualizarStatus(CategoriaDto categoriaDto);
     void excluir(Long id);
