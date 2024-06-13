@@ -10,6 +10,8 @@ public interface CategoriaService {
     List<CategoriaDto> listarPorNome(String nome);
     List<CategoriaDto> listar();
     List<CategoriaDto> listarDisponiveis();
+    List<CategoriaDto> listarPorRestaurante();
+    List<CategoriaDto> listarDisponiveisPorRestaurante();
     CategoriaDto atualizar(CategoriaDto categoriaDto);
     CategoriaDto atualizarStatus(CategoriaDto categoriaDto);
     void excluir(Long id);

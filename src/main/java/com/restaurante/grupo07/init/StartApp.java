@@ -4,7 +4,6 @@ import com.restaurante.grupo07.model.Contato;
 import com.restaurante.grupo07.model.Login;
 import com.restaurante.grupo07.model.Perfil;
 import com.restaurante.grupo07.model.Usuario;
-import com.restaurante.grupo07.repository.ContatoRepository;
 import com.restaurante.grupo07.repository.LoginRepository;
 import com.restaurante.grupo07.repository.PerfilRepository;
 import com.restaurante.grupo07.repository.UsuarioRepository;

@@ -33,4 +33,9 @@ public class Categoria {
     @OneToMany(fetch = FetchType.LAZY, mappedBy = "categoria", cascade = CascadeType.REMOVE)
     @JsonIgnoreProperties("categoria")
     private List<Subcategoria> subcategoria;
+
+    @NotNull
+    @ManyToOne
+    @JsonIgnoreProperties(value = {"restaurante", "categoria"})
+    private Restaurante restaurante;
 }

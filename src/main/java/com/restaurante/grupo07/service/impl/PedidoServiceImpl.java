@@ -1,6 +1,7 @@
 package com.restaurante.grupo07.service.impl;
 
-import com.restaurante.grupo07.dto.ListarMesaPorStatusDto;
+import com.restaurante.grupo07.dto.FecharContaDto;
+import com.restaurante.grupo07.dto.ListarPorStatusDto;
 import com.restaurante.grupo07.dto.ListarPedidosPorMesaDto;
 import com.restaurante.grupo07.dto.PedidoDto;
 import com.restaurante.grupo07.dto.mapper.PedidoMapper;
@@ -15,12 +16,10 @@ import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
 import org.springframework.web.server.ResponseStatusException;
 
-import java.util.HashSet;
 import java.util.List;
 import java.util.Optional;
 import java.util.Set;
 import java.util.stream.Collectors;
-import java.util.stream.Stream;
 
 @Service
 public class PedidoServiceImpl implements PedidoService {
@@ -65,25 +64,51 @@ public class PedidoServiceImpl implements PedidoService {
     }
 
     @Override
-    public List<PedidoDto> listarPorMesa(ListarPedidosPorMesaDto listarPedidosPorMesaDto) {
+    public List<PedidoDto> listarPorMesaInStatus(ListarPedidosPorMesaDto listarPedidosPorMesaDto) {
         Set<StatusPedido> statusPedidos = listarPedidosPorMesaDto.statusPedidos()
                 .stream()
                 .map(status -> StatusPedido.doStatus(status))
                 .collect(Collectors.toSet());
 
-        return pedidoRepository.findAllByMesa(listarPedidosPorMesaDto.mesa(), statusPedidos)
+        return pedidoRepository.findAllByMesaInStatus(listarPedidosPorMesaDto.mesa(), statusPedidos)
                 .stream()
                 .map(entity -> pedidoMapper.toDto(entity))
                 .collect(Collectors.toList());
     }
 
     @Override
-    public List<PedidoDto> listarPorStatus(ListarMesaPorStatusDto listarMesaPorStatusDto) {
-        return pedidoRepository.findAllByStatusOrderByDataDesc(listarMesaPorStatusDto.restauranteId(), 
-                    StatusPedido.doStatus(listarMesaPorStatusDto.status()))
+    public List<PedidoDto> listarPorStatus(ListarPorStatusDto listarPorStatusDto) {
+        return pedidoRepository.findAllByStatusOrderByDataDesc(listarPorStatusDto.restauranteId(),
+                    StatusPedido.doStatus(listarPorStatusDto.status()))
                 .stream()
                 .map(entity -> pedidoMapper.toDto(entity))
                 .collect(Collectors.toList());
+    }
+
+    @Override
+    public List<PedidoDto> listarPorRestaurante(Long restauranteId) {
+        return pedidoRepository.findAllByRestaurante(restauranteId)
+                .stream()
+                .map(entity -> pedidoMapper.toDto(entity))
+                .collect(Collectors.toList());
+    }
+
+    @Override
+    public List<PedidoDto> listarPorRestauranteDataAtual(Long restauranteId) {
+        return pedidoRepository.findAllByRestauranteCurrenteDate(restauranteId)
+                .stream()
+                .map(entity -> pedidoMapper.toDto(entity))
+                .collect(Collectors.toList());
+    }
+
+    @Override
+    public void fecharConta(FecharContaDto fecharContaDto) {
+        Set<StatusPedido> statusPedidosReference = fecharContaDto.statusReference()
+                .stream()
+                .map(status -> StatusPedido.doStatus(status))
+                .collect(Collectors.toSet());
+
+        pedidoRepository.fecharConta(fecharContaDto.mesaId(), StatusPedido.doStatus(fecharContaDto.statusUpdate()), statusPedidosReference);
     }
 
     @Override

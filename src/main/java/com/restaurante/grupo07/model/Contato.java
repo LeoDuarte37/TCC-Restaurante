@@ -1,22 +1,19 @@
 package com.restaurante.grupo07.model;
 
-import jakarta.persistence.*;
+import jakarta.persistence.Embeddable;
 import jakarta.validation.constraints.Email;
 import jakarta.validation.constraints.NotBlank;
-import lombok.*;
+import lombok.AllArgsConstructor;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
+import lombok.Setter;
 
 @AllArgsConstructor
-@RequiredArgsConstructor
-@Builder
+@NoArgsConstructor
 @Getter
 @Setter
-@Entity
-@Table(name = "tb_contato")
+@Embeddable
 public class Contato {
-
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long id;
 
     @NotBlank(message = "Atributo email é obrigatório!")
     @Email(message = "Atributo email deverá ser um email válido!")

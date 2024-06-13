@@ -22,6 +22,7 @@ public class CategoriaMapper {
                 .nome(categoriaDto.nome())
                 .foto(categoriaDto.foto())
                 .disponivel(categoriaDto.disponivel())
+                .restaurante(categoriaDto.restaurante())
                 .build();
     }
 }

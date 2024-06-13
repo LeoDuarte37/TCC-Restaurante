@@ -2,12 +2,7 @@ package com.restaurante.grupo07.model;
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.restaurante.grupo07.enumeration.StatusMesa;
-import jakarta.persistence.Enumerated;
-import jakarta.persistence.GenerationType;
-import jakarta.persistence.Entity;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.Id;
-import jakarta.persistence.Table;
+import jakarta.persistence.*;
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.NotNull;
 import jakarta.validation.constraints.Size;
@@ -35,7 +30,7 @@ public class Mesa {
 
     @ManyToOne
     @NotNull(message = "Atributo restaurante é obrigatório!")
-    @JsonIgnoreProperties(value = {"cnpj", "endereco", "contato"})
+    @JsonIgnoreProperties(value = {"id", "cnpj", "endereco", "contato"})
     private Restaurante restaurante;
 
     @Builder.Default
