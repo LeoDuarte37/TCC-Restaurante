@@ -1,5 +1,7 @@
 package com.restaurante.grupo07.resource;
 
+import com.restaurante.grupo07.dto.ListarPorStatusDto;
+import com.restaurante.grupo07.dto.LoginMesaDto;
 import com.restaurante.grupo07.dto.MesaDto;
 import com.restaurante.grupo07.service.MesaService;
 import jakarta.validation.Valid;
@@ -29,8 +31,14 @@ public class MesaResource {
 
     @GetMapping("/{id}")
     @ResponseStatus(HttpStatus.OK)
-    public MesaDto buscarPorNumero(@PathVariable("id") @NotNull Long id) {
+    public MesaDto buscarPorId(@PathVariable("id") @NotNull Long id) {
         return mesaService.buscarPorId(id);
+    }
+
+    @PostMapping("/login")
+    @ResponseStatus(HttpStatus.OK)
+    public MesaDto loginMesa(@Valid @RequestBody LoginMesaDto loginMesaDto) {
+        return mesaService.loginMesa(loginMesaDto);
     }
 
     @GetMapping("/listar")
@@ -39,16 +47,22 @@ public class MesaResource {
         return mesaService.listar();
     }
 
-    @GetMapping("/listar/status/{status}")
+    @GetMapping("/listar/restaurante/{id}")
     @ResponseStatus(HttpStatus.OK)
-    public List<MesaDto> listarPorStatus(@PathVariable("status") @NotBlank String status) {
-        return mesaService.listarPorStatus(status);
+    public List<MesaDto> listarPorRestaurante(@PathVariable("id") @NotNull Long restauranteId) {
+        return mesaService.listarPorRestaurante(restauranteId);
     }
 
-    @GetMapping("/listar/chamandoGarcom")
+    @GetMapping("/listar/status")
     @ResponseStatus(HttpStatus.OK)
-    public List<MesaDto> listarChamandoGarcom() {
-        return mesaService.listarChamandoGarcom();
+    public List<MesaDto> listarPorRestauranteAndStatus(@Valid @RequestBody ListarPorStatusDto listarPorStatusDto) {
+        return mesaService.listarPorRestauranteAndStatus(listarPorStatusDto);
+    }
+
+    @GetMapping("/listar/chamandoGarcom/restaurante/{id}")
+    @ResponseStatus(HttpStatus.OK)
+    public List<MesaDto> listarChamandoGarcom(@PathVariable("id") @NotNull Long restauranteId) {
+        return mesaService.listarChamandoGarcom(restauranteId);
     }
 
     @PutMapping

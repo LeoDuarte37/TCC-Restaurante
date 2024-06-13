@@ -10,7 +10,7 @@ import jakarta.validation.constraints.Size;
 import java.util.UUID;
 
 public record RestauranteDto (
-        Long id,
+        UUID uuid,
 
         @NotBlank
         @Size(max = 25)

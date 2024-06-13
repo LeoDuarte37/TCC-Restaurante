@@ -1,5 +1,7 @@
 package com.restaurante.grupo07.service.impl;
 
+import com.restaurante.grupo07.dto.ListarPorStatusDto;
+import com.restaurante.grupo07.dto.LoginMesaDto;
 import com.restaurante.grupo07.dto.MesaDto;
 import com.restaurante.grupo07.dto.mapper.MesaMapper;
 import com.restaurante.grupo07.enumeration.StatusMesa;
@@ -7,6 +9,7 @@ import com.restaurante.grupo07.model.Mesa;
 import com.restaurante.grupo07.repository.MesaRepository;
 import com.restaurante.grupo07.repository.RestauranteRepository;
 import com.restaurante.grupo07.service.MesaService;
+import com.restaurante.grupo07.util.StringToUUIDConverter;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
@@ -14,6 +17,7 @@ import org.springframework.web.server.ResponseStatusException;
 
 import java.util.List;
 import java.util.Optional;
+import java.util.UUID;
 import java.util.stream.Collectors;
 
 @Service
@@ -27,6 +31,9 @@ public class MesaServiceImpl implements MesaService {
 
     @Autowired
     private RestauranteRepository restauranteRepository;
+
+    @Autowired
+    private StringToUUIDConverter stringToUUIDConverter;
 
     @Override
     public MesaDto adicionar(MesaDto mesaDto) {
@@ -45,6 +52,13 @@ public class MesaServiceImpl implements MesaService {
     }
 
     @Override
+    public MesaDto loginMesa(LoginMesaDto loginMesaDto) {
+        UUID uuid = stringToUUIDConverter.convert(loginMesaDto.uuid());
+
+        return mesaMapper.toDto(mesaRepository.findByRestaurante(uuid, loginMesaDto.numero()));
+    }
+
+    @Override
     public List<MesaDto> listar() {
         return mesaRepository.findAll()
                 .stream()
@@ -53,16 +67,26 @@ public class MesaServiceImpl implements MesaService {
     }
 
     @Override
-    public List<MesaDto> listarPorStatus(String status) {
-        return mesaRepository.findAllByStatusOrderByNumero(StatusMesa.doStatus(status))
+    public List<MesaDto> listarPorRestaurante(Long restauranteId) {
+        return mesaRepository.findAllByRestauranteOrderByNumero(restauranteId)
                 .stream()
                 .map(entity -> mesaMapper.toDto(entity))
                 .collect(Collectors.toList());
     }
 
     @Override
-    public List<MesaDto> listarChamandoGarcom() {
-        return mesaRepository.findAllByChamarGarcomTrue()
+    public List<MesaDto> listarPorRestauranteAndStatus(ListarPorStatusDto listarPorStatusDto) {
+        StatusMesa statusMesa = StatusMesa.doStatus(listarPorStatusDto.status());
+
+        return mesaRepository.findAllByRestauranteAndStatus(listarPorStatusDto.restauranteId(), statusMesa)
+                .stream()
+                .map(entity -> mesaMapper.toDto(entity))
+                .collect(Collectors.toList());
+    }
+
+    @Override
+    public List<MesaDto> listarChamandoGarcom(Long restauranteId) {
+        return mesaRepository.findAllByChamarGarcomTrue(restauranteId)
                 .stream()
                 .map(entity -> mesaMapper.toDto(entity))
                 .collect(Collectors.toList());

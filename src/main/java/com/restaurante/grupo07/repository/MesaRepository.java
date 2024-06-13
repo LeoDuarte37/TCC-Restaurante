@@ -12,10 +12,13 @@ import java.util.UUID;
 public interface MesaRepository extends JpaRepository<Mesa, Long> {
 
     @Query(value = "select * from Mesa m where m.restaurante.id = :restaurante and m.status = :status order by m.numero")
-    public List<Mesa> findAllByStatusOrderByNumero(@Param("restaurante") Long restaurante, @Param("status") StatusMesa status);
+    public List<Mesa> findAllByRestauranteAndStatus(@Param("restaurante") Long restaurante, @Param("status") StatusMesa status);
 
     public List<Mesa> findAllByRestauranteOrderByNumero(@Param("restaurante") Long restaurante);
 
     @Query(value = "select * from Mesa m where m.restaurante.id = :restaurante and m.chamarGarcom = true order by m.numero")
     public List<Mesa> findAllByChamarGarcomTrue(@Param("restaurante") Long restaurante);
+
+    @Query(value = "select m from Mesa m where m.restaurante.uuid = :uuid and m.numero = :numero")
+    public Mesa findByRestaurante(@Param("uuid") UUID uuid, @Param("numero") Long numero);
 }
