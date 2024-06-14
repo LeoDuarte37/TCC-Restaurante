@@ -10,6 +10,5 @@ public record StatusDto(
 
         @NotBlank
         String status
-
     ) {
 }
