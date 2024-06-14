@@ -9,7 +9,7 @@ import jakarta.validation.constraints.Size;
 public record LoginDto(
 
         @NotBlank
-        @Size(min = 5, max = 25)
+        @Size(min = 5)
         String username,
 
         @NotBlank

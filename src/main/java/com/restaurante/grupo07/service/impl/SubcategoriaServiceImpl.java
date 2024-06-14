@@ -7,10 +7,12 @@ import com.restaurante.grupo07.repository.SubcategoriaRepository;
 import com.restaurante.grupo07.service.SubcategoriaService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
+import org.springframework.stereotype.Service;
 import org.springframework.web.server.ResponseStatusException;
 
 import java.util.Optional;
 
+@Service
 public class SubcategoriaServiceImpl implements SubcategoriaService {
 
     @Autowired

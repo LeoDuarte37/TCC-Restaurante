@@ -1,5 +1,6 @@
 package com.restaurante.grupo07.dto;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.restaurante.grupo07.model.Produto;
 import com.restaurante.grupo07.model.Restaurante;
@@ -24,7 +25,7 @@ public record CategoriaDto (
         @JsonIgnoreProperties("categoria")
         List<Subcategoria> subcategoria,
 
-        @JsonIgnoreProperties("restaurante")
+        @JsonIgnore
         Restaurante restaurante
     ){
 }

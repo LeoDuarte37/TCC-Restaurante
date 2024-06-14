@@ -2,7 +2,9 @@ package com.restaurante.grupo07.dto.mapper;
 
 import com.restaurante.grupo07.dto.SubcategoriaDto;
 import com.restaurante.grupo07.model.Subcategoria;
+import org.springframework.stereotype.Component;
 
+@Component
 public class SubcategoriaMapper {
 
     public SubcategoriaDto toDto(Subcategoria subcategoria) {

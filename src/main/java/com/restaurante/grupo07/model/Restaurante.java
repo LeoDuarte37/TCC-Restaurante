@@ -25,8 +25,8 @@ public class Restaurante {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @GeneratedValue(strategy = GenerationType.UUID)
-    private UUID uuid;
+    @Builder.Default
+    private UUID uuid = UUID.randomUUID();
 
     @NotBlank(message = "Atributo nome é obrigatório!")
     @Size(max = 25)

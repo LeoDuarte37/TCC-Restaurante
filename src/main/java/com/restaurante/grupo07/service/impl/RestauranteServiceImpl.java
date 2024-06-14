@@ -5,7 +5,6 @@ import com.restaurante.grupo07.dto.mapper.RestauranteMapper;
 import com.restaurante.grupo07.model.Restaurante;
 import com.restaurante.grupo07.repository.RestauranteRepository;
 import com.restaurante.grupo07.service.RestauranteService;
-import com.restaurante.grupo07.util.StringToUUIDConverter;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
@@ -25,9 +24,6 @@ public class RestauranteServiceImpl implements RestauranteService {
 
     @Autowired
     private RestauranteMapper restauranteMapper;
-
-    @Autowired
-    private StringToUUIDConverter stringToUUIDConverter;
 
     @Override
     public RestauranteDto adicionar(RestauranteDto restauranteDto) {
@@ -51,7 +47,7 @@ public class RestauranteServiceImpl implements RestauranteService {
 
     @Override
     public RestauranteDto atualizar(RestauranteDto restauranteDto) {
-        UUID uuid = stringToUUIDConverter.convert(restauranteDto.uuid());
+        UUID uuid = UUID.fromString(restauranteDto.uuid());
 
         Long id = restauranteRepository.findRestauranteByUuid(uuid).getId();
 

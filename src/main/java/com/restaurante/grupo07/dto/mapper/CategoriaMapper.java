@@ -13,7 +13,8 @@ public class CategoriaMapper {
                 categoria.getNome(),
                 categoria.getFoto(),
                 categoria.isDisponivel(),
-                categoria.getSubcategoria()
+                categoria.getSubcategoria(),
+                categoria.getRestaurante()
         );
     }
 

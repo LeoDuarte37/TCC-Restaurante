@@ -9,6 +9,8 @@ import com.restaurante.grupo07.repository.PerfilRepository;
 import com.restaurante.grupo07.repository.UsuarioRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.CommandLineRunner;
+import org.springframework.security.crypto.bcrypt.BCrypt;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Component;
 
 import java.util.ArrayList;
@@ -22,13 +24,13 @@ public class StartApp implements CommandLineRunner {
     private PerfilRepository perfilRepository;
 
     @Autowired
-    private ContatoRepository contatoRepository;
-    
-    @Autowired
     private LoginRepository loginRepository;
 
     @Autowired
     private UsuarioRepository usuarioRepository;
+
+    @Autowired
+    private PasswordEncoder passwordEncoder;
 
     @Override
     public void run(String... args) throws Exception {
@@ -45,14 +47,5 @@ public class StartApp implements CommandLineRunner {
 
         List<Perfil> perfisIniciais = new ArrayList<>(Arrays.asList(root, admin, caixa, garcom, cozinha));
         perfisIniciais.forEach(perfil -> perfilRepository.save(perfil));
-        
-        Contato contato = new Contato(1L, "leonardo.r@gmail.com", "11 92564184");
-        contatoRepository.save(contato);
-        
-        Usuario usuario = new Usuario(1L, "Root", contato);
-        usuarioRepository.save(usuario);
-        
-        Login login = new Login("Root", "root@123", usuario, root);
-        loginRepository.save(login); 
     }
 }

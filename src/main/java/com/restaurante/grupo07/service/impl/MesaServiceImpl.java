@@ -9,7 +9,6 @@ import com.restaurante.grupo07.model.Mesa;
 import com.restaurante.grupo07.repository.MesaRepository;
 import com.restaurante.grupo07.repository.RestauranteRepository;
 import com.restaurante.grupo07.service.MesaService;
-import com.restaurante.grupo07.util.StringToUUIDConverter;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
@@ -32,8 +31,6 @@ public class MesaServiceImpl implements MesaService {
     @Autowired
     private RestauranteRepository restauranteRepository;
 
-    @Autowired
-    private StringToUUIDConverter stringToUUIDConverter;
 
     @Override
     public MesaDto adicionar(MesaDto mesaDto) {
@@ -53,9 +50,13 @@ public class MesaServiceImpl implements MesaService {
 
     @Override
     public MesaDto loginMesa(LoginMesaDto loginMesaDto) {
-        UUID uuid = stringToUUIDConverter.convert(loginMesaDto.uuid());
+        UUID uuid = UUID.fromString(loginMesaDto.uuid());
 
-        return mesaMapper.toDto(mesaRepository.findByRestaurante(uuid, loginMesaDto.numero()));
+        try {
+            return mesaMapper.toDto(mesaRepository.findByRestaurante(uuid, loginMesaDto.numero()));
+        } catch (NullPointerException e) {
+            throw new RuntimeException("Mesa não encontrada!");
+        }
     }
 
     @Override

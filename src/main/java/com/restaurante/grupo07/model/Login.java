@@ -1,11 +1,6 @@
 package com.restaurante.grupo07.model;
 
-import jakarta.persistence.Enumerated;
-import jakarta.persistence.GenerationType;
-import jakarta.persistence.Entity;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.Id;
-import jakarta.persistence.Table;
+import jakarta.persistence.*;
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.NotNull;
 import jakarta.validation.constraints.Size;
@@ -27,10 +22,11 @@ public class Login {
     @Id
     @Column(unique = true)
     @NotBlank(message = "Atributo username é obrigatório!")
+    @Size(min = 5)
     private String username;
 
     @NotBlank(message = "Atributo senha é obrigatório!")
-    @Size(min = 5, max = 1000)
+    @Size(min = 5)
     private String senha;
 
     @NotNull(message = "Atributo usuario é obrigatório!")

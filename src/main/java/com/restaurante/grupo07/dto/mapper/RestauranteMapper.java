@@ -9,7 +9,7 @@ public class RestauranteMapper {
 
     public RestauranteDto toDto(Restaurante restaurante) {
         return new RestauranteDto(
-                restaurante.getUuid(),
+                restaurante.getUuid().toString(),
                 restaurante.getNome(),
                 restaurante.getCnpj(),
                 restaurante.getEndereco(),
