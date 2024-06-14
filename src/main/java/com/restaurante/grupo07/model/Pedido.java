@@ -38,7 +38,7 @@ public class Pedido {
 
     @NotNull
     @ElementCollection
-    @CollectionTable(name = "TB_PEDIDO_ITEM")
+    @CollectionTable(name = "tb_pedido_item")
     private List<Item> item = new ArrayList<>();
 
     @JsonFormat(pattern="dd/MM/yyyy HH:mm")

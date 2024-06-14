@@ -1,6 +1,7 @@
 package com.restaurante.grupo07.dto.mapper;
 
-import com.restaurante.grupo07.dto.SubcategoriaDto;
+import com.restaurante.grupo07.dto.subcategoria.AddSubcategoriaDto;
+import com.restaurante.grupo07.dto.subcategoria.SubcategoriaDto;
 import com.restaurante.grupo07.model.Subcategoria;
 import org.springframework.stereotype.Component;
 
@@ -17,11 +18,11 @@ public class SubcategoriaMapper {
         );
     }
 
-    public Subcategoria toEntity(SubcategoriaDto subcategoriaDto) {
+    public Subcategoria toEntity(AddSubcategoriaDto addSubcategoriaDto) {
         return Subcategoria.builder()
-                .nome(subcategoriaDto.nome())
-                .disponivel(subcategoriaDto.disponivel())
-                .categoria(subcategoriaDto.categoria())
+                .nome(addSubcategoriaDto.nome())
+                .disponivel(addSubcategoriaDto.disponivel())
+                .categoria(addSubcategoriaDto.categoria())
                 .build();
     }
 }

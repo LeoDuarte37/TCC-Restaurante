@@ -1,10 +1,10 @@
 package com.restaurante.grupo07.resource;
 
-import com.restaurante.grupo07.dto.FecharContaDto;
-import com.restaurante.grupo07.dto.ListarPorStatusDto;
-import com.restaurante.grupo07.dto.ListarPedidosPorMesaDto;
-import com.restaurante.grupo07.dto.PedidoDto;
-import com.restaurante.grupo07.enumeration.StatusPedido;
+import com.restaurante.grupo07.dto.StatusDto;
+import com.restaurante.grupo07.dto.pedido.AddPedidoDto;
+import com.restaurante.grupo07.dto.pedido.AtualizarPedidoDto;
+import com.restaurante.grupo07.dto.pedido.ListarPedidosPorMesaAndStatusDto;
+import com.restaurante.grupo07.dto.pedido.PedidoDto;
 import com.restaurante.grupo07.service.PedidoService;
 import jakarta.validation.Valid;
 import jakarta.validation.constraints.NotNull;
@@ -14,8 +14,6 @@ import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
-import java.util.Set;
-import java.util.stream.Collectors;
 
 @RestController
 @RequestMapping("/pedido")
@@ -28,8 +26,8 @@ public class PedidoResource {
     @PostMapping
     @ResponseStatus(HttpStatus.CREATED)
     @Transactional
-    public PedidoDto adicionar(@Valid @RequestBody PedidoDto pedidoDto) {
-        return pedidoService.adicionar(pedidoDto);
+    public PedidoDto adicionar(@Valid @RequestBody AddPedidoDto addPedidoDto) {
+        return pedidoService.adicionar(addPedidoDto);
     }
 
     @GetMapping("/{id}")
@@ -38,22 +36,17 @@ public class PedidoResource {
         return pedidoService.buscarPorId(id);
     }
 
-    @GetMapping("/listar")
-    @ResponseStatus(HttpStatus.OK)
-    public List<PedidoDto> listar() {
-        return pedidoService.listar();
-    }
 
     @GetMapping("/listar/mesa")
     @ResponseStatus(HttpStatus.OK)
-    public List<PedidoDto> listarPorMesaInStatus(@Valid @RequestBody ListarPedidosPorMesaDto listarPedidosPorMesaDto) {
-        return pedidoService.listarPorMesaInStatus(listarPedidosPorMesaDto);
+    public List<PedidoDto> listarPorMesaInStatus(@Valid @RequestBody ListarPedidosPorMesaAndStatusDto listarPedidosPorMesaAndStatusDto) {
+        return pedidoService.listarPorMesaInStatus(listarPedidosPorMesaAndStatusDto);
     }
 
     @GetMapping("/listar/status")
     @ResponseStatus(HttpStatus.OK)
-    public List<PedidoDto> listarPorStatus(@Valid @RequestBody ListarPorStatusDto listarPorStatusDto) {
-        return pedidoService.listarPorStatus(listarPorStatusDto);
+    public List<PedidoDto> listarPorStatus(@Valid @RequestBody StatusDto statusDto) {
+        return pedidoService.listarPorStatus(statusDto);
     }
 
     @GetMapping("/listar/restaurante/{id}")
@@ -62,31 +55,31 @@ public class PedidoResource {
         return pedidoService.listarPorRestaurante(id);
     }
 
-    @GetMapping("/listar/dataAtual/restaurante/{id}")
+    @GetMapping("/listar/data/corrente/restaurante/{id}")
     @ResponseStatus(HttpStatus.OK)
     public List<PedidoDto> listarPorRestauranteDataAtual(@PathVariable("id") @NotNull Long id) {
         return pedidoService.listarPorRestauranteDataAtual(id);
     }
 
-    @PutMapping("/fecharConta")
+    @PutMapping("/fecharConta/mesa/{id}")
     @ResponseStatus(HttpStatus.ACCEPTED)
     @Transactional
-    public void fecharConta(@Valid @RequestBody FecharContaDto fecharContaDto) {
-        pedidoService.fecharConta(fecharContaDto);
+    public void fecharConta(@PathVariable("id") @NotNull Long id) {
+        pedidoService.fecharConta(id);
     }
 
     @PutMapping
     @ResponseStatus(HttpStatus.ACCEPTED)
     @Transactional
-    public PedidoDto atualizar(@Valid @RequestBody PedidoDto pedidoDto) {
-        return pedidoService.atualizar(pedidoDto);
+    public PedidoDto atualizar(@Valid @RequestBody AtualizarPedidoDto atualizarPedidoDto) {
+        return pedidoService.atualizar(atualizarPedidoDto);
     }
 
     @PatchMapping("/atualizar/status")
     @ResponseStatus(HttpStatus.ACCEPTED)
     @Transactional
-    public PedidoDto atualizarStatus(@RequestBody PedidoDto pedidoDto) {
-        return pedidoService.atualizarStatus(pedidoDto);
+    public PedidoDto atualizarStatus(@Valid @RequestBody StatusDto statusDto) {
+        return pedidoService.atualizarStatus(statusDto);
     }
 
     @DeleteMapping("/{id}")

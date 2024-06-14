@@ -1,23 +1,31 @@
 package com.restaurante.grupo07.service;
 
-import com.restaurante.grupo07.dto.FecharContaDto;
-import com.restaurante.grupo07.dto.ListarPorStatusDto;
-import com.restaurante.grupo07.dto.ListarPedidosPorMesaDto;
-import com.restaurante.grupo07.dto.PedidoDto;
+import com.restaurante.grupo07.dto.StatusDto;
+import com.restaurante.grupo07.dto.pedido.AddPedidoDto;
+import com.restaurante.grupo07.dto.pedido.AtualizarPedidoDto;
+import com.restaurante.grupo07.dto.pedido.ListarPedidosPorMesaAndStatusDto;
+import com.restaurante.grupo07.dto.pedido.PedidoDto;
 
 import java.util.List;
-import java.util.Set;
 
 public interface PedidoService {
-    PedidoDto adicionar(PedidoDto pedidoDto);
+    PedidoDto adicionar(AddPedidoDto addPedidoDto);
+
     PedidoDto buscarPorId(Long id);
-    List<PedidoDto> listar();
-    List<PedidoDto> listarPorMesaInStatus(ListarPedidosPorMesaDto listarPedidosPorMesaDto);
-    List<PedidoDto> listarPorStatus(ListarPorStatusDto listarPorStatusDto);
+
+    List<PedidoDto> listarPorMesaInStatus(ListarPedidosPorMesaAndStatusDto listarPedidosPorMesaAndStatusDto);
+
+    List<PedidoDto> listarPorStatus(StatusDto statusDto);
+
     List<PedidoDto> listarPorRestaurante(Long restauranteId);
+
     List<PedidoDto> listarPorRestauranteDataAtual(Long restauranteId);
-    void fecharConta(FecharContaDto fecharContaDto);
-    PedidoDto atualizar(PedidoDto pedidoDto);
-    PedidoDto atualizarStatus(PedidoDto pedidoDto);
+
+    PedidoDto atualizar(AtualizarPedidoDto atualizarPedidoDto);
+
+    PedidoDto atualizarStatus(StatusDto statusDto);
+
+    void fecharConta(Long id);
+
     void excluir(Long id);
 }

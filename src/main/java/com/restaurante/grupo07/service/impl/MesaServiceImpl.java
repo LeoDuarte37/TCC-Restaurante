@@ -1,8 +1,10 @@
 package com.restaurante.grupo07.service.impl;
 
-import com.restaurante.grupo07.dto.ListarPorStatusDto;
-import com.restaurante.grupo07.dto.LoginMesaDto;
-import com.restaurante.grupo07.dto.MesaDto;
+import com.restaurante.grupo07.dto.StatusDto;
+import com.restaurante.grupo07.dto.mesa.AddMesaDto;
+import com.restaurante.grupo07.dto.mesa.AtualizarMesaDto;
+import com.restaurante.grupo07.dto.mesa.LoginMesaDto;
+import com.restaurante.grupo07.dto.mesa.MesaDto;
 import com.restaurante.grupo07.dto.mapper.MesaMapper;
 import com.restaurante.grupo07.enumeration.StatusMesa;
 import com.restaurante.grupo07.model.Mesa;
@@ -31,11 +33,10 @@ public class MesaServiceImpl implements MesaService {
     @Autowired
     private RestauranteRepository restauranteRepository;
 
-
     @Override
-    public MesaDto adicionar(MesaDto mesaDto) {
-        if (restauranteRepository.existsById(mesaDto.restaurante().getId())){
-            return mesaMapper.toDto(mesaRepository.save(mesaMapper.toEntity(mesaDto)));
+    public MesaDto adicionar(AddMesaDto addMesaDto) {
+        if (restauranteRepository.existsById(addMesaDto.restaurante().getId())){
+            return mesaMapper.toDto(mesaRepository.save(mesaMapper.toEntity(addMesaDto)));
         }
 
         throw new ResponseStatusException(HttpStatus.NOT_FOUND, "Restaurante não encontrado!");
@@ -60,14 +61,6 @@ public class MesaServiceImpl implements MesaService {
     }
 
     @Override
-    public List<MesaDto> listar() {
-        return mesaRepository.findAll()
-                .stream()
-                .map(entity -> mesaMapper.toDto(entity))
-                .collect(Collectors.toList());
-    }
-
-    @Override
     public List<MesaDto> listarPorRestaurante(Long restauranteId) {
         return mesaRepository.findAllByRestauranteOrderByNumero(restauranteId)
                 .stream()
@@ -76,10 +69,10 @@ public class MesaServiceImpl implements MesaService {
     }
 
     @Override
-    public List<MesaDto> listarPorRestauranteAndStatus(ListarPorStatusDto listarPorStatusDto) {
-        StatusMesa statusMesa = StatusMesa.doStatus(listarPorStatusDto.status());
+    public List<MesaDto> listarPorRestauranteAndStatus(StatusDto statusDto) {
+        StatusMesa statusMesa = StatusMesa.doStatus(statusDto.status());
 
-        return mesaRepository.findAllByRestauranteAndStatus(listarPorStatusDto.restauranteId(), statusMesa)
+        return mesaRepository.findAllByRestauranteAndStatus(statusDto.id(), statusMesa)
                 .stream()
                 .map(entity -> mesaMapper.toDto(entity))
                 .collect(Collectors.toList());
@@ -94,33 +87,30 @@ public class MesaServiceImpl implements MesaService {
     }
 
     @Override
-    public MesaDto atualizar(MesaDto mesaDto) {
-        return mesaRepository.findById(mesaDto.id())
+    public MesaDto atualizar(AtualizarMesaDto atualizarMesaDto) {
+        return mesaRepository.findById(atualizarMesaDto.id())
                 .map(entity -> {
-                    entity.setNumero(mesaDto.numero());
-                    entity.setRestaurante(mesaDto.restaurante());
-                    entity.setChamarGarcom(mesaDto.chamarGarcom());
-                    entity.setStatus(StatusMesa.doStatus(mesaDto.status()));
+                    entity.setNumero(atualizarMesaDto.numero());
                     return mesaMapper.toDto(mesaRepository.save(entity));
 
                 }).orElseThrow(() -> new ResponseStatusException(HttpStatus.NOT_FOUND));
     }
 
     @Override
-    public MesaDto atualizarStatus(MesaDto mesaDto) {
-        return mesaRepository.findById(mesaDto.id())
+    public MesaDto atualizarStatus(StatusDto statusDto) {
+        return mesaRepository.findById(statusDto.id())
                 .map(entity -> {
-                    entity.setStatus(StatusMesa.doStatus(mesaDto.status()));
+                    entity.setStatus(StatusMesa.doStatus(statusDto.status()));
                     return mesaMapper.toDto(mesaRepository.save(entity));
 
                 }).orElseThrow(() -> new ResponseStatusException(HttpStatus.NOT_FOUND));
     }
 
     @Override
-    public MesaDto atualizarChamarGarcom(MesaDto mesaDto) {
-        return mesaRepository.findById(mesaDto.id())
+    public MesaDto atualizarChamarGarcom(Long id) {
+        return mesaRepository.findById(id)
                 .map(entity -> {
-                    entity.setChamarGarcom(mesaDto.chamarGarcom());
+                    entity.setChamarGarcom(!entity.isChamarGarcom());
                     return mesaMapper.toDto(mesaRepository.save(entity));
 
                 }).orElseThrow(() -> new ResponseStatusException(HttpStatus.NOT_FOUND));

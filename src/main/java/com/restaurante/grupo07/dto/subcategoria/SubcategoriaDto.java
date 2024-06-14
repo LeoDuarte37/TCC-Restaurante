@@ -1,4 +1,4 @@
-package com.restaurante.grupo07.dto;
+package com.restaurante.grupo07.dto.subcategoria;
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.restaurante.grupo07.model.Categoria;
@@ -11,16 +11,13 @@ import java.util.List;
 public record SubcategoriaDto(
         Long id,
 
-        @NotBlank
         String nome,
 
-        @NotNull
         boolean disponivel,
 
         @JsonIgnoreProperties("subcategoria")
         List<Produto> produto,
 
-        @NotNull
         @JsonIgnoreProperties("subcategoria")
         Categoria categoria
     ) {

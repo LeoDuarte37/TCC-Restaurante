@@ -1,6 +1,7 @@
 package com.restaurante.grupo07.resource;
 
-import com.restaurante.grupo07.dto.RestauranteDto;
+import com.restaurante.grupo07.dto.restaurante.AddRestauranteDto;
+import com.restaurante.grupo07.dto.restaurante.RestauranteDto;
 import com.restaurante.grupo07.service.RestauranteService;
 import jakarta.validation.Valid;
 import jakarta.validation.constraints.NotNull;
@@ -22,20 +23,14 @@ public class RestauranteResource {
     @PostMapping
     @ResponseStatus(HttpStatus.CREATED)
     @Transactional
-    public RestauranteDto adicionar(@Valid @RequestBody RestauranteDto restauranteDto) {
-        return restauranteService.adicionar(restauranteDto);
+    public RestauranteDto adicionar(@Valid @RequestBody AddRestauranteDto addRestauranteDto) {
+        return restauranteService.adicionar(addRestauranteDto);
     }
 
     @GetMapping("/{id}")
     @ResponseStatus(HttpStatus.OK)
     public RestauranteDto buscarPorId(@PathVariable("id") @NotNull Long id) {
         return restauranteService.buscarPorId(id);
-    }
-
-    @GetMapping("/listar")
-    @ResponseStatus(HttpStatus.OK)
-    public List<RestauranteDto> listar() {
-        return restauranteService.listar();
     }
 
     @PutMapping

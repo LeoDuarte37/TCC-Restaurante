@@ -1,8 +1,6 @@
-package com.restaurante.grupo07.dto;
+package com.restaurante.grupo07.dto.categoria;
 
-import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
-import com.restaurante.grupo07.model.Produto;
 import com.restaurante.grupo07.model.Restaurante;
 import com.restaurante.grupo07.model.Subcategoria;
 import jakarta.validation.constraints.NotBlank;
@@ -16,16 +14,10 @@ public record CategoriaDto (
         @NotBlank
         String nome,
 
-        @NotBlank
-        String foto,
-
         @NotNull
         boolean disponivel,
 
         @JsonIgnoreProperties("categoria")
-        List<Subcategoria> subcategoria,
-
-        @JsonIgnore
-        Restaurante restaurante
+        List<Subcategoria> subcategoria
     ){
 }

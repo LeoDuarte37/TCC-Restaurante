@@ -1,8 +1,8 @@
 package com.restaurante.grupo07.service.impl;
 
-import com.restaurante.grupo07.dto.LogarDto;
-import com.restaurante.grupo07.dto.LoginDto;
-import com.restaurante.grupo07.dto.SessaoDto;
+import com.restaurante.grupo07.dto.login.LogarDto;
+import com.restaurante.grupo07.dto.login.AddLoginDto;
+import com.restaurante.grupo07.dto.login.LoginDto;
 import com.restaurante.grupo07.dto.mapper.LoginMapper;
 import com.restaurante.grupo07.model.Login;
 import com.restaurante.grupo07.repository.LoginRepository;
@@ -39,7 +39,7 @@ public class LoginServiceImpl implements LoginService {
     private PasswordEncoder passwordEncoder;
 
     @Override
-    public Optional<SessaoDto> autenticar(Optional<LogarDto> logarDto) {
+    public Optional<LoginDto> autenticar(Optional<LogarDto> logarDto) {
         var credenciais = new UsernamePasswordAuthenticationToken(
                 logarDto.get().username(),
                 logarDto.get().senha()
@@ -52,9 +52,10 @@ public class LoginServiceImpl implements LoginService {
 
             if(login.isPresent()) {
                 return Optional.of(
-                        new SessaoDto(
+                        new LoginDto(
                             login.get().getUsername(),
                             login.get().getPerfil().getNome(),
+                            login.get().getUsuario().getRestaurante().getId(),
                             jwtService.gerarToken(login.get())
                         )
                 );
@@ -65,27 +66,27 @@ public class LoginServiceImpl implements LoginService {
     }
 
     @Override
-    public Optional<LoginDto> cadastrar(LoginDto loginDto) {
-        if (loginRepository.existsByUsername(loginDto.username())) {
+    public Optional<AddLoginDto> cadastrar(AddLoginDto addLoginDto) {
+        if (loginRepository.existsByUsername(addLoginDto.username())) {
             throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "Usuário já existente!");
         }
 
-        Login login = loginMapper.toEntity(loginDto);
+        Login login = loginMapper.toEntity(addLoginDto);
 
         login.setSenha(passwordEncoder.encode(login.getSenha()));
         return Optional.of(loginMapper.toDto(loginRepository.save(login)));
     }
 
     @Override
-    public Optional<LoginDto> atualizar(LoginDto loginDto) {
-        if (loginRepository.existsByUsername(loginDto.username())) {
-            Optional<Login> login = loginRepository.findById(loginDto.username());
+    public Optional<AddLoginDto> atualizar(AddLoginDto addLoginDto) {
+        if (loginRepository.existsByUsername(addLoginDto.username())) {
+            Optional<Login> login = loginRepository.findById(addLoginDto.username());
 
-            if ((login.isPresent()) && !Objects.equals(login.get().getUsername(), loginDto.username())) {
+            if ((login.isPresent()) && !Objects.equals(login.get().getUsername(), addLoginDto.username())) {
                 throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "Username incorreto!");
             }
 
-            login.get().setSenha(passwordEncoder.encode(loginDto.senha()));
+            login.get().setSenha(passwordEncoder.encode(addLoginDto.senha()));
             return Optional.ofNullable(loginMapper.toDto(loginRepository.save(login.get())));
         }
 

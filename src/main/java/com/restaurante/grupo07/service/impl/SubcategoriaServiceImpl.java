@@ -1,8 +1,11 @@
 package com.restaurante.grupo07.service.impl;
 
-import com.restaurante.grupo07.dto.SubcategoriaDto;
+import com.restaurante.grupo07.dto.AtualizarCardapioDto;
+import com.restaurante.grupo07.dto.subcategoria.AddSubcategoriaDto;
+import com.restaurante.grupo07.dto.subcategoria.SubcategoriaDto;
 import com.restaurante.grupo07.dto.mapper.SubcategoriaMapper;
 import com.restaurante.grupo07.model.Subcategoria;
+import com.restaurante.grupo07.repository.CategoriaRepository;
 import com.restaurante.grupo07.repository.SubcategoriaRepository;
 import com.restaurante.grupo07.service.SubcategoriaService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -16,22 +19,29 @@ import java.util.Optional;
 public class SubcategoriaServiceImpl implements SubcategoriaService {
 
     @Autowired
+    private CategoriaRepository categoriaRepository;
+
+    @Autowired
     private SubcategoriaRepository subcategoriaRepository;
 
     @Autowired
     private SubcategoriaMapper subcategoriaMapper;
 
     @Override
-    public SubcategoriaDto adicionar(SubcategoriaDto subcategoriaDto) {
-        return subcategoriaMapper.toDto(subcategoriaRepository.save(subcategoriaMapper.toEntity(subcategoriaDto)));
+    public SubcategoriaDto adicionar(AddSubcategoriaDto addSubcategoriaDto) {
+        if (categoriaRepository.existsById(addSubcategoriaDto.categoria().getId())) {
+            return subcategoriaMapper.toDto(subcategoriaRepository.save(subcategoriaMapper.toEntity(addSubcategoriaDto)));
+        }
+
+        throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "Categoria não encontrada!");
     }
 
     @Override
-    public SubcategoriaDto atualizar(SubcategoriaDto subcategoriaDto) {
-        return subcategoriaRepository.findById(subcategoriaDto.id())
+    public SubcategoriaDto atualizar(AtualizarCardapioDto atualizarCardapioDto) {
+        return subcategoriaRepository.findById(atualizarCardapioDto.id())
                 .map(entity -> {
-                    entity.setNome(subcategoriaDto.nome());
-                    entity.setDisponivel(subcategoriaDto.disponivel());
+                    entity.setNome(atualizarCardapioDto.nome());
+                    entity.setDisponivel(atualizarCardapioDto.disponivel());
                     return subcategoriaMapper.toDto(subcategoriaRepository.save(entity));
                 }).orElseThrow(() -> new ResponseStatusException(HttpStatus.NOT_FOUND, "Subcategoria não encontrada"));
     }

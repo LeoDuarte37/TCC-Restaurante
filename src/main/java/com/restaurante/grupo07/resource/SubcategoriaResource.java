@@ -1,6 +1,8 @@
 package com.restaurante.grupo07.resource;
 
-import com.restaurante.grupo07.dto.SubcategoriaDto;
+import com.restaurante.grupo07.dto.AtualizarCardapioDto;
+import com.restaurante.grupo07.dto.subcategoria.AddSubcategoriaDto;
+import com.restaurante.grupo07.dto.subcategoria.SubcategoriaDto;
 import com.restaurante.grupo07.service.SubcategoriaService;
 import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -19,21 +21,21 @@ public class SubcategoriaResource {
     @PostMapping
     @ResponseStatus(HttpStatus.OK)
     @Transactional
-    public SubcategoriaDto adicionar(@Valid @RequestBody SubcategoriaDto subcategoriaDto) {
-        return subcategoriaService.adicionar(subcategoriaDto);
+    public SubcategoriaDto adicionar(@Valid @RequestBody AddSubcategoriaDto addSubcategoriaDto) {
+        return subcategoriaService.adicionar(addSubcategoriaDto);
     }
 
     @PutMapping
     @ResponseStatus(HttpStatus.ACCEPTED)
     @Transactional
-    public SubcategoriaDto atualizar(@Valid @RequestBody SubcategoriaDto subcategoriaDto) {
-        return subcategoriaService.atualizar(subcategoriaDto);
+    public SubcategoriaDto atualizar(@Valid @RequestBody AtualizarCardapioDto atualizarCardapioDto) {
+        return subcategoriaService.atualizar(atualizarCardapioDto);
     }
 
     @DeleteMapping("/{id}")
     @ResponseStatus(HttpStatus.NO_CONTENT)
     @Transactional
-    public void deletar(@PathVariable("id") Long id) {
+    public void excluir(@PathVariable("id") Long id) {
         subcategoriaService.excluir(id);
     }
 }

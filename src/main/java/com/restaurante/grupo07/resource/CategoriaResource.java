@@ -1,6 +1,8 @@
 package com.restaurante.grupo07.resource;
 
-import com.restaurante.grupo07.dto.CategoriaDto;
+import com.restaurante.grupo07.dto.AtualizarCardapioDto;
+import com.restaurante.grupo07.dto.categoria.AddCategoriaDto;
+import com.restaurante.grupo07.dto.categoria.CategoriaDto;
 import com.restaurante.grupo07.service.CategoriaService;
 import jakarta.validation.Valid;
 import jakarta.validation.constraints.NotBlank;
@@ -23,21 +25,14 @@ public class CategoriaResource {
     @PostMapping
     @ResponseStatus(HttpStatus.CREATED)
     @Transactional
-    public CategoriaDto adicionar(@Valid @RequestBody CategoriaDto categoriaDto) {
-        return categoriaService.adicionar(categoriaDto);
+    public CategoriaDto adicionar(@Valid @RequestBody AddCategoriaDto addCategoriaDto) {
+        return categoriaService.adicionar(addCategoriaDto);
     }
 
     @GetMapping("/{id}")
     @ResponseStatus(HttpStatus.OK)
     public CategoriaDto buscarPorId(@PathVariable("id") @NotNull Long id) {
         return categoriaService.buscarPorId(id);
-    }
-
-
-    @GetMapping("/listar")
-    @ResponseStatus(HttpStatus.OK)
-    public List<CategoriaDto> listar() {
-        return categoriaService.listar();
     }
     
     @GetMapping("/listar/nome/{nome}")
@@ -61,15 +56,8 @@ public class CategoriaResource {
     @PutMapping
     @ResponseStatus(HttpStatus.ACCEPTED)
     @Transactional
-    public CategoriaDto atualizar(@Valid @RequestBody CategoriaDto categoriaDto) {
-        return categoriaService.atualizar(categoriaDto);
-    }
-
-    @PatchMapping("/atualizar/status")
-    @ResponseStatus(HttpStatus.ACCEPTED)
-    @Transactional
-    public CategoriaDto atualizarStatus(@RequestBody CategoriaDto categoriaDto) {
-        return categoriaService.atualizarStatus(categoriaDto);
+    public CategoriaDto atualizar(@Valid @RequestBody AtualizarCardapioDto atualizarCardapioDto) {
+        return categoriaService.atualizar(atualizarCardapioDto);
     }
 
     @DeleteMapping("/{id}")

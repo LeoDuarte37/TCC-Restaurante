@@ -3,13 +3,13 @@ package com.restaurante.grupo07.dto;
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.NotNull;
 
-public record ListarPorStatusDto(
+public record StatusDto(
 
-    @NotNull
-    Long restauranteId,
+        @NotNull
+        Long id,
 
-    @NotBlank
-    String status
+        @NotBlank
+        String status
 
     ) {
 }

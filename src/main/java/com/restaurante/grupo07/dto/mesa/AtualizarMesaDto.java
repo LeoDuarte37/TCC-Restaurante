@@ -1,12 +1,10 @@
-package com.restaurante.grupo07.dto;
+package com.restaurante.grupo07.dto.mesa;
 
 import jakarta.validation.constraints.NotNull;
 
-import java.util.UUID;
-
-public record LoginMesaDto(
+public record AtualizarMesaDto(
         @NotNull
-        String uuid,
+        Long id,
 
         @NotNull
         Long numero

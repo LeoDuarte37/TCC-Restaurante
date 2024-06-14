@@ -1,4 +1,4 @@
-package com.restaurante.grupo07.dto;
+package com.restaurante.grupo07.dto.login;
 
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.Size;

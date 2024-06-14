@@ -24,18 +24,13 @@ public class Categoria {
     @NotBlank(message = "Atributo nome é obrigatório!")
     private String nome;
 
-    @NotBlank(message = "Atributo foto é obrigatório!")
-    private String foto;
-
     @NotNull(message = "Atributo disponivel é obrigatório!")
     private boolean disponivel;
 
     @OneToMany(fetch = FetchType.LAZY, mappedBy = "categoria", cascade = CascadeType.REMOVE)
-    @JsonIgnoreProperties("categoria")
     private List<Subcategoria> subcategoria;
 
     @NotNull
     @ManyToOne
-    @JsonIgnoreProperties(value = {"restaurante", "categoria"})
     private Restaurante restaurante;
 }

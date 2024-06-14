@@ -1,6 +1,6 @@
 package com.restaurante.grupo07.resource;
 
-import com.restaurante.grupo07.dto.UsuarioDto;
+import com.restaurante.grupo07.dto.usuario.UsuarioDto;
 import com.restaurante.grupo07.service.UsuarioService;
 import jakarta.validation.Valid;
 import jakarta.validation.constraints.NotNull;
@@ -29,12 +29,5 @@ public class UsuarioResource {
     @ResponseStatus(HttpStatus.OK)
     public List<UsuarioDto> listar() {
         return usuarioService.listar();
-    }
-
-    @PutMapping
-    @ResponseStatus(HttpStatus.ACCEPTED)
-    @Transactional
-    public UsuarioDto atualizar(@Valid @RequestBody UsuarioDto usuarioDto) {
-        return usuarioService.atualizar(usuarioDto);
     }
 }

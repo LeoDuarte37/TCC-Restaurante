@@ -1,11 +1,12 @@
 package com.restaurante.grupo07.resource;
 
-import com.restaurante.grupo07.dto.ListarPorStatusDto;
-import com.restaurante.grupo07.dto.LoginMesaDto;
-import com.restaurante.grupo07.dto.MesaDto;
+import com.restaurante.grupo07.dto.StatusDto;
+import com.restaurante.grupo07.dto.mesa.AddMesaDto;
+import com.restaurante.grupo07.dto.mesa.AtualizarMesaDto;
+import com.restaurante.grupo07.dto.mesa.LoginMesaDto;
+import com.restaurante.grupo07.dto.mesa.MesaDto;
 import com.restaurante.grupo07.service.MesaService;
 import jakarta.validation.Valid;
-import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.NotNull;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -25,8 +26,8 @@ public class MesaResource {
     @PostMapping
     @ResponseStatus(HttpStatus.CREATED)
     @Transactional
-    public MesaDto adicionar(@Valid @RequestBody MesaDto mesaDto) {
-        return mesaService.adicionar(mesaDto);
+    public MesaDto adicionar(@Valid @RequestBody AddMesaDto addMesaDto) {
+        return mesaService.adicionar(addMesaDto);
     }
 
     @GetMapping("/{id}")
@@ -41,12 +42,6 @@ public class MesaResource {
         return mesaService.loginMesa(loginMesaDto);
     }
 
-    @GetMapping("/listar")
-    @ResponseStatus(HttpStatus.OK)
-    public List<MesaDto> listar() {
-        return mesaService.listar();
-    }
-
     @GetMapping("/listar/restaurante/{id}")
     @ResponseStatus(HttpStatus.OK)
     public List<MesaDto> listarPorRestaurante(@PathVariable("id") @NotNull Long restauranteId) {
@@ -55,8 +50,8 @@ public class MesaResource {
 
     @GetMapping("/listar/status")
     @ResponseStatus(HttpStatus.OK)
-    public List<MesaDto> listarPorRestauranteAndStatus(@Valid @RequestBody ListarPorStatusDto listarPorStatusDto) {
-        return mesaService.listarPorRestauranteAndStatus(listarPorStatusDto);
+    public List<MesaDto> listarPorRestauranteAndStatus(@Valid @RequestBody StatusDto statusDto) {
+        return mesaService.listarPorRestauranteAndStatus(statusDto);
     }
 
     @GetMapping("/listar/chamandoGarcom/restaurante/{id}")
@@ -68,22 +63,22 @@ public class MesaResource {
     @PutMapping
     @ResponseStatus(HttpStatus.ACCEPTED)
     @Transactional
-    public MesaDto atualizar(@Valid @RequestBody MesaDto mesaDto) {
-        return mesaService.atualizar(mesaDto);
+    public MesaDto atualizar(@Valid @RequestBody AtualizarMesaDto atualizarMesaDto) {
+        return mesaService.atualizar(atualizarMesaDto);
     }
 
     @PatchMapping("/atualizar/status")
     @ResponseStatus(HttpStatus.ACCEPTED)
     @Transactional
-    public MesaDto atualizarStatus(@RequestBody MesaDto mesaDto) {
-        return mesaService.atualizarStatus(mesaDto);
+    public MesaDto atualizarStatus(@Valid @RequestBody StatusDto statusDto) {
+        return mesaService.atualizarStatus(statusDto);
     }
 
-    @PatchMapping("/atualizar/chamarGarcom")
+    @PatchMapping("/atualizar/chamarGarcom/{id}")
     @ResponseStatus(HttpStatus.ACCEPTED)
     @Transactional
-    public MesaDto atualizarChamarGarcom(@RequestBody MesaDto mesaDto) {
-        return mesaService.atualizarChamarGarcom(mesaDto);
+    public MesaDto atualizarChamarGarcom(@PathVariable("id") @NotNull Long id) {
+        return mesaService.atualizarChamarGarcom(id);
     }
 
     @DeleteMapping("/{id}")

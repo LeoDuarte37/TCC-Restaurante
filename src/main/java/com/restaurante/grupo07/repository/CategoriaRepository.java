@@ -10,7 +10,8 @@ import java.util.List;
 
 @Repository
 public interface CategoriaRepository extends JpaRepository<Categoria, Long> {
-    @Query(value = "select c from Categoria c where c.restaurante.id = ?1 and c.disponivel = true")
+    @Query(value = "SELECT * FROM tb_categoria c WHERE c.disponivel = true AND EXISTS (SELECT 1 FROM tb_restaurante r WHERE r.id = ?1)",
+            nativeQuery = true)
     public List<Categoria> findAllByRestauranteAndDisponivelTrue(@Param("restaurante") Long restaurante);
 
     @Query(value = "select c from Categoria c where c.restaurante.id = :restaurante")

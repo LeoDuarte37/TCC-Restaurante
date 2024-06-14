@@ -25,5 +25,5 @@ public interface PedidoRepository extends JpaRepository<Pedido, Long> {
     public List<Pedido> findAllByMesaInStatus(@Param("mesa") Long mesa, @Param("statusPedidos") Set<StatusPedido> statusPedidos);
 
     @Query(value = "update Pedido p set p.status = :statusUpdate where p.mesa.id = :mesa and p.status in :statusReference")
-    public void fecharConta(@Param("mesa") Long mesa, @Param("statusUpdate") StatusPedido statusUpdate, @Param("statusReference") Set<StatusPedido> statusReference);
+    public void fecharConta(@Param("mesa") Long mesa, @Param("statusUpdate") StatusPedido statusUpdate, @Param("statusReference") List<StatusPedido> statusReference);
 }

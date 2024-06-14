@@ -1,9 +1,10 @@
 package com.restaurante.grupo07.service.impl;
 
-import com.restaurante.grupo07.dto.FecharContaDto;
-import com.restaurante.grupo07.dto.ListarPorStatusDto;
-import com.restaurante.grupo07.dto.ListarPedidosPorMesaDto;
-import com.restaurante.grupo07.dto.PedidoDto;
+import com.restaurante.grupo07.dto.StatusDto;
+import com.restaurante.grupo07.dto.pedido.AddPedidoDto;
+import com.restaurante.grupo07.dto.pedido.AtualizarPedidoDto;
+import com.restaurante.grupo07.dto.pedido.ListarPedidosPorMesaAndStatusDto;
+import com.restaurante.grupo07.dto.pedido.PedidoDto;
 import com.restaurante.grupo07.dto.mapper.PedidoMapper;
 import com.restaurante.grupo07.enumeration.StatusMesa;
 import com.restaurante.grupo07.enumeration.StatusPedido;
@@ -16,9 +17,7 @@ import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
 import org.springframework.web.server.ResponseStatusException;
 
-import java.util.List;
-import java.util.Optional;
-import java.util.Set;
+import java.util.*;
 import java.util.stream.Collectors;
 
 @Service
@@ -34,18 +33,17 @@ public class PedidoServiceImpl implements PedidoService {
     private MesaRepository mesaRepository;
 
     @Override
-    public PedidoDto adicionar(PedidoDto pedidoDto) {
-        return mesaRepository.findById(pedidoDto.mesa().getId())
+    public PedidoDto adicionar(AddPedidoDto addPedidoDto) {
+        return mesaRepository.findById(addPedidoDto.mesa().getId())
                 .map(entity -> {
                     if (entity.getStatus() == StatusMesa.ABERTA) {
-                        return pedidoMapper.toDto(pedidoRepository.save(pedidoMapper.toEntity(pedidoDto)));
+                        return pedidoMapper.toDto(pedidoRepository.save(pedidoMapper.toEntity(addPedidoDto)));
 
                     }
 
                     throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "Mesa ainda não foi aberta por um cliente!");
 
                 }).orElseThrow(() -> new ResponseStatusException(HttpStatus.NOT_FOUND, "Mesa não encontrada"));
-
     }
 
     @Override
@@ -56,30 +54,21 @@ public class PedidoServiceImpl implements PedidoService {
     }
 
     @Override
-    public List<PedidoDto> listar() {
-        return pedidoRepository.findAll()
-                .stream()
-                .map(entity -> pedidoMapper.toDto(entity))
-                .collect(Collectors.toList());
-    }
-
-    @Override
-    public List<PedidoDto> listarPorMesaInStatus(ListarPedidosPorMesaDto listarPedidosPorMesaDto) {
-        Set<StatusPedido> statusPedidos = listarPedidosPorMesaDto.statusPedidos()
+    public List<PedidoDto> listarPorMesaInStatus(ListarPedidosPorMesaAndStatusDto listarPedidosPorMesaAndStatusDto) {
+        Set<StatusPedido> statusPedidos = listarPedidosPorMesaAndStatusDto.statusPedidos()
                 .stream()
                 .map(status -> StatusPedido.doStatus(status))
                 .collect(Collectors.toSet());
 
-        return pedidoRepository.findAllByMesaInStatus(listarPedidosPorMesaDto.mesa(), statusPedidos)
+        return pedidoRepository.findAllByMesaInStatus(listarPedidosPorMesaAndStatusDto.mesa(), statusPedidos)
                 .stream()
                 .map(entity -> pedidoMapper.toDto(entity))
                 .collect(Collectors.toList());
     }
 
     @Override
-    public List<PedidoDto> listarPorStatus(ListarPorStatusDto listarPorStatusDto) {
-        return pedidoRepository.findAllByStatusOrderByDataDesc(listarPorStatusDto.restauranteId(),
-                    StatusPedido.doStatus(listarPorStatusDto.status()))
+    public List<PedidoDto> listarPorStatus(StatusDto statusDto) {
+        return pedidoRepository.findAllByStatusOrderByDataDesc(statusDto.id(), StatusPedido.doStatus(statusDto.status()))
                 .stream()
                 .map(entity -> pedidoMapper.toDto(entity))
                 .collect(Collectors.toList());
@@ -102,34 +91,33 @@ public class PedidoServiceImpl implements PedidoService {
     }
 
     @Override
-    public void fecharConta(FecharContaDto fecharContaDto) {
-        Set<StatusPedido> statusPedidosReference = fecharContaDto.statusReference()
-                .stream()
-                .map(status -> StatusPedido.doStatus(status))
-                .collect(Collectors.toSet());
-
-        pedidoRepository.fecharConta(fecharContaDto.mesaId(), StatusPedido.doStatus(fecharContaDto.statusUpdate()), statusPedidosReference);
-    }
-
-    @Override
-    public PedidoDto atualizar(PedidoDto pedidoDto) {
-        return pedidoRepository.findById(pedidoDto.id())
+    public PedidoDto atualizar(AtualizarPedidoDto atualizarPedidoDto) {
+        return pedidoRepository.findById(atualizarPedidoDto.id())
                 .map(entity -> {
-                    entity.setMesa(pedidoDto.mesa());
-                    entity.setItem(pedidoDto.item());
+                    entity.setMesa(atualizarPedidoDto.mesa());
+                    entity.setItem(atualizarPedidoDto.item());
                     return pedidoMapper.toDto(pedidoRepository.save(entity));
 
                 }).orElseThrow(() -> new ResponseStatusException(HttpStatus.NOT_FOUND, "Pedido não encontrado!"));
     }
 
     @Override
-    public PedidoDto atualizarStatus(PedidoDto pedidoDto) {
-        return pedidoRepository.findById(pedidoDto.id())
+    public PedidoDto atualizarStatus(StatusDto statusDto) {
+        return pedidoRepository.findById(statusDto.id())
                 .map(entity -> {
-                    entity.setStatus(StatusPedido.doStatus(pedidoDto.status()));
+                    entity.setStatus(StatusPedido.doStatus(statusDto.status()));
                     return pedidoMapper.toDto(pedidoRepository.save(entity));
 
                 }).orElseThrow(() -> new ResponseStatusException(HttpStatus.NOT_FOUND, "Pedido não encontrado!"));
+    }
+
+    @Override
+    public void fecharConta(Long id) {
+        List<StatusPedido> statusReference = new ArrayList<>(Arrays.asList(
+                StatusPedido.REALIZADO, StatusPedido.FEITO, StatusPedido.ENTREGUE
+        ));
+
+        pedidoRepository.fecharConta(id, StatusPedido.PAGO, statusReference);
     }
 
     @Override

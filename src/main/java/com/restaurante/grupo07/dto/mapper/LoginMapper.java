@@ -1,37 +1,27 @@
 package com.restaurante.grupo07.dto.mapper;
 
-import com.restaurante.grupo07.dto.LoginDto;
-import com.restaurante.grupo07.dto.UsuarioDto;
+import com.restaurante.grupo07.dto.login.AddLoginDto;
 import com.restaurante.grupo07.model.Login;
 import org.springframework.stereotype.Component;
 
 @Component
 public class LoginMapper {
 
-    public LoginDto toDto(Login login) {
-        return new LoginDto(
+    public AddLoginDto toDto(Login login) {
+        return new AddLoginDto(
                 login.getUsername(),
                 login.getSenha(),
                 login.getUsuario(),
                 login.getPerfil()
         );
-
     }
 
-    public Login toEntity(LoginDto loginDto) {
+    public Login toEntity(AddLoginDto addLoginDto) {
         return Login.builder()
-                .username(loginDto.username())
-                .senha(loginDto.senha())
-                .usuario(loginDto.usuario())
-                .perfil(loginDto.perfil())
+                .username(addLoginDto.username())
+                .senha(addLoginDto.senha())
+                .usuario(addLoginDto.usuario())
+                .perfil(addLoginDto.perfil())
                 .build();
-    }
-
-    public UsuarioDto toUsuarioDto(Login login) {
-        return new UsuarioDto(
-                login.getUsuario().getId(),
-                login.getUsuario().getNome(),
-                login.getUsuario().getContato()
-        );
     }
 }

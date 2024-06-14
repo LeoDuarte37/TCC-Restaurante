@@ -1,6 +1,6 @@
 package com.restaurante.grupo07.service.impl;
 
-import com.restaurante.grupo07.dto.UsuarioDto;
+import com.restaurante.grupo07.dto.usuario.UsuarioDto;
 import com.restaurante.grupo07.dto.mapper.UsuarioMapper;
 import com.restaurante.grupo07.repository.UsuarioRepository;
 import com.restaurante.grupo07.service.UsuarioService;
@@ -35,17 +35,4 @@ public class UsuarioServiceImpl implements UsuarioService {
                 .map(entity -> usuarioMapper.toDto(entity))
                 .collect(Collectors.toList());
     }
-
-    @Override
-    public UsuarioDto atualizar(UsuarioDto usuarioDto) {
-        return usuarioRepository.findById(usuarioDto.id())
-                .map(entity -> {
-                    entity.setNome(usuarioDto.nome());
-                    entity.setContato(usuarioDto.contato());
-                    return usuarioMapper.toDto(usuarioRepository.save(entity));
-
-                }).orElseThrow(() -> new ResponseStatusException(HttpStatus.NOT_FOUND, "Usuário não encontrado!"));
-    }
-
-
 }

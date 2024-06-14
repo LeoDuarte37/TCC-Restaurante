@@ -1,6 +1,6 @@
 package com.restaurante.grupo07.dto.mapper;
 
-import com.restaurante.grupo07.dto.UsuarioDto;
+import com.restaurante.grupo07.dto.usuario.UsuarioDto;
 import com.restaurante.grupo07.model.Usuario;
 import org.springframework.stereotype.Component;
 
@@ -9,16 +9,8 @@ public class UsuarioMapper {
 
     public UsuarioDto toDto(Usuario usuario) {
         return new UsuarioDto(
-                usuario.getId(),
                 usuario.getNome(),
                 usuario.getContato()
         );
-    }
-
-    public Usuario toEntity(UsuarioDto usuarioDto) {
-        return Usuario.builder()
-                .nome(usuarioDto.nome())
-                .contato(usuarioDto.contato())
-                .build();
     }
 }

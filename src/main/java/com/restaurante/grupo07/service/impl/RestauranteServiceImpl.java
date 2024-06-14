@@ -1,6 +1,7 @@
 package com.restaurante.grupo07.service.impl;
 
-import com.restaurante.grupo07.dto.RestauranteDto;
+import com.restaurante.grupo07.dto.restaurante.AddRestauranteDto;
+import com.restaurante.grupo07.dto.restaurante.RestauranteDto;
 import com.restaurante.grupo07.dto.mapper.RestauranteMapper;
 import com.restaurante.grupo07.model.Restaurante;
 import com.restaurante.grupo07.repository.RestauranteRepository;
@@ -16,7 +17,6 @@ import java.util.UUID;
 import java.util.stream.Collectors;
 
 @Service
-
 public class RestauranteServiceImpl implements RestauranteService {
 
     @Autowired
@@ -26,8 +26,8 @@ public class RestauranteServiceImpl implements RestauranteService {
     private RestauranteMapper restauranteMapper;
 
     @Override
-    public RestauranteDto adicionar(RestauranteDto restauranteDto) {
-        return restauranteMapper.toDto(restauranteRepository.save(restauranteMapper.toEntity(restauranteDto)));
+    public RestauranteDto adicionar(AddRestauranteDto addRestauranteDto) {
+        return restauranteMapper.toDto(restauranteRepository.save(restauranteMapper.toEntity(addRestauranteDto)));
     }
 
     @Override
@@ -38,20 +38,8 @@ public class RestauranteServiceImpl implements RestauranteService {
     }
 
     @Override
-    public List<RestauranteDto> listar() {
-        return restauranteRepository.findAll()
-                .stream()
-                .map(entity -> restauranteMapper.toDto(entity))
-                .collect(Collectors.toList());
-    }
-
-    @Override
     public RestauranteDto atualizar(RestauranteDto restauranteDto) {
-        UUID uuid = UUID.fromString(restauranteDto.uuid());
-
-        Long id = restauranteRepository.findRestauranteByUuid(uuid).getId();
-
-        return restauranteRepository.findById(id)
+        return restauranteRepository.findById(restauranteDto.id())
             .map(entity -> {
                 entity.setNome(restauranteDto.nome());
                 entity.setCnpj(restauranteDto.cnpj());

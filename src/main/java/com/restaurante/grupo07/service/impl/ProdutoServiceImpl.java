@@ -1,9 +1,9 @@
 package com.restaurante.grupo07.service.impl;
 
-import com.restaurante.grupo07.dto.ProdutoDto;
+import com.restaurante.grupo07.dto.produto.AddProdutoDto;
+import com.restaurante.grupo07.dto.produto.ProdutoDto;
 import com.restaurante.grupo07.dto.mapper.ProdutoMapper;
 import com.restaurante.grupo07.model.Produto;
-import com.restaurante.grupo07.repository.CategoriaRepository;
 import com.restaurante.grupo07.repository.ProdutoRepository;
 import com.restaurante.grupo07.repository.SubcategoriaRepository;
 import com.restaurante.grupo07.service.ProdutoService;
@@ -29,12 +29,12 @@ public class ProdutoServiceImpl implements ProdutoService {
     private SubcategoriaRepository subcategoriaRepository;
 
     @Override
-    public ProdutoDto adicionar(ProdutoDto produtoDto) {
-        if (subcategoriaRepository.existsById(produtoDto.subCategoria().getId())) {
-            return produtoMapper.toDto(produtoRepository.save(produtoMapper.toEntity(produtoDto)));
+    public ProdutoDto adicionar(AddProdutoDto addProdutoDto) {
+        if (subcategoriaRepository.existsById(addProdutoDto.subcategoria().getId())) {
+            return produtoMapper.toDto(produtoRepository.save(produtoMapper.toEntity(addProdutoDto)));
         }
 
-        throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "Categoria não encontrada!");
+        throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "Subcategoria não encontrada!");
     }
 
     @Override
@@ -42,22 +42,6 @@ public class ProdutoServiceImpl implements ProdutoService {
         return produtoRepository.findById(id)
                 .map(entity -> produtoMapper.toDto(entity))
                 .orElseThrow(() -> new ResponseStatusException(HttpStatus.NOT_FOUND));
-    }
-
-    @Override
-    public List<ProdutoDto> listar() {
-        return produtoRepository.findAll()
-                .stream()
-                .map(entity -> produtoMapper.toDto(entity))
-                .collect(Collectors.toList());
-    }
-
-    @Override
-    public List<ProdutoDto> listarDisponiveis() {
-        return produtoRepository.findByDisponivelTrue()
-                .stream()
-                .map(entity -> produtoMapper.toDto(entity))
-                .collect(Collectors.toList());
     }
 
     @Override
@@ -70,7 +54,7 @@ public class ProdutoServiceImpl implements ProdutoService {
 
     @Override
     public ProdutoDto atualizar(ProdutoDto produtoDto) {
-        if (subcategoriaRepository.existsById(produtoDto.subCategoria().getId())) {
+        if (subcategoriaRepository.existsById(produtoDto.subcategoria().getId())) {
             return produtoRepository.findById(produtoDto.id())
                     .map(entity -> {
                         entity.setNome(produtoDto.nome());
@@ -84,16 +68,6 @@ public class ProdutoServiceImpl implements ProdutoService {
         }
 
         throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "Categoria não encontrada!");
-    }
-
-    @Override
-    public ProdutoDto atualizarStatus(ProdutoDto produtoDto) {
-        return produtoRepository.findById(produtoDto.id())
-                .map(entity -> {
-                    entity.setDisponivel(produtoDto.disponivel());
-                    return produtoMapper.toDto(produtoRepository.save(entity));
-
-                }).orElseThrow(() -> new ResponseStatusException(HttpStatus.NOT_FOUND, "Produto não encontrado!"));
     }
 
     @Override

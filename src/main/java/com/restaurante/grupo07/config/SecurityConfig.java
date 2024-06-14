@@ -76,7 +76,7 @@ public class SecurityConfig {
                     .requestMatchers(HttpMethod.POST, "/pedido").permitAll()
                     .requestMatchers(HttpMethod.GET, "/pedido/listar/**")
                             .hasAnyRole("ROOT", "ADMIN", "CAIXA")
-                    .requestMatchers(HttpMethod.PUT, "/pedido", "/pedido/fecharConta")
+                    .requestMatchers(HttpMethod.PUT, "/pedido", "/pedido/fecharConta/mesa/{id}")
                         .hasAnyRole("ROOT", "ADMIN", "CAIXA")
                     .requestMatchers(HttpMethod.PATCH, "/pedido/atualizar/status")
                         .hasAnyRole("ROOT", "ADMIN", "CAIXA", "GARCOM", "COZINHA")

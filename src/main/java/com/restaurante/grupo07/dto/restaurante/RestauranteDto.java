@@ -1,4 +1,4 @@
-package com.restaurante.grupo07.dto;
+package com.restaurante.grupo07.dto.restaurante;
 
 
 import com.restaurante.grupo07.model.Contato;
@@ -10,14 +10,13 @@ import jakarta.validation.constraints.Size;
 import java.util.UUID;
 
 public record RestauranteDto (
-        String uuid,
+        @NotNull
+        Long id,
 
         @NotBlank
-        @Size(max = 25)
         String nome,
 
         @NotBlank
-        @Size(min = 14, max = 14)
         String cnpj,
 
         @NotNull

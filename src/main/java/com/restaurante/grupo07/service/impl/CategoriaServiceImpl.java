@@ -1,9 +1,13 @@
 package com.restaurante.grupo07.service.impl;
 
-import com.restaurante.grupo07.dto.CategoriaDto;
+import com.restaurante.grupo07.dto.AtualizarCardapioDto;
+import com.restaurante.grupo07.dto.StatusDto;
+import com.restaurante.grupo07.dto.categoria.AddCategoriaDto;
+import com.restaurante.grupo07.dto.categoria.CategoriaDto;
 import com.restaurante.grupo07.dto.mapper.CategoriaMapper;
 import com.restaurante.grupo07.model.Categoria;
 import com.restaurante.grupo07.repository.CategoriaRepository;
+import com.restaurante.grupo07.repository.RestauranteRepository;
 import com.restaurante.grupo07.service.CategoriaService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -18,14 +22,21 @@ import java.util.stream.Collectors;
 public class CategoriaServiceImpl implements CategoriaService {
 
     @Autowired
+    private RestauranteRepository restauranteRepository;
+
+    @Autowired
     private CategoriaRepository categoriaRepository;
 
     @Autowired
     private CategoriaMapper categoriaMapper;
 
     @Override
-    public CategoriaDto adicionar(CategoriaDto categoriaDto) {
-        return categoriaMapper.toDto(categoriaRepository.save(categoriaMapper.toEntity(categoriaDto)));
+    public CategoriaDto adicionar(AddCategoriaDto addCategoriaDto) {
+        if (restauranteRepository.existsById(addCategoriaDto.restaurante().getId())) {
+            return categoriaMapper.toDto(categoriaRepository.save(categoriaMapper.toEntity(addCategoriaDto)));
+        }
+
+        throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "Restaurante não encontrado!");
     }
 
     @Override
@@ -38,14 +49,6 @@ public class CategoriaServiceImpl implements CategoriaService {
     @Override
     public List<CategoriaDto> listarPorNome(String nome) {
         return categoriaRepository.findAllByNomeContainingIgnoreCase(nome)
-                .stream()
-                .map(entity -> categoriaMapper.toDto(entity))
-                .collect(Collectors.toList());
-    }
-
-    @Override
-    public List<CategoriaDto> listar() {
-        return categoriaRepository.findAll()
                 .stream()
                 .map(entity -> categoriaMapper.toDto(entity))
                 .collect(Collectors.toList());
@@ -68,24 +71,14 @@ public class CategoriaServiceImpl implements CategoriaService {
     }
 
     @Override
-    public CategoriaDto atualizar(CategoriaDto categoriaDto) {
+    public CategoriaDto atualizar(AtualizarCardapioDto atualizarCardapioDto) {
 
-        return categoriaRepository.findById(categoriaDto.id())
+        return categoriaRepository.findById(atualizarCardapioDto.id())
                 .map(entity -> {
-                    entity.setNome(categoriaDto.nome());
-                    entity.setFoto(categoriaDto.foto());
-                    entity.setDisponivel(categoriaDto.disponivel());
+                    entity.setNome(atualizarCardapioDto.nome());
+                    entity.setDisponivel(atualizarCardapioDto.disponivel());
                     return categoriaMapper.toDto(categoriaRepository.save(entity));
 
-                }).orElseThrow(() -> new ResponseStatusException(HttpStatus.NOT_FOUND));
-    }
-
-    @Override
-    public CategoriaDto atualizarStatus(CategoriaDto categoriaDto) {
-        return categoriaRepository.findById(categoriaDto.id())
-                .map(entity -> {
-                    entity.setDisponivel(categoriaDto.disponivel());
-                    return categoriaMapper.toDto(categoriaRepository.save(entity));
                 }).orElseThrow(() -> new ResponseStatusException(HttpStatus.NOT_FOUND));
     }
 

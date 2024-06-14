@@ -1,16 +1,22 @@
-package com.restaurante.grupo07.dto;
+package com.restaurante.grupo07.dto.restaurante;
 
 import com.restaurante.grupo07.model.Contato;
+import com.restaurante.grupo07.model.Endereco;
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.NotNull;
 import jakarta.validation.constraints.Size;
 
-public record UsuarioDto (
-        Long id,
+public record AddRestauranteDto(
+        @NotBlank
+        @Size(max = 25)
+        String nome,
 
         @NotBlank
-        @Size(max = 70)
-        String nome,
+        @Size(min = 14, max = 14)
+        String cnpj,
+
+        @NotNull
+        Endereco endereco,
 
         @NotNull
         Contato contato

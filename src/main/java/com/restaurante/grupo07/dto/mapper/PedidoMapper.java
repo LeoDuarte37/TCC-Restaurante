@@ -1,6 +1,7 @@
 package com.restaurante.grupo07.dto.mapper;
 
-import com.restaurante.grupo07.dto.PedidoDto;
+import com.restaurante.grupo07.dto.pedido.AddPedidoDto;
+import com.restaurante.grupo07.dto.pedido.PedidoDto;
 import com.restaurante.grupo07.enumeration.StatusPedido;
 import com.restaurante.grupo07.model.Pedido;
 import org.springframework.stereotype.Component;
@@ -18,10 +19,10 @@ public class PedidoMapper {
         );
     }
 
-    public Pedido toEntity(PedidoDto pedidoDto) {
+    public Pedido toEntity(AddPedidoDto addPedidoDto) {
         return Pedido.builder()
-                .mesa(pedidoDto.mesa())
-                .item(pedidoDto.item())
+                .mesa(addPedidoDto.mesa())
+                .item(addPedidoDto.item())
                 .status(StatusPedido.doStatus("R"))
                 .build();
     }

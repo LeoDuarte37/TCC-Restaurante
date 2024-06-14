@@ -1,6 +1,7 @@
 package com.restaurante.grupo07.resource;
 
-import com.restaurante.grupo07.dto.ProdutoDto;
+import com.restaurante.grupo07.dto.produto.AddProdutoDto;
+import com.restaurante.grupo07.dto.produto.ProdutoDto;
 import com.restaurante.grupo07.service.ProdutoService;
 import jakarta.validation.Valid;
 import jakarta.validation.constraints.NotBlank;
@@ -23,8 +24,8 @@ public class ProdutoResource {
     @PostMapping
     @ResponseStatus(HttpStatus.CREATED)
     @Transactional
-    public ProdutoDto adicionar(@Valid @RequestBody ProdutoDto produtoDto) {
-        return produtoService.adicionar(produtoDto);
+    public ProdutoDto adicionar(@Valid @RequestBody AddProdutoDto addProdutoDto) {
+        return produtoService.adicionar(addProdutoDto);
     }
 
     @GetMapping("/{id}")
@@ -33,22 +34,10 @@ public class ProdutoResource {
         return produtoService.buscarPorId(id);
     }
 
-    @GetMapping("/listar")
-    @ResponseStatus(HttpStatus.OK)
-    public List<ProdutoDto> listar() {
-        return produtoService.listar();
-    }
-
     @GetMapping("/listar/nome/{nome}")
     @ResponseStatus(HttpStatus.OK)
     public List<ProdutoDto> listarPorNome(@PathVariable("nome") @NotBlank String nome) {
         return produtoService.listarPorNome(nome);
-    }
-
-    @GetMapping("/listar/disponiveis")
-    @ResponseStatus(HttpStatus.OK)
-    public List<ProdutoDto> listarDisponiveis() {
-        return produtoService.listarDisponiveis();
     }
 
     @PutMapping
@@ -56,13 +45,6 @@ public class ProdutoResource {
     @Transactional
     public ProdutoDto atualizar(@Valid @RequestBody ProdutoDto produtoDto) {
         return produtoService.atualizar(produtoDto);
-    }
-
-    @PatchMapping("/atualizar/status")
-    @ResponseStatus(HttpStatus.ACCEPTED)
-    @Transactional
-    public ProdutoDto atualizarStatus(@RequestBody ProdutoDto produtoDto) {
-        return produtoService.atualizarStatus(produtoDto);
     }
 
     @DeleteMapping("/{id}")

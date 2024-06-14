@@ -1,8 +1,8 @@
 package com.restaurante.grupo07.resource;
 
-import com.restaurante.grupo07.dto.LogarDto;
-import com.restaurante.grupo07.dto.LoginDto;
-import com.restaurante.grupo07.dto.SessaoDto;
+import com.restaurante.grupo07.dto.login.LogarDto;
+import com.restaurante.grupo07.dto.login.AddLoginDto;
+import com.restaurante.grupo07.dto.login.LoginDto;
 import com.restaurante.grupo07.service.LoginService;
 import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -23,22 +23,22 @@ public class LoginResource {
     @PostMapping
     @ResponseStatus(HttpStatus.CREATED)
     @Transactional
-    public Optional<SessaoDto> logar(@Valid @RequestBody Optional<LogarDto> logarDto) {
+    public Optional<LoginDto> logar(@Valid @RequestBody Optional<LogarDto> logarDto) {
         return loginService.autenticar(logarDto);
     }
 
     @PostMapping("/cadastrar")
     @ResponseStatus(HttpStatus.CREATED)
     @Transactional
-    public Optional<LoginDto> cadastrar(@Valid @RequestBody LoginDto loginDto) {
-        return loginService.cadastrar(loginDto);
+    public Optional<AddLoginDto> cadastrar(@Valid @RequestBody AddLoginDto addLoginDto) {
+        return loginService.cadastrar(addLoginDto);
     }
 
     @PutMapping
     @ResponseStatus(HttpStatus.ACCEPTED)
     @Transactional
-    public Optional<LoginDto> atualizar(@Valid @RequestBody LoginDto loginDto) {
-        return loginService.atualizar(loginDto);
+    public Optional<AddLoginDto> atualizar(@Valid @RequestBody AddLoginDto addLoginDto) {
+        return loginService.atualizar(addLoginDto);
     }
 
     @DeleteMapping("/{username}")

@@ -1,6 +1,7 @@
 package com.restaurante.grupo07.dto.mapper;
 
-import com.restaurante.grupo07.dto.RestauranteDto;
+import com.restaurante.grupo07.dto.restaurante.AddRestauranteDto;
+import com.restaurante.grupo07.dto.restaurante.RestauranteDto;
 import com.restaurante.grupo07.model.Restaurante;
 import org.springframework.stereotype.Component;
 
@@ -9,7 +10,7 @@ public class RestauranteMapper {
 
     public RestauranteDto toDto(Restaurante restaurante) {
         return new RestauranteDto(
-                restaurante.getUuid().toString(),
+                restaurante.getId(),
                 restaurante.getNome(),
                 restaurante.getCnpj(),
                 restaurante.getEndereco(),
@@ -17,12 +18,12 @@ public class RestauranteMapper {
         );
     }
 
-    public Restaurante toEntity(RestauranteDto restauranteDto) {
+    public Restaurante toEntity(AddRestauranteDto addRestauranteDto) {
         return Restaurante.builder()
-                .nome(restauranteDto.nome())
-                .cnpj(restauranteDto.cnpj())
-                .endereco(restauranteDto.endereco())
-                .contato(restauranteDto.contato())
+                .nome(addRestauranteDto.nome())
+                .cnpj(addRestauranteDto.cnpj())
+                .endereco(addRestauranteDto.endereco())
+                .contato(addRestauranteDto.contato())
                 .build();
     }
 }

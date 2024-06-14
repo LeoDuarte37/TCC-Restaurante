@@ -1,13 +1,14 @@
 package com.restaurante.grupo07.service;
 
-import com.restaurante.grupo07.dto.RestauranteDto;
-
-import java.util.List;
+import com.restaurante.grupo07.dto.restaurante.AddRestauranteDto;
+import com.restaurante.grupo07.dto.restaurante.RestauranteDto;
 
 public interface RestauranteService {
-    RestauranteDto adicionar(RestauranteDto restauranteDto);
+    RestauranteDto adicionar(AddRestauranteDto addRestauranteDto);
+
     RestauranteDto buscarPorId(Long id);
-    List<RestauranteDto> listar();
+
     RestauranteDto atualizar(RestauranteDto restauranteDto);
+
     void excluir(Long id);
 }
