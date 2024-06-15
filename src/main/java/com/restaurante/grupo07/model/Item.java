@@ -19,7 +19,7 @@ public class Item {
 
     @ManyToOne
     @NotNull(message = "Atributo produto é obrigatório!")
-    @JsonIgnoreProperties(value = {"foto", "descricao", "disponivel", "categoria"})
+    @JsonIgnoreProperties(value = {"subcategoria", "descricao", "disponivel", "categoria"})
     private Produto produto;
 
     @NotNull(message = "Atributo quantidade é obrigatório!")

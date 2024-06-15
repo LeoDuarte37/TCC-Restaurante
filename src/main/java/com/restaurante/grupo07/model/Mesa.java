@@ -1,5 +1,6 @@
 package com.restaurante.grupo07.model;
 
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.restaurante.grupo07.enumeration.StatusMesa;
 import jakarta.persistence.*;
 import jakarta.validation.constraints.NotNull;
@@ -27,6 +28,7 @@ public class Mesa {
 
     @ManyToOne
     @NotNull(message = "Atributo restaurante é obrigatório!")
+    @JsonIgnoreProperties(value = {"chamarGarcom", "id", "status", "cnpj", "endereco", "contato"})
     private Restaurante restaurante;
 
     @Builder.Default
