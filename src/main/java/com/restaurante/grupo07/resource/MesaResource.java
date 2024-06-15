@@ -30,16 +30,16 @@ public class MesaResource {
         return mesaService.adicionar(addMesaDto);
     }
 
-    @GetMapping("/{id}")
-    @ResponseStatus(HttpStatus.OK)
-    public MesaDto buscarPorId(@PathVariable("id") @NotNull Long id) {
-        return mesaService.buscarPorId(id);
-    }
-
     @PostMapping("/login")
     @ResponseStatus(HttpStatus.OK)
     public MesaDto loginMesa(@Valid @RequestBody LoginMesaDto loginMesaDto) {
         return mesaService.loginMesa(loginMesaDto);
+    }
+
+    @GetMapping("/{id}")
+    @ResponseStatus(HttpStatus.OK)
+    public MesaDto buscarPorId(@PathVariable("id") @NotNull Long id) {
+        return mesaService.buscarPorId(id);
     }
 
     @GetMapping("/listar/restaurante/{id}")

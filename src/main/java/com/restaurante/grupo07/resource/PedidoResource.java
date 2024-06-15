@@ -36,7 +36,6 @@ public class PedidoResource {
         return pedidoService.buscarPorId(id);
     }
 
-
     @GetMapping("/listar/mesa")
     @ResponseStatus(HttpStatus.OK)
     public List<PedidoDto> listarPorMesaInStatus(@Valid @RequestBody ListarPedidosPorMesaAndStatusDto listarPedidosPorMesaAndStatusDto) {
@@ -61,18 +60,18 @@ public class PedidoResource {
         return pedidoService.listarPorRestauranteDataAtual(id);
     }
 
-    @PutMapping("/fecharConta/mesa/{id}")
-    @ResponseStatus(HttpStatus.ACCEPTED)
-    @Transactional
-    public void fecharConta(@PathVariable("id") @NotNull Long id) {
-        pedidoService.fecharConta(id);
-    }
-
     @PutMapping
     @ResponseStatus(HttpStatus.ACCEPTED)
     @Transactional
     public PedidoDto atualizar(@Valid @RequestBody AtualizarPedidoDto atualizarPedidoDto) {
         return pedidoService.atualizar(atualizarPedidoDto);
+    }
+
+    @PutMapping("/fecharConta/mesa/{id}")
+    @ResponseStatus(HttpStatus.ACCEPTED)
+    @Transactional
+    public void fecharConta(@PathVariable("id") @NotNull Long id) {
+        pedidoService.fecharConta(id);
     }
 
     @PatchMapping("/atualizar/status")
