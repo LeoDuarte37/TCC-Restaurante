@@ -28,11 +28,4 @@ public interface PedidoRepository extends JpaRepository<Pedido, Long> {
 
     @Query(value = "select p from Pedido p where p.mesa.id = :mesa and p.status in :statusPedidos")
     public List<Pedido> findAllByMesaInStatus(@Param("mesa") Long mesa, @Param("statusPedidos") List<StatusPedido> statusPedidos);
-
-    @Modifying
-    @Transactional
-    @Query(value = "UPDATE tb_pedido p SET p.status = :statusUpdate WHERE p.status IN(:statusReference) AND EXISTS " +
-            "(SELECT 1 FROM tb_mesa m WHERE m.id = :mesa)",
-        nativeQuery = true)
-    public void fecharConta(@Param("mesa") Long mesa, @Param("statusUpdate") StatusPedido statusUpdate, @Param("statusReference") List<StatusPedido> statusReference);
 }
