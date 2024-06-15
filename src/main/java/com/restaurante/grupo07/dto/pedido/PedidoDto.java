@@ -13,7 +13,7 @@ public record PedidoDto (
         @JsonIgnoreProperties(value = {"chamarGarcom", "status", "cnpj", "endereco", "contato"})
         Mesa mesa,
 
-        @JsonIgnoreProperties("pedido")
+        @JsonIgnoreProperties(value = {"pedido", "subcategoria"})
         List<Item> item,
 
         LocalDateTime data,

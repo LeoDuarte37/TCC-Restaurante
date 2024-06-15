@@ -18,7 +18,6 @@ public record AddLoginDto(
         String senha,
 
         @NotNull
-        @JsonIgnoreProperties("restaurante")
         Usuario usuario,
 
         @NotNull

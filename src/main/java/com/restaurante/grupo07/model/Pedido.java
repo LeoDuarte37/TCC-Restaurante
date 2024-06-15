@@ -41,7 +41,7 @@ public class Pedido {
     @CollectionTable(name = "tb_pedido_item")
     private List<Item> item = new ArrayList<>();
 
-    @JsonFormat(pattern="dd/MM/yyyy HH:mm")
+    @JsonFormat(shape = JsonFormat.Shape.STRING, pattern="dd/MM/yyyy HH:mm")
     @UpdateTimestamp
     private LocalDateTime data;
 

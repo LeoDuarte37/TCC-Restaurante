@@ -21,8 +21,8 @@ public interface PedidoRepository extends JpaRepository<Pedido, Long> {
     @Query(value = "select p from Pedido p inner join Mesa m where m.restaurante.id = ?1 order by p.data desc")
     public List<Pedido> findAllByRestaurante(@Param("restaurante") Long restaurante);
 
-    @Query(value = "select p from Pedido p inner join Mesa m where m.id = :mesa and p.status in :statusPedidos")
-    public List<Pedido> findAllByMesaInStatus(@Param("mesa") Long mesa, @Param("statusPedidos") Set<StatusPedido> statusPedidos);
+    @Query(value = "select p from Pedido p where p.mesa.id = :mesa and p.status in :statusPedidos")
+    public List<Pedido> findAllByMesaInStatus(@Param("mesa") Long mesa, @Param("statusPedidos") List<StatusPedido> statusPedidos);
 
     @Query(value = "update Pedido p set p.status = :statusUpdate where p.mesa.id = :mesa and p.status in :statusReference")
     public void fecharConta(@Param("mesa") Long mesa, @Param("statusUpdate") StatusPedido statusUpdate, @Param("statusReference") List<StatusPedido> statusReference);

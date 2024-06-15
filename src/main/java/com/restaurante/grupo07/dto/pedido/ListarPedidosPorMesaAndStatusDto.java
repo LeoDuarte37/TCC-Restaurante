@@ -3,7 +3,7 @@ package com.restaurante.grupo07.dto.pedido;
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.NotNull;
 
-import java.util.Set;
+import java.util.List;
 
 public record ListarPedidosPorMesaAndStatusDto(
         @NotNull
@@ -11,7 +11,7 @@ public record ListarPedidosPorMesaAndStatusDto(
 
         @NotNull
         @NotBlank
-        Set<String> statusPedidos
+        List<String> statusPedidos
 
     ) {
 }

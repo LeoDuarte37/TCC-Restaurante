@@ -34,14 +34,21 @@ public class PedidoServiceImpl implements PedidoService {
 
     @Override
     public PedidoDto adicionar(AddPedidoDto addPedidoDto) {
+        List<StatusPedido> statusPedidos = new ArrayList<>(Arrays.asList(
+                StatusPedido.REALIZADO, StatusPedido.FEITO, StatusPedido.ENTREGUE
+        ));
+
+        int lenght = pedidoRepository.findAllByMesaInStatus(addPedidoDto.mesa().getId(), statusPedidos).size();
+
         return mesaRepository.findById(addPedidoDto.mesa().getId())
                 .map(entity -> {
-                    if (entity.getStatus() == StatusMesa.ABERTA) {
+                    if (lenght == 0 && entity.getStatus() == StatusMesa.DISPONIVEL) {
+                        entity.setStatus(StatusMesa.ABERTA);
+                        mesaRepository.save(entity);
                         return pedidoMapper.toDto(pedidoRepository.save(pedidoMapper.toEntity(addPedidoDto)));
-
+                    } else {
+                        return pedidoMapper.toDto(pedidoRepository.save(pedidoMapper.toEntity(addPedidoDto)));
                     }
-
-                    throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "Mesa ainda não foi aberta por um cliente!");
 
                 }).orElseThrow(() -> new ResponseStatusException(HttpStatus.NOT_FOUND, "Mesa não encontrada"));
     }
@@ -55,10 +62,10 @@ public class PedidoServiceImpl implements PedidoService {
 
     @Override
     public List<PedidoDto> listarPorMesaInStatus(ListarPedidosPorMesaAndStatusDto listarPedidosPorMesaAndStatusDto) {
-        Set<StatusPedido> statusPedidos = listarPedidosPorMesaAndStatusDto.statusPedidos()
+        List<StatusPedido> statusPedidos = listarPedidosPorMesaAndStatusDto.statusPedidos()
                 .stream()
                 .map(status -> StatusPedido.doStatus(status))
-                .collect(Collectors.toSet());
+                .collect(Collectors.toList());
 
         return pedidoRepository.findAllByMesaInStatus(listarPedidosPorMesaAndStatusDto.mesa(), statusPedidos)
                 .stream()
