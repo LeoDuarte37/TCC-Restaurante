@@ -3,27 +3,36 @@ package com.restaurante.grupo07.repository;
 import com.restaurante.grupo07.enumeration.StatusPedido;
 import com.restaurante.grupo07.model.Pedido;
 import org.springframework.data.jpa.repository.JpaRepository;
+import org.springframework.data.jpa.repository.Modifying;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.query.Param;
 import org.springframework.stereotype.Repository;
+import org.springframework.transaction.annotation.Transactional;
 
+import java.time.LocalDate;
 import java.util.List;
 import java.util.Set;
 
 @Repository
 public interface PedidoRepository extends JpaRepository<Pedido, Long> {
-    @Query(value = "select p from Pedido p inner join Mesa m where m.restaurante.id = ?1 and p.status = ?2 order by p.data desc")
+    @Query(value = "select p from Pedido p cross join Mesa m where m.restaurante.id = ?1 and p.status = ?2 order by p.data desc")
     public List<Pedido> findAllByStatusOrderByDataDesc(@Param("restaurante") Long restaurante, @Param("status") StatusPedido status);
 
-    @Query(value = "select p from Pedido p inner join Mesa m where m.restaurante.id = ?1 and p.data = CURRENT_DATE order by p.data desc")
+    @Query(value = "SELECT * FROM tb_pedido p WHERE DATE(p.data) = CURDATE() AND EXISTS " +
+            "(SELECT 1 FROM tb_restaurante r WHERE r.id = ?1) ORDER BY p.data DESC",
+        nativeQuery = true)
     public List<Pedido> findAllByRestauranteCurrenteDate(@Param("restaurante") Long restaurante);
 
-    @Query(value = "select p from Pedido p inner join Mesa m where m.restaurante.id = ?1 order by p.data desc")
+    @Query(value = "select p from Pedido p cross join Mesa m where m.restaurante.id = ?1 order by p.data desc")
     public List<Pedido> findAllByRestaurante(@Param("restaurante") Long restaurante);
 
     @Query(value = "select p from Pedido p where p.mesa.id = :mesa and p.status in :statusPedidos")
     public List<Pedido> findAllByMesaInStatus(@Param("mesa") Long mesa, @Param("statusPedidos") List<StatusPedido> statusPedidos);
 
-    @Query(value = "update Pedido p set p.status = :statusUpdate where p.mesa.id = :mesa and p.status in :statusReference")
+    @Modifying
+    @Transactional
+    @Query(value = "UPDATE tb_pedido p SET p.status = :statusUpdate WHERE p.status IN(:statusReference) AND EXISTS " +
+            "(SELECT 1 FROM tb_mesa m WHERE m.id = :mesa)",
+        nativeQuery = true)
     public void fecharConta(@Param("mesa") Long mesa, @Param("statusUpdate") StatusPedido statusUpdate, @Param("statusReference") List<StatusPedido> statusReference);
 }
