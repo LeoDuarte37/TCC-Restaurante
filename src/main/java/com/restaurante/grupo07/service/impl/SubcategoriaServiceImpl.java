@@ -3,7 +3,8 @@ package com.restaurante.grupo07.service.impl;
 import com.restaurante.grupo07.dto.AtualizarCardapioDto;
 import com.restaurante.grupo07.dto.subcategoria.AddSubcategoriaDto;
 import com.restaurante.grupo07.dto.subcategoria.SubcategoriaDto;
-import com.restaurante.grupo07.dto.mapper.SubcategoriaMapper;
+import com.restaurante.grupo07.mapper.SubcategoriaMapper;
+import com.restaurante.grupo07.model.Categoria;
 import com.restaurante.grupo07.model.Subcategoria;
 import com.restaurante.grupo07.repository.CategoriaRepository;
 import com.restaurante.grupo07.repository.SubcategoriaRepository;
@@ -29,8 +30,15 @@ public class SubcategoriaServiceImpl implements SubcategoriaService {
 
     @Override
     public SubcategoriaDto adicionar(AddSubcategoriaDto addSubcategoriaDto) {
-        if (categoriaRepository.existsById(addSubcategoriaDto.categoria().getId())) {
-            return subcategoriaMapper.toDto(subcategoriaRepository.save(subcategoriaMapper.toEntity(addSubcategoriaDto)));
+        Optional<Categoria> categoria = categoriaRepository.findById(addSubcategoriaDto.categoriaId());
+
+        if (categoria.isPresent()) {
+            Subcategoria subcategoria = new Subcategoria(
+                    addSubcategoriaDto.nome(),
+                    addSubcategoriaDto.disponivel(),
+                    categoria.get()
+            );
+            return subcategoriaMapper.toDto(subcategoriaRepository.save(subcategoria));
         }
 
         throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "Categoria não encontrada!");

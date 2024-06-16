@@ -1,4 +1,4 @@
-package com.restaurante.grupo07.dto.mapper;
+package com.restaurante.grupo07.mapper;
 
 import com.restaurante.grupo07.dto.mesa.AddMesaDto;
 import com.restaurante.grupo07.dto.mesa.MesaDto;
@@ -14,6 +14,7 @@ public class MesaMapper {
                 mesa.getId(),
                 mesa.getNumero(),
                 mesa.getRestaurante().getId(),
+                mesa.getRestaurante().getUuid().toString(),
                 mesa.isChamarGarcom(),
                 String.valueOf(mesa.getStatus())
         );

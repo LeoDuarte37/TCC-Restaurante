@@ -1,4 +1,4 @@
-package com.restaurante.grupo07.dto.mapper;
+package com.restaurante.grupo07.mapper;
 
 import com.restaurante.grupo07.dto.login.AddLoginDto;
 import com.restaurante.grupo07.model.Login;

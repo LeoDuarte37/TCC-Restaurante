@@ -1,6 +1,5 @@
 package com.restaurante.grupo07.dto.produto;
 
-import com.restaurante.grupo07.model.Subcategoria;
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.NotNull;
 
@@ -21,6 +20,6 @@ public record AddProdutoDto(
         boolean disponivel,
 
         @NotNull
-        Subcategoria subcategoria
+        Long subcategoriaId
     ) {
 }

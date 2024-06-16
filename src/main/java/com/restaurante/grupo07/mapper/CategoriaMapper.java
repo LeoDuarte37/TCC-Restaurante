@@ -1,6 +1,5 @@
-package com.restaurante.grupo07.dto.mapper;
+package com.restaurante.grupo07.mapper;
 
-import com.restaurante.grupo07.dto.categoria.AddCategoriaDto;
 import com.restaurante.grupo07.dto.categoria.CategoriaDto;
 import com.restaurante.grupo07.model.Categoria;
 import org.springframework.stereotype.Component;
@@ -15,13 +14,5 @@ public class CategoriaMapper {
                 categoria.isDisponivel(),
                 categoria.getSubcategoria()
         );
-    }
-
-    public Categoria toEntity(AddCategoriaDto addCategoriaDto) {
-        return Categoria.builder()
-                .nome(addCategoriaDto.nome())
-                .disponivel(addCategoriaDto.disponivel())
-                .restaurante(addCategoriaDto.restaurante())
-                .build();
     }
 }

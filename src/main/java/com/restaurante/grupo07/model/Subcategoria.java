@@ -39,4 +39,10 @@ public class Subcategoria {
     @ManyToOne
     @JsonIgnoreProperties("subcategoria")
     private Categoria categoria;
+
+    public Subcategoria(String nome, boolean disponivel, Categoria categoria) {
+        this.nome = nome;
+        this.disponivel = disponivel;
+        this.categoria = categoria;
+    }
 }

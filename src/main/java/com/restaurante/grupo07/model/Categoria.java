@@ -1,6 +1,5 @@
 package com.restaurante.grupo07.model;
 
-import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import jakarta.persistence.*;
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.NotNull;
@@ -33,4 +32,10 @@ public class Categoria {
     @NotNull
     @ManyToOne
     private Restaurante restaurante;
+
+    public Categoria(String nome, boolean disponivel, Restaurante restaurante) {
+        this.nome = nome;
+        this.disponivel = disponivel;
+        this.restaurante = restaurante;
+    }
 }

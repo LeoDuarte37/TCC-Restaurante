@@ -5,7 +5,7 @@ import com.restaurante.grupo07.dto.mesa.AddMesaDto;
 import com.restaurante.grupo07.dto.mesa.AtualizarMesaDto;
 import com.restaurante.grupo07.dto.mesa.LoginMesaDto;
 import com.restaurante.grupo07.dto.mesa.MesaDto;
-import com.restaurante.grupo07.dto.mapper.MesaMapper;
+import com.restaurante.grupo07.mapper.MesaMapper;
 import com.restaurante.grupo07.enumeration.StatusMesa;
 import com.restaurante.grupo07.model.Mesa;
 import com.restaurante.grupo07.repository.MesaRepository;

@@ -1,7 +1,7 @@
 package com.restaurante.grupo07.service.impl;
 
 import com.restaurante.grupo07.dto.usuario.UsuarioDto;
-import com.restaurante.grupo07.dto.mapper.UsuarioMapper;
+import com.restaurante.grupo07.mapper.UsuarioMapper;
 import com.restaurante.grupo07.repository.UsuarioRepository;
 import com.restaurante.grupo07.service.UsuarioService;
 import org.springframework.beans.factory.annotation.Autowired;

@@ -7,6 +7,8 @@ public record MesaDto(
 
         Long restauranteId,
 
+        String restauranteUuid,
+
         boolean chamarGarcom,
 
         String status

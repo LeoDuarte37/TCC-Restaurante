@@ -42,4 +42,13 @@ public class Produto {
     @ManyToOne
     @JsonIgnoreProperties("produto")
     private Subcategoria subcategoria;
+
+    public Produto(String nome, String descricao, String foto, float valor, boolean disponivel, Subcategoria subcategoria) {
+        this.nome = nome;
+        this.descricao = descricao;
+        this.foto = foto;
+        this.valor = valor;
+        this.disponivel = disponivel;
+        this.subcategoria = subcategoria;
+    }
 }

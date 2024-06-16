@@ -5,7 +5,7 @@ import com.restaurante.grupo07.dto.pedido.AddPedidoDto;
 import com.restaurante.grupo07.dto.pedido.AtualizarPedidoDto;
 import com.restaurante.grupo07.dto.pedido.ListarPedidosPorMesaAndStatusDto;
 import com.restaurante.grupo07.dto.pedido.PedidoDto;
-import com.restaurante.grupo07.dto.mapper.PedidoMapper;
+import com.restaurante.grupo07.mapper.PedidoMapper;
 import com.restaurante.grupo07.enumeration.StatusMesa;
 import com.restaurante.grupo07.enumeration.StatusPedido;
 import com.restaurante.grupo07.model.Pedido;

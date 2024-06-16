@@ -3,7 +3,7 @@ package com.restaurante.grupo07.service.impl;
 import com.restaurante.grupo07.dto.login.LogarDto;
 import com.restaurante.grupo07.dto.login.AddLoginDto;
 import com.restaurante.grupo07.dto.login.LoginDto;
-import com.restaurante.grupo07.dto.mapper.LoginMapper;
+import com.restaurante.grupo07.mapper.LoginMapper;
 import com.restaurante.grupo07.model.Login;
 import com.restaurante.grupo07.repository.LoginRepository;
 import com.restaurante.grupo07.security.JwtService;

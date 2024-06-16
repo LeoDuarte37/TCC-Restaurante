@@ -2,7 +2,7 @@ package com.restaurante.grupo07.service.impl;
 
 import com.restaurante.grupo07.dto.restaurante.AddRestauranteDto;
 import com.restaurante.grupo07.dto.restaurante.RestauranteDto;
-import com.restaurante.grupo07.dto.mapper.RestauranteMapper;
+import com.restaurante.grupo07.mapper.RestauranteMapper;
 import com.restaurante.grupo07.model.Restaurante;
 import com.restaurante.grupo07.repository.RestauranteRepository;
 import com.restaurante.grupo07.service.RestauranteService;
@@ -11,10 +11,7 @@ import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
 import org.springframework.web.server.ResponseStatusException;
 
-import java.util.List;
 import java.util.Optional;
-import java.util.UUID;
-import java.util.stream.Collectors;
 
 @Service
 public class RestauranteServiceImpl implements RestauranteService {

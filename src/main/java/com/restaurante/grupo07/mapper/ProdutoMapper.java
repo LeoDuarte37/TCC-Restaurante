@@ -1,6 +1,5 @@
-package com.restaurante.grupo07.dto.mapper;
+package com.restaurante.grupo07.mapper;
 
-import com.restaurante.grupo07.dto.produto.AddProdutoDto;
 import com.restaurante.grupo07.dto.produto.ProdutoDto;
 import com.restaurante.grupo07.model.Produto;
 import org.springframework.stereotype.Component;
@@ -18,16 +17,5 @@ public class ProdutoMapper {
                 produto.isDisponivel(),
                 produto.getSubcategoria()
         );
-    }
-
-    public Produto toEntity(AddProdutoDto addProdutoDto) {
-        return Produto.builder()
-                .nome(addProdutoDto.nome())
-                .descricao(addProdutoDto.descricao())
-                .foto(addProdutoDto.foto())
-                .valor(addProdutoDto.valor())
-                .disponivel(addProdutoDto.disponivel())
-                .subcategoria(addProdutoDto.subcategoria())
-                .build();
     }
 }
