@@ -7,7 +7,7 @@ import com.restaurante.grupo07.dto.categoria.CategoriaDto;
 import java.util.List;
 
 public interface CategoriaService {
-    CategoriaDto adicionar(AddCategoriaDto addCategoriaDto);
+    void adicionar(AddCategoriaDto addCategoriaDto);
 
     CategoriaDto buscarPorId(Long id);
 

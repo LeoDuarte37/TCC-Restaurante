@@ -19,10 +19,10 @@ public class SubcategoriaResource {
     private SubcategoriaService subcategoriaService;
 
     @PostMapping
-    @ResponseStatus(HttpStatus.OK)
+    @ResponseStatus(HttpStatus.CREATED)
     @Transactional
-    public SubcategoriaDto adicionar(@Valid @RequestBody AddSubcategoriaDto addSubcategoriaDto) {
-        return subcategoriaService.adicionar(addSubcategoriaDto);
+    public void adicionar(@Valid @RequestBody AddSubcategoriaDto addSubcategoriaDto) {
+        subcategoriaService.adicionar(addSubcategoriaDto);
     }
 
     @PutMapping

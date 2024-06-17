@@ -30,7 +30,7 @@ public class ProdutoServiceImpl implements ProdutoService {
     private SubcategoriaRepository subcategoriaRepository;
 
     @Override
-    public ProdutoDto adicionar(AddProdutoDto addProdutoDto) {
+    public void adicionar(AddProdutoDto addProdutoDto) {
         Optional<Subcategoria> subcategoria = subcategoriaRepository.findById(addProdutoDto.subcategoriaId());
 
         if (subcategoria.isPresent()) {
@@ -42,7 +42,7 @@ public class ProdutoServiceImpl implements ProdutoService {
                     addProdutoDto.disponivel(),
                     subcategoria.get()
             );
-            return produtoMapper.toDto(produtoRepository.save(produto));
+            produtoRepository.save(produto);
         }
 
         throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "Subcategoria não encontrada!");

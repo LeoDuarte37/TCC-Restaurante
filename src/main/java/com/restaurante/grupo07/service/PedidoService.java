@@ -9,7 +9,7 @@ import com.restaurante.grupo07.dto.pedido.PedidoDto;
 import java.util.List;
 
 public interface PedidoService {
-    PedidoDto adicionar(AddPedidoDto addPedidoDto);
+    void adicionar(AddPedidoDto addPedidoDto);
 
     PedidoDto buscarPorId(Long id);
 

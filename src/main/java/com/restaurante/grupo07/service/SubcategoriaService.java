@@ -6,7 +6,7 @@ import com.restaurante.grupo07.dto.subcategoria.SubcategoriaDto;
 
 public interface SubcategoriaService {
 
-    SubcategoriaDto adicionar(AddSubcategoriaDto addSubcategoriaDto);
+    void adicionar(AddSubcategoriaDto addSubcategoriaDto);
 
     SubcategoriaDto atualizar(AtualizarCardapioDto atualizarCardapioDto);
 

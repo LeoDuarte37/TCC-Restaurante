@@ -33,21 +33,21 @@ public class PedidoServiceImpl implements PedidoService {
     private MesaRepository mesaRepository;
 
     @Override
-    public PedidoDto adicionar(AddPedidoDto addPedidoDto) {
+    public void adicionar(AddPedidoDto addPedidoDto) {
         List<StatusPedido> statusPedidos = new ArrayList<>(Arrays.asList(
                 StatusPedido.REALIZADO, StatusPedido.FEITO, StatusPedido.ENTREGUE
         ));
 
         int lenght = pedidoRepository.findAllByMesaInStatus(addPedidoDto.mesa().getId(), statusPedidos).size();
 
-        return mesaRepository.findById(addPedidoDto.mesa().getId())
+        mesaRepository.findById(addPedidoDto.mesa().getId())
                 .map(entity -> {
                     if (lenght == 0 && entity.getStatus() == StatusMesa.DISPONIVEL) {
                         entity.setStatus(StatusMesa.ABERTA);
                         mesaRepository.save(entity);
-                        return pedidoMapper.toDto(pedidoRepository.save(pedidoMapper.toEntity(addPedidoDto)));
+                        return pedidoRepository.save(pedidoMapper.toEntity(addPedidoDto));
                     } else {
-                        return pedidoMapper.toDto(pedidoRepository.save(pedidoMapper.toEntity(addPedidoDto)));
+                        return pedidoRepository.save(pedidoMapper.toEntity(addPedidoDto));
                     }
 
                 }).orElseThrow(() -> new ResponseStatusException(HttpStatus.NOT_FOUND, "Mesa não encontrada"));
