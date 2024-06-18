@@ -5,6 +5,7 @@ import com.restaurante.grupo07.dto.pedido.AddPedidoDto;
 import com.restaurante.grupo07.dto.pedido.AtualizarPedidoDto;
 import com.restaurante.grupo07.dto.pedido.ListarPedidosPorMesaAndStatusDto;
 import com.restaurante.grupo07.dto.pedido.PedidoDto;
+import com.restaurante.grupo07.model.Item;
 import com.restaurante.grupo07.service.PedidoService;
 import jakarta.validation.Valid;
 import jakarta.validation.constraints.NotNull;
@@ -29,23 +30,22 @@ public class PedidoResource {
     public void adicionar(@Valid @RequestBody AddPedidoDto addPedidoDto) {
         pedidoService.adicionar(addPedidoDto);
     }
-
-    @GetMapping("/{id}")
-    @ResponseStatus(HttpStatus.OK)
-    public PedidoDto buscarPorId(@PathVariable("id") @NotNull Long id) {
-        return pedidoService.buscarPorId(id);
-    }
-
-    @GetMapping("/listar/mesa")
+    @PostMapping("/listar/mesa")
     @ResponseStatus(HttpStatus.OK)
     public List<PedidoDto> listarPorMesaInStatus(@Valid @RequestBody ListarPedidosPorMesaAndStatusDto listarPedidosPorMesaAndStatusDto) {
         return pedidoService.listarPorMesaInStatus(listarPedidosPorMesaAndStatusDto);
     }
 
-    @GetMapping("/listar/status")
+    @PostMapping("/listar/status")
     @ResponseStatus(HttpStatus.OK)
     public List<PedidoDto> listarPorStatus(@Valid @RequestBody StatusDto statusDto) {
         return pedidoService.listarPorStatus(statusDto);
+    }
+
+    @GetMapping("/{id}")
+    @ResponseStatus(HttpStatus.OK)
+    public PedidoDto buscarPorId(@PathVariable("id") @NotNull Long id) {
+        return pedidoService.buscarPorId(id);
     }
 
     @GetMapping("/listar/restaurante/{id}")

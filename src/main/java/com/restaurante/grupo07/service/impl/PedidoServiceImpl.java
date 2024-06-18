@@ -8,6 +8,7 @@ import com.restaurante.grupo07.dto.pedido.PedidoDto;
 import com.restaurante.grupo07.mapper.PedidoMapper;
 import com.restaurante.grupo07.enumeration.StatusMesa;
 import com.restaurante.grupo07.enumeration.StatusPedido;
+import com.restaurante.grupo07.model.Item;
 import com.restaurante.grupo07.model.Pedido;
 import com.restaurante.grupo07.repository.MesaRepository;
 import com.restaurante.grupo07.repository.PedidoRepository;
@@ -46,13 +47,13 @@ public class PedidoServiceImpl implements PedidoService {
                         entity.setStatus(StatusMesa.ABERTA);
                         mesaRepository.save(entity);
                         return pedidoRepository.save(pedidoMapper.toEntity(addPedidoDto));
+
                     } else {
                         return pedidoRepository.save(pedidoMapper.toEntity(addPedidoDto));
                     }
 
                 }).orElseThrow(() -> new ResponseStatusException(HttpStatus.NOT_FOUND, "Mesa não encontrada"));
     }
-
     @Override
     public PedidoDto buscarPorId(Long id) {
         return pedidoRepository.findById(id)
@@ -128,6 +129,8 @@ public class PedidoServiceImpl implements PedidoService {
                 .stream()
                 .map(entity -> {
                     entity.setStatus(StatusPedido.PAGO);
+                    entity.getMesa().setStatus(StatusMesa.DISPONIVEL);
+                    mesaRepository.save(entity.getMesa());
                     return pedidoMapper.toDto(pedidoRepository.save(entity));
                 })
                 .collect(Collectors.toList());

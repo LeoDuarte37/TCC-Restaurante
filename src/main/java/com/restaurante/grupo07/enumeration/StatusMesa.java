@@ -12,11 +12,11 @@ public enum StatusMesa {
     private StatusMesa (String status) { this.status = status; }
 
     public static StatusMesa doStatus (String status) {
-        if (status.equals("D")) {
+        if (status.equals("D") || status.equals("DISPONIVEL")) {
             return DISPONIVEL;
-        } else if (status.equals("A")) {
+        } else if (status.equals("A") || status.equals("ABERTA")) {
             return ABERTA;
-        } else if (status.equals("P")) {
+        } else if (status.equals("P") || status.equals("PENDENTE")) {
             return PENDENTE;
         } else {
             return null;

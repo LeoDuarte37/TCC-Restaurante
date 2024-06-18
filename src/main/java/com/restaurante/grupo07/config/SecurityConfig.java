@@ -49,8 +49,7 @@ public class SecurityConfig {
                     .requestMatchers(HttpMethod.GET, "/mesa/**")
                         .hasAnyRole("ROOT", "ADMIN", "CAIXA", "GARCOM", "COZINHA")
                     .requestMatchers(HttpMethod.PUT, "/mesa").hasAnyRole("ROOT", "ADMIN", "CAIXA")
-                    .requestMatchers(HttpMethod.PATCH, "/mesa/atualizar/status")
-                        .hasAnyRole("ROOT", "ADMIN", "CAIXA", "GARCOM", "COZINHA")
+                    .requestMatchers(HttpMethod.PATCH, "/mesa/atualizar/status").permitAll()
                     .requestMatchers(HttpMethod.PATCH, "/mesa/atualizar/chamarGarcom/{id}").permitAll()
                     .requestMatchers(HttpMethod.DELETE, "/mesa/{id}").hasAnyRole("ROOT", "ADMIN")
 
@@ -75,6 +74,7 @@ public class SecurityConfig {
                     .requestMatchers(HttpMethod.DELETE, "/produto/{id}").hasAnyRole("ROOT", "ADMIN")
 
                     .requestMatchers(HttpMethod.POST, "/pedido").permitAll()
+                    .requestMatchers(HttpMethod.POST, "/pedido/listar/**").hasAnyRole("ROOT", "ADMIN", "CAIXA", "GARCOM", "COZINHA")
                     .requestMatchers(HttpMethod.GET, "/pedido/listar/restaurante/{id}", "/pedido/listar/status")
                         .hasAnyRole("ROOT", "ADMIN")
                     .requestMatchers(HttpMethod.GET, "/pedido/{id}", "/pedido/listar/data/**", "/pedido/listar/mesa")

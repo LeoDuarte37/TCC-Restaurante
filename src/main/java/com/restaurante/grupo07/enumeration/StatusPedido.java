@@ -15,13 +15,13 @@ public enum StatusPedido {
     }
 
     public static StatusPedido doStatus (String status) {
-        if (status.equals("R")) {
+        if (status.equals("R") || status.equals("REALIZADO")) {
             return REALIZADO;
-        } else if (status.equals("F")) {
+        } else if (status.equals("F") || status.equals("FEITO")) {
             return FEITO;
-        } else if (status.equals("E")) {
+        } else if (status.equals("E") || status.equals("ENTREGUE")) {
             return ENTREGUE;
-        } else if (status.equals("P")) {
+        } else if (status.equals("P") || status.equals("PAGO")) {
             return PAGO;
         } else {
             return null;

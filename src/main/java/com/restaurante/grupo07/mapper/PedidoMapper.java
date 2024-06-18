@@ -2,6 +2,7 @@ package com.restaurante.grupo07.mapper;
 
 import com.restaurante.grupo07.dto.pedido.AddPedidoDto;
 import com.restaurante.grupo07.dto.pedido.PedidoDto;
+import com.restaurante.grupo07.enumeration.StatusMesa;
 import com.restaurante.grupo07.enumeration.StatusPedido;
 import com.restaurante.grupo07.model.Pedido;
 import org.springframework.stereotype.Component;

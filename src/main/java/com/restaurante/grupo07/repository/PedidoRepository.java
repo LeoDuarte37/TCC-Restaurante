@@ -26,6 +26,6 @@ public interface PedidoRepository extends JpaRepository<Pedido, Long> {
     @Query(value = "select p from Pedido p cross join Mesa m where m.restaurante.id = ?1 order by p.data desc")
     public List<Pedido> findAllByRestaurante(@Param("restaurante") Long restaurante);
 
-    @Query(value = "select p from Pedido p where p.mesa.id = :mesa and p.status in :statusPedidos")
+    @Query(value = "select p from Pedido p where p.mesa.id = :mesa and p.status in :statusPedidos order by p.data desc")
     public List<Pedido> findAllByMesaInStatus(@Param("mesa") Long mesa, @Param("statusPedidos") List<StatusPedido> statusPedidos);
 }
