@@ -38,7 +38,7 @@ public class SubcategoriaServiceImpl implements SubcategoriaService {
                     addSubcategoriaDto.disponivel(),
                     categoria.get()
             );
-            subcategoriaMapper.toDto(subcategoriaRepository.save(subcategoria));
+            return subcategoriaMapper.toDto(subcategoriaRepository.save(subcategoria));
         }
 
         throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "Categoria não encontrada!");

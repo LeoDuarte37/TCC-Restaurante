@@ -1,5 +1,6 @@
 package com.restaurante.grupo07.mapper;
 
+import com.restaurante.grupo07.dto.subcategoria.AddSubcategoriaDto;
 import com.restaurante.grupo07.dto.subcategoria.SubcategoriaDto;
 import com.restaurante.grupo07.model.Subcategoria;
 import org.springframework.stereotype.Component;
