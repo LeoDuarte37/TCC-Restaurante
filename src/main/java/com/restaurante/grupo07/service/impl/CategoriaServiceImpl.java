@@ -31,12 +31,12 @@ public class CategoriaServiceImpl implements CategoriaService {
     private CategoriaMapper categoriaMapper;
 
     @Override
-    public void adicionar(AddCategoriaDto addCategoriaDto) {
+    public CategoriaDto adicionar(AddCategoriaDto addCategoriaDto) {
         Optional<Restaurante> restaurante = restauranteRepository.findById(addCategoriaDto.restauranteId());
 
         if (restaurante.isPresent()) {
             Categoria categoria = new Categoria(addCategoriaDto.nome(), addCategoriaDto.disponivel(), restaurante.get());
-            categoriaRepository.save(categoria);
+            return categoriaMapper.toDto(categoriaRepository.save(categoria));
         }
 
         throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "Restaurante não encontrado!");

@@ -25,8 +25,8 @@ public class CategoriaResource {
     @PostMapping
     @ResponseStatus(HttpStatus.CREATED)
     @Transactional
-    public void adicionar(@Valid @RequestBody AddCategoriaDto addCategoriaDto) {
-        categoriaService.adicionar(addCategoriaDto);
+    public CategoriaDto adicionar(@Valid @RequestBody AddCategoriaDto addCategoriaDto) {
+        return categoriaService.adicionar(addCategoriaDto);
     }
 
     @GetMapping("/{id}")
