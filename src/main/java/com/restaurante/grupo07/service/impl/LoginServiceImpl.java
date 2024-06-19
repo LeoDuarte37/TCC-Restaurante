@@ -56,6 +56,7 @@ public class LoginServiceImpl implements LoginService {
                             login.get().getUsername(),
                             login.get().getPerfil().getNome(),
                             login.get().getUsuario().getRestaurante().getId(),
+                            login.get().getUsuario().getRestaurante().getUuid().toString(),
                             jwtService.gerarToken(login.get())
                         )
                 );

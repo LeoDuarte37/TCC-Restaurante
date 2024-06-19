@@ -5,15 +5,20 @@ import com.restaurante.grupo07.dto.categoria.AddCategoriaDto;
 import com.restaurante.grupo07.dto.categoria.CategoriaDto;
 import com.restaurante.grupo07.mapper.CategoriaMapper;
 import com.restaurante.grupo07.model.Categoria;
+import com.restaurante.grupo07.model.Produto;
 import com.restaurante.grupo07.model.Restaurante;
+import com.restaurante.grupo07.model.Subcategoria;
 import com.restaurante.grupo07.repository.CategoriaRepository;
+import com.restaurante.grupo07.repository.ProdutoRepository;
 import com.restaurante.grupo07.repository.RestauranteRepository;
+import com.restaurante.grupo07.repository.SubcategoriaRepository;
 import com.restaurante.grupo07.service.CategoriaService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
 import org.springframework.web.server.ResponseStatusException;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 import java.util.stream.Collectors;
@@ -29,6 +34,12 @@ public class CategoriaServiceImpl implements CategoriaService {
 
     @Autowired
     private CategoriaMapper categoriaMapper;
+
+    @Autowired
+    SubcategoriaRepository subcategoriaRepository;
+
+    @Autowired
+    ProdutoRepository produtoRepository;
 
     @Override
     public CategoriaDto adicionar(AddCategoriaDto addCategoriaDto) {
@@ -67,8 +78,27 @@ public class CategoriaServiceImpl implements CategoriaService {
 
     @Override
     public List<CategoriaDto> listarDisponiveisPorRestaurante(Long restaurante) {
-        return categoriaRepository.findAllByRestauranteAndDisponivelTrue(restaurante)
+        List<Categoria> categoriasDisponiveis = categoriaRepository.findAllByRestauranteAndDisponivelTrue(restaurante)
                 .stream()
+                .toList();
+
+        for (Categoria categoria : categoriasDisponiveis) {
+            List<Subcategoria> subcategoriasDisponiveis = subcategoriaRepository.findByDisponivelTrueAndCategoria(categoria);
+
+
+            for (Subcategoria subcategoria : subcategoriasDisponiveis) {
+                List<Produto> produtosDisponiveis = produtoRepository.findByDisponivelTrueAndSubcategoria(subcategoria);
+
+                if (produtosDisponiveis.isEmpty()) {
+                    categoria.setSubcategoria(new ArrayList<>());
+                } else {
+                    categoria.setSubcategoria(subcategoriasDisponiveis);
+                    subcategoria.setProduto(produtosDisponiveis);
+                }
+            }
+        }
+
+        return categoriasDisponiveis.stream()
                 .map(entity -> categoriaMapper.toDto(entity))
                 .collect(Collectors.toList());
     }

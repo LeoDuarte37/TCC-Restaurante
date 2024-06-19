@@ -64,6 +64,13 @@
 			<artifactId>h2</artifactId>
 			<scope>test</scope>
 		</dependency>
+
+		<!-- Dependência do Banco de dados PostgreSQL -->
+		<dependency>
+			<groupId>org.postgresql</groupId>
+			<artifactId>postgresql</artifactId>
+		</dependency>
+
 		<dependency>
 			<groupId>org.projectlombok</groupId>
 			<artifactId>lombok</artifactId>

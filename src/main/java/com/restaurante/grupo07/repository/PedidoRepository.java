@@ -28,4 +28,10 @@ public interface PedidoRepository extends JpaRepository<Pedido, Long> {
 
     @Query(value = "select p from Pedido p where p.mesa.id = :mesa and p.status in :statusPedidos order by p.data desc")
     public List<Pedido> findAllByMesaInStatus(@Param("mesa") Long mesa, @Param("statusPedidos") List<StatusPedido> statusPedidos);
+
+    @Transactional
+    @Modifying
+    @Query(value = "DELETE FROM tb_pedido p WHERE p.id IN (SELECT pi.pedido_id FROM tb_pedido_item pi WHERE pi.produto_id = :id)",
+            nativeQuery = true)
+    public void deleteAllByProduto(@Param("id") Long id);
 }

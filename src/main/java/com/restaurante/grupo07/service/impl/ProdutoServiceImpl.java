@@ -3,8 +3,10 @@ package com.restaurante.grupo07.service.impl;
 import com.restaurante.grupo07.dto.produto.AddProdutoDto;
 import com.restaurante.grupo07.dto.produto.ProdutoDto;
 import com.restaurante.grupo07.mapper.ProdutoMapper;
+import com.restaurante.grupo07.model.Pedido;
 import com.restaurante.grupo07.model.Produto;
 import com.restaurante.grupo07.model.Subcategoria;
+import com.restaurante.grupo07.repository.PedidoRepository;
 import com.restaurante.grupo07.repository.ProdutoRepository;
 import com.restaurante.grupo07.repository.SubcategoriaRepository;
 import com.restaurante.grupo07.service.ProdutoService;
@@ -28,6 +30,9 @@ public class ProdutoServiceImpl implements ProdutoService {
 
     @Autowired
     private SubcategoriaRepository subcategoriaRepository;
+
+    @Autowired
+    private PedidoRepository pedidoRepository;
 
     @Override
     public ProdutoDto adicionar(AddProdutoDto addProdutoDto) {
@@ -89,6 +94,7 @@ public class ProdutoServiceImpl implements ProdutoService {
             throw new ResponseStatusException(HttpStatus.NOT_FOUND, "Produto não encontrado!");
         }
 
+        pedidoRepository.deleteAllByProduto(id);
         produtoRepository.deleteById(id);
     }
 }

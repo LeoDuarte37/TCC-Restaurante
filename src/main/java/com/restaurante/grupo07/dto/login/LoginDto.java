@@ -7,6 +7,8 @@ public record LoginDto(
 
         Long restauranteId,
 
+        String restauranteUuid,
+
         String token
     ) {
 }

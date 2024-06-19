@@ -14,6 +14,14 @@ public interface CategoriaRepository extends JpaRepository<Categoria, Long> {
             nativeQuery = true)
     public List<Categoria> findAllByRestauranteAndDisponivelTrue(@Param("restaurante") Long restaurante);
 
+    @Query(value = "SELECT * FROM tb_categoria c "
+            + "LEFT JOIN tb_subcategoria sc ON sc.categoria_id = c.id "
+            + "LEFT JOIN tb_produto p ON p.subcategoria_id = sc.id "
+            + "WHERE c.disponivel = true AND sc.disponivel = true AND p.disponivel = true "
+            + "AND EXISTS (SELECT 1 FROM tb_restaurante r WHERE r.id = ?1)",
+            nativeQuery = true)
+    List<Object[]> findAllCategoriaSubcategoriaProdutoDisponiveis(@Param("restaurante") Long restaurante);
+
     @Query(value = "select c from Categoria c where c.restaurante.id = :restaurante")
     public List<Categoria> findAllByRestaurante(@Param("restaurante") Long restaurante);
 
