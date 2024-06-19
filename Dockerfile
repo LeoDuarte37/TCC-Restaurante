@@ -1,4 +1,4 @@
-FROM openjdk:17.0.1-jdk-oracle as build
+FROM openjdk:17.0.1-jdk-oracle AS build
 
 WORKDIR /workspace/app
 
@@ -9,6 +9,8 @@ COPY src src
 
 RUN chmod -R 777 ./mvnw
 
+RUN chmod +x ./mvnw
+RUN ./mvnw clean package -DskipTests
 RUN ./mvnw install -DskipTests
 
 RUN mkdir -p target/dependency && (cd target/dependency; jar -xf ../*.jar)
