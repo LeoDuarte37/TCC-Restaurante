@@ -24,8 +24,8 @@ public class ProdutoResource {
     @PostMapping
     @ResponseStatus(HttpStatus.CREATED)
     @Transactional
-    public void adicionar(@Valid @RequestBody AddProdutoDto addProdutoDto) {
-        produtoService.adicionar(addProdutoDto);
+    public ProdutoDto adicionar(@Valid @RequestBody AddProdutoDto addProdutoDto) {
+        return produtoService.adicionar(addProdutoDto);
     }
 
     @GetMapping("/{id}")

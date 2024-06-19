@@ -6,7 +6,7 @@ import com.restaurante.grupo07.dto.produto.ProdutoDto;
 import java.util.List;
 
 public interface ProdutoService {
-    void adicionar(AddProdutoDto addProdutoDto);
+    ProdutoDto adicionar(AddProdutoDto addProdutoDto);
 
     ProdutoDto buscarPorId(Long id);
 

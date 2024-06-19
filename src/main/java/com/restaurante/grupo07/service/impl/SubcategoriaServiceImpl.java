@@ -29,7 +29,7 @@ public class SubcategoriaServiceImpl implements SubcategoriaService {
     private SubcategoriaMapper subcategoriaMapper;
 
     @Override
-    public void adicionar(AddSubcategoriaDto addSubcategoriaDto) {
+    public SubcategoriaDto adicionar(AddSubcategoriaDto addSubcategoriaDto) {
         Optional<Categoria> categoria = categoriaRepository.findById(addSubcategoriaDto.categoriaId());
 
         if (categoria.isPresent()) {
@@ -38,7 +38,7 @@ public class SubcategoriaServiceImpl implements SubcategoriaService {
                     addSubcategoriaDto.disponivel(),
                     categoria.get()
             );
-            subcategoriaRepository.save(subcategoria);
+            subcategoriaMapper.toDto(subcategoriaRepository.save(subcategoria));
         }
 
         throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "Categoria não encontrada!");
