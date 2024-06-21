@@ -26,7 +26,7 @@ public class Categoria {
     @NotNull(message = "Atributo disponivel é obrigatório!")
     private boolean disponivel;
 
-    @OneToMany(fetch = FetchType.LAZY, mappedBy = "categoria", cascade = CascadeType.REMOVE)
+    @OneToMany(fetch = FetchType.LAZY, mappedBy = "categoria", cascade = {CascadeType.ALL, CascadeType.REMOVE})
     private List<Subcategoria> subcategoria;
 
     @NotNull

@@ -3,7 +3,6 @@ package com.restaurante.grupo07.service.impl;
 import com.restaurante.grupo07.dto.produto.AddProdutoDto;
 import com.restaurante.grupo07.dto.produto.ProdutoDto;
 import com.restaurante.grupo07.mapper.ProdutoMapper;
-import com.restaurante.grupo07.model.Pedido;
 import com.restaurante.grupo07.model.Produto;
 import com.restaurante.grupo07.model.Subcategoria;
 import com.restaurante.grupo07.repository.PedidoRepository;

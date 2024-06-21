@@ -19,7 +19,7 @@ public record ProdutoDto (
         String foto,
 
         @NotNull
-        float valor,
+        double valor,
 
         @NotNull
         boolean disponivel,

@@ -7,6 +7,7 @@ import com.restaurante.grupo07.mapper.SubcategoriaMapper;
 import com.restaurante.grupo07.model.Categoria;
 import com.restaurante.grupo07.model.Subcategoria;
 import com.restaurante.grupo07.repository.CategoriaRepository;
+import com.restaurante.grupo07.repository.PedidoRepository;
 import com.restaurante.grupo07.repository.SubcategoriaRepository;
 import com.restaurante.grupo07.service.SubcategoriaService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -27,6 +28,9 @@ public class SubcategoriaServiceImpl implements SubcategoriaService {
 
     @Autowired
     private SubcategoriaMapper subcategoriaMapper;
+
+    @Autowired
+    PedidoRepository pedidoRepository;
 
     @Override
     public SubcategoriaDto adicionar(AddSubcategoriaDto addSubcategoriaDto) {
@@ -61,6 +65,14 @@ public class SubcategoriaServiceImpl implements SubcategoriaService {
         if (subcategoria.isEmpty()) {
             throw new ResponseStatusException(HttpStatus.NOT_FOUND, "Subcategoria não encontrada");
         }
+
+        subcategoria.get()
+                .getProduto().stream()
+                .map(produto -> {
+                    Long idProduto = produto.getId();
+                    pedidoRepository.deleteAllByProduto(idProduto);
+                    return null;
+                });
 
         subcategoriaRepository.deleteById(id);
     }

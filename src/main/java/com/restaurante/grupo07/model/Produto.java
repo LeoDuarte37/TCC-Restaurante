@@ -33,7 +33,7 @@ public class Produto {
     private String foto;
 
     @NotNull(message = "Atributo valor é obrigatório!")
-    private float valor;
+    private double valor;
 
     @NotNull(message = "Atributo disponivel é obrigatório!")
     private boolean disponivel;
@@ -43,7 +43,7 @@ public class Produto {
     @JsonIgnoreProperties("produto")
     private Subcategoria subcategoria;
 
-    public Produto(String nome, String descricao, String foto, float valor, boolean disponivel, Subcategoria subcategoria) {
+    public Produto(String nome, String descricao, String foto, double valor, boolean disponivel, Subcategoria subcategoria) {
         this.nome = nome;
         this.descricao = descricao;
         this.foto = foto;

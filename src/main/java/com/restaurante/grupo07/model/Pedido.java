@@ -10,12 +10,17 @@ import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.RequiredArgsConstructor;
 import lombok.Setter;
+import org.hibernate.annotations.Cascade;
+import org.hibernate.annotations.OnDelete;
+import org.hibernate.annotations.OnDeleteAction;
 import org.hibernate.annotations.UpdateTimestamp;
 
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.List;
+
+import static org.hibernate.annotations.CascadeType.ALL;
 
 @AllArgsConstructor
 @RequiredArgsConstructor
@@ -37,13 +42,16 @@ public class Pedido {
 
     @NotNull
     @ElementCollection
-    @CollectionTable(name = "tb_pedido_item")
+    @CollectionTable(name = "tb_pedido_item",
+            foreignKey = @ForeignKey(name = "pedido_id",
+            foreignKeyDefinition = "foreign key (pedido_id) references tb_pedido (id) on delete cascade"))
+    @JsonIgnoreProperties("subcategoria")
     private List<Item> item = new ArrayList<>();
 
     @Builder.Default
     private LocalDateTime data = LocalDateTime.now();
 
     @Enumerated(EnumType.STRING)
-    private StatusPedido status;
-
+    @Builder.Default
+    private StatusPedido status = StatusPedido.REALIZADO;
 }

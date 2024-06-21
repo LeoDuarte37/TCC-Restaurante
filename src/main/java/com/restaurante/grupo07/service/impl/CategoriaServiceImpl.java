@@ -8,10 +8,7 @@ import com.restaurante.grupo07.model.Categoria;
 import com.restaurante.grupo07.model.Produto;
 import com.restaurante.grupo07.model.Restaurante;
 import com.restaurante.grupo07.model.Subcategoria;
-import com.restaurante.grupo07.repository.CategoriaRepository;
-import com.restaurante.grupo07.repository.ProdutoRepository;
-import com.restaurante.grupo07.repository.RestauranteRepository;
-import com.restaurante.grupo07.repository.SubcategoriaRepository;
+import com.restaurante.grupo07.repository.*;
 import com.restaurante.grupo07.service.CategoriaService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -40,6 +37,9 @@ public class CategoriaServiceImpl implements CategoriaService {
 
     @Autowired
     ProdutoRepository produtoRepository;
+
+    @Autowired
+    PedidoRepository pedidoRepository;
 
     @Override
     public CategoriaDto adicionar(AddCategoriaDto addCategoriaDto) {
@@ -122,6 +122,16 @@ public class CategoriaServiceImpl implements CategoriaService {
         if (categoria.isEmpty()) {
             throw new ResponseStatusException(HttpStatus.NOT_FOUND);
         }
+
+        categoria.get().getSubcategoria()
+                .stream()
+                .map(subcategoria -> subcategoria.getProduto()
+                       .stream()
+                       .map(produto -> {
+                           Long idProduto = produto.getId();
+                           pedidoRepository.deleteAllByProduto(idProduto);
+                           return null;
+                       }));
 
         categoriaRepository.deleteById(id);
     }

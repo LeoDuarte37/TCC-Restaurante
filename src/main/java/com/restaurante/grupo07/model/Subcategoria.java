@@ -31,7 +31,7 @@ public class Subcategoria {
     @NotNull
     private boolean disponivel;
 
-    @OneToMany(fetch = FetchType.LAZY, mappedBy = "subcategoria", cascade = CascadeType.REMOVE)
+    @OneToMany(fetch = FetchType.LAZY, mappedBy = "subcategoria", cascade = {CascadeType.ALL, CascadeType.REMOVE})
     @JsonIgnoreProperties("subcategoria")
     private List<Produto> produto;
 

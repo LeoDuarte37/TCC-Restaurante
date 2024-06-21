@@ -46,6 +46,7 @@ public class PedidoServiceImpl implements PedidoService {
                     if (lenght == 0 && entity.getStatus() == StatusMesa.DISPONIVEL) {
                         entity.setStatus(StatusMesa.ABERTA);
                         mesaRepository.save(entity);
+                        System.out.println(pedidoMapper.toEntity(addPedidoDto));
                         return pedidoRepository.save(pedidoMapper.toEntity(addPedidoDto));
 
                     } else {

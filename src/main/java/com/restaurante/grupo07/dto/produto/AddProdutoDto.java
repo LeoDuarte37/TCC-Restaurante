@@ -14,7 +14,7 @@ public record AddProdutoDto(
         String foto,
 
         @NotNull
-        float valor,
+        double valor,
 
         @NotNull
         boolean disponivel,

@@ -18,17 +18,9 @@ import org.hibernate.annotations.OnDeleteAction;
 @Embeddable
 public class Item {
 
-//    @Id
-//    @GeneratedValue(strategy = GenerationType.IDENTITY)
-//    private Long id;
-//
-//    @ManyToOne
-//    @JoinColumn(name = "pedido_id")
-//    private Pedido pedido;
-
     @ManyToOne
     @NotNull(message = "Atributo produto é obrigatório!")
-    @JsonIgnoreProperties(value = {"subcategoria", "descricao", "disponivel", "categoria"})
+    @JsonIgnoreProperties(value = {"foto", "descricao", "disponivel", "categoria", "subcategoria"})
     private Produto produto;
 
     @NotNull(message = "Atributo quantidade é obrigatório!")

@@ -5,7 +5,6 @@ import com.restaurante.grupo07.dto.pedido.AddPedidoDto;
 import com.restaurante.grupo07.dto.pedido.AtualizarPedidoDto;
 import com.restaurante.grupo07.dto.pedido.ListarPedidosPorMesaAndStatusDto;
 import com.restaurante.grupo07.dto.pedido.PedidoDto;
-import com.restaurante.grupo07.model.Item;
 import com.restaurante.grupo07.service.PedidoService;
 import jakarta.validation.Valid;
 import jakarta.validation.constraints.NotNull;
@@ -30,6 +29,7 @@ public class PedidoResource {
     public void adicionar(@Valid @RequestBody AddPedidoDto addPedidoDto) {
         pedidoService.adicionar(addPedidoDto);
     }
+
     @PostMapping("/listar/mesa")
     @ResponseStatus(HttpStatus.OK)
     public List<PedidoDto> listarPorMesaInStatus(@Valid @RequestBody ListarPedidosPorMesaAndStatusDto listarPedidosPorMesaAndStatusDto) {
