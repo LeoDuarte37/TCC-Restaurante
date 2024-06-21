@@ -10,6 +10,8 @@ import lombok.Getter;
 import lombok.RequiredArgsConstructor;
 import lombok.Setter;
 
+import java.util.List;
+
 @AllArgsConstructor
 @RequiredArgsConstructor
 @Builder
@@ -17,6 +19,7 @@ import lombok.Setter;
 @Setter
 @Entity
 @Table(name = "tb_mesa")
+@JsonIgnoreProperties("pedido")
 public class Mesa {
 
     @Id
@@ -30,6 +33,9 @@ public class Mesa {
     @NotNull(message = "Atributo restaurante é obrigatório!")
     @JsonIgnoreProperties(value = {"chamarGarcom", "id", "status", "cnpj", "endereco", "contato"})
     private Restaurante restaurante;
+
+    @OneToMany(cascade = { CascadeType.ALL, CascadeType.REMOVE }, mappedBy = "mesa")
+    private List<Pedido> pedido;
 
     @Builder.Default
     private boolean chamarGarcom = false;

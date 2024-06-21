@@ -11,7 +11,7 @@ import java.util.List;
 public record PedidoDto (
         Long id,
 
-        @JsonIgnoreProperties(value = {"chamarGarcom", "id", "status", "cnpj", "endereco", "contato", "restaurante"})
+        @JsonIgnoreProperties(value = {"chamarGarcom", "status", "cnpj", "endereco", "contato", "restaurante"})
         Mesa mesa,
 
         @JsonIgnoreProperties(value = {"pedido", "subcategoria"})
