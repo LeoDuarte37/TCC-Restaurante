@@ -15,7 +15,14 @@ import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.web.SecurityFilterChain;
 import org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter;
+import org.springframework.web.cors.CorsConfiguration;
+import org.springframework.web.cors.CorsConfigurationSource;
+import org.springframework.web.cors.UrlBasedCorsConfigurationSource;
+import org.springframework.web.servlet.config.annotation.CorsRegistry;
 import org.springframework.web.servlet.config.annotation.EnableWebMvc;
+import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
+
+import java.util.Arrays;
 
 @Configuration
 @EnableWebSecurity
@@ -74,13 +81,13 @@ public class SecurityConfig {
                     .requestMatchers(HttpMethod.DELETE, "/produto/{id}").hasAnyRole("ROOT", "ADMIN")
 
                     .requestMatchers(HttpMethod.POST, "/pedido").permitAll()
-                    .requestMatchers(HttpMethod.POST, "/pedido/listar/**").hasAnyRole("ROOT", "ADMIN", "CAIXA", "GARCOM", "COZINHA")
+                    .requestMatchers(HttpMethod.POST, "/pedido/listar/**")
+                        .hasAnyRole("ROOT", "ADMIN", "CAIXA", "GARCOM", "COZINHA")
                     .requestMatchers(HttpMethod.GET, "/pedido/listar/restaurante/{id}", "/pedido/listar/status")
                         .hasAnyRole("ROOT", "ADMIN")
                     .requestMatchers(HttpMethod.GET, "/pedido/{id}", "/pedido/listar/data/**", "/pedido/listar/mesa")
                         .hasAnyRole("ROOT", "ADMIN", "CAIXA")
-                    .requestMatchers(HttpMethod.PUT, "/pedido", "/pedido/fecharConta/mesa/{id}")
-                        .hasAnyRole("ROOT", "ADMIN", "CAIXA")
+                    .requestMatchers(HttpMethod.PUT).hasAnyRole("ROOT", "ADMIN", "CAIXA")
                     .requestMatchers(HttpMethod.PATCH, "/pedido/atualizar/status")
                         .hasAnyRole("ROOT", "ADMIN", "CAIXA", "GARCOM", "COZINHA")
                     .requestMatchers(HttpMethod.DELETE, "/pedido/{id}").hasAnyRole("ROOT", "ADMIN")
@@ -98,5 +105,20 @@ public class SecurityConfig {
     @Bean
     public AuthenticationManager authenticationManager(AuthenticationConfiguration authenticationConfiguration) throws Exception {
         return authenticationConfiguration.getAuthenticationManager();
+    }
+
+    @Bean
+    public WebMvcConfigurer corsConfigurer()
+    {
+        return new WebMvcConfigurer() {
+            @Override
+            public void addCorsMappings(CorsRegistry registry) {
+                registry
+                        .addMapping("/**")
+                        .allowedOrigins("http://localhost:5173")
+                        .allowedHeaders("*")
+                        .allowedMethods("GET", "POST", "PUT", "PATCH", "DELETE");
+            }
+        };
     }
 }

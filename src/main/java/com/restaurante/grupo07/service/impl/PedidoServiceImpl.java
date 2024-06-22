@@ -121,12 +121,12 @@ public class PedidoServiceImpl implements PedidoService {
     }
 
     @Override
-    public List<PedidoDto> fecharConta(Long id) {
+    public void fecharConta(Long id) {
         List<StatusPedido> statusReference = new ArrayList<>(Arrays.asList(
                 StatusPedido.REALIZADO, StatusPedido.FEITO, StatusPedido.ENTREGUE
         ));
 
-        return pedidoRepository.findAllByMesaInStatus(id, statusReference)
+        pedidoRepository.findAllByMesaInStatus(id, statusReference)
                 .stream()
                 .map(entity -> {
                     entity.setStatus(StatusPedido.PAGO);

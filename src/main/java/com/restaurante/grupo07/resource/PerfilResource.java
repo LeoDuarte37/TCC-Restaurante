@@ -13,7 +13,6 @@ import java.util.List;
 
 @RestController
 @RequestMapping("/perfil")
-@CrossOrigin(origins = "*", allowedHeaders = "*")
 public class PerfilResource {
 
     @Autowired

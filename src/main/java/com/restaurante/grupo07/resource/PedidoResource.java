@@ -17,7 +17,6 @@ import java.util.List;
 
 @RestController
 @RequestMapping("/pedido")
-@CrossOrigin(origins = "*", allowedHeaders = "*")
 public class PedidoResource {
 
     @Autowired

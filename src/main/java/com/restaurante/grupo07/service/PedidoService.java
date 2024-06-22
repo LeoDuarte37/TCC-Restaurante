@@ -26,7 +26,7 @@ public interface PedidoService {
 
     PedidoDto atualizarStatus(StatusDto statusDto);
 
-    List<PedidoDto> fecharConta(Long id);
+    void fecharConta(Long id);
 
     void excluir(Long id);
 }
