@@ -5,12 +5,11 @@ import com.restaurante.grupo07.dto.pedido.AddPedidoDto;
 import com.restaurante.grupo07.dto.pedido.AtualizarPedidoDto;
 import com.restaurante.grupo07.dto.pedido.ListarPedidosPorMesaAndStatusDto;
 import com.restaurante.grupo07.dto.pedido.PedidoDto;
-import com.restaurante.grupo07.model.Item;
 
 import java.util.List;
 
 public interface PedidoService {
-    void adicionar(AddPedidoDto addPedidoDto);
+    PedidoDto adicionar(AddPedidoDto addPedidoDto);
 
     PedidoDto buscarPorId(Long id);
 
