@@ -62,8 +62,7 @@ public class SecurityConfig {
 
                     .requestMatchers(HttpMethod.POST, "/categoria").hasAnyRole("ROOT", "ADMIN")
                     .requestMatchers(HttpMethod.GET,"/categoria/listar/disponiveis/restaurante/{id}").permitAll()
-                    .requestMatchers(HttpMethod.GET,"/categoria/listar/restaurante/{id}")
-                        .hasAnyRole("ROOT", "ADMIN", "CAIXA")
+                    .requestMatchers(HttpMethod.GET,"/categoria/listar/restaurante/{id}").permitAll()
                     .requestMatchers(HttpMethod.PUT, "/categoria").hasAnyRole("ROOT", "ADMIN")
                     .requestMatchers(HttpMethod.PATCH, "/categoria/atualizar/status")
                         .hasAnyRole("ROOT", "ADMIN", "CAIXA")
