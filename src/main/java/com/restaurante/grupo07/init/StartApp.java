@@ -1,8 +1,11 @@
 package com.restaurante.grupo07.init;
 
-import com.restaurante.grupo07.model.*;
-import com.restaurante.grupo07.repository.PerfilRepository;
-import com.restaurante.grupo07.repository.RestauranteRepository;
+import com.restaurante.grupo07.infrastructure.model.Contato;
+import com.restaurante.grupo07.infrastructure.model.Endereco;
+import com.restaurante.grupo07.infrastructure.model.Perfil;
+import com.restaurante.grupo07.infrastructure.model.Restaurante;
+import com.restaurante.grupo07.infrastructure.repository.PerfilRepository;
+import com.restaurante.grupo07.infrastructure.repository.RestauranteRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.stereotype.Component;
