@@ -91,6 +91,8 @@ public class SecurityConfig {
                         .hasAnyRole("ROOT", "ADMIN", "CAIXA", "GARCOM", "COZINHA")
                     .requestMatchers(HttpMethod.DELETE, "/pedido/{id}").hasAnyRole("ROOT", "ADMIN")
 
+                    .requestMatchers("/v3/api-docs/**", "swagger-ui/**", "swagger-ui.html").permitAll()
+
                     .anyRequest().authenticated()
 
                 ).addFilterBefore(securityFilter, UsernamePasswordAuthenticationFilter.class).build();
