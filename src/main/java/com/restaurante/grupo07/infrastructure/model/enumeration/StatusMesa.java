@@ -9,18 +9,15 @@ public enum StatusMesa {
 
     private String status;
 
-    private StatusMesa (String status) { this.status = status; }
+    StatusMesa (String status) { this.status = status; }
 
     public static StatusMesa doStatus (String status) {
-        if (status.equals("D") || status.equals("DISPONIVEL")) {
-            return DISPONIVEL;
-        } else if (status.equals("A") || status.equals("ABERTA")) {
-            return ABERTA;
-        } else if (status.equals("P") || status.equals("PENDENTE")) {
-            return PENDENTE;
-        } else {
-            return null;
-        }
+        return switch (status) {
+            case "D", "DISPONIVEL" -> DISPONIVEL;
+            case "A", "ABERTA" -> ABERTA;
+            case "P", "PENDENTE" -> PENDENTE;
+            default -> null;
+        };
     }
 
     @JsonValue

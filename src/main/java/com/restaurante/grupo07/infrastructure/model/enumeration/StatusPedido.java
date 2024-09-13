@@ -10,22 +10,18 @@ public enum StatusPedido {
 
     private String status;
 
-    private StatusPedido(String status) {
+    StatusPedido(String status) {
         this.status = status;
     }
 
     public static StatusPedido doStatus (String status) {
-        if (status.equals("R") || status.equals("REALIZADO")) {
-            return REALIZADO;
-        } else if (status.equals("F") || status.equals("FEITO")) {
-            return FEITO;
-        } else if (status.equals("E") || status.equals("ENTREGUE")) {
-            return ENTREGUE;
-        } else if (status.equals("P") || status.equals("PAGO")) {
-            return PAGO;
-        } else {
-            return null;
-        }
+        return switch (status) {
+            case "R", "REALIZADO" -> REALIZADO;
+            case "F", "FEITO" -> FEITO;
+            case "E", "ENTREGUE" -> ENTREGUE;
+            case "P", "PAGO" -> PAGO;
+            default -> null;
+        };
     }
 
     @JsonValue

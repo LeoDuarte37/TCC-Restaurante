@@ -2,6 +2,7 @@ package com.restaurante.grupo07.api.mapper;
 
 import com.restaurante.grupo07.api.request.AddLoginDto;
 import com.restaurante.grupo07.infrastructure.model.Login;
+import com.restaurante.grupo07.infrastructure.model.enumeration.Perfil;
 import org.springframework.stereotype.Component;
 
 @Component
@@ -12,7 +13,7 @@ public class LoginMapper {
                 login.getUsername(),
                 login.getSenha(),
                 login.getUsuario(),
-                login.getPerfil()
+                login.getPerfil().getNivel()
         );
     }
 
@@ -21,7 +22,7 @@ public class LoginMapper {
                 .username(addLoginDto.username())
                 .senha(addLoginDto.senha())
                 .usuario(addLoginDto.usuario())
-                .perfil(addLoginDto.perfil())
+                .perfil(Perfil.doNivel(addLoginDto.perfil()))
                 .build();
     }
 }

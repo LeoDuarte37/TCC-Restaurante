@@ -5,7 +5,9 @@ import com.restaurante.grupo07.infrastructure.model.Endereco;
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.NotNull;
 import jakarta.validation.constraints.Size;
+import lombok.Builder;
 
+@Builder
 public record AddRestauranteDto(
         @NotBlank
         @Size(max = 25)

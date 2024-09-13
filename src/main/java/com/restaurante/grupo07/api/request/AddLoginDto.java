@@ -1,11 +1,12 @@
 package com.restaurante.grupo07.api.request;
 
-import com.restaurante.grupo07.infrastructure.model.Perfil;
 import com.restaurante.grupo07.infrastructure.model.Usuario;
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.NotNull;
 import jakarta.validation.constraints.Size;
+import lombok.Builder;
 
+@Builder
 public record AddLoginDto(
 
         @NotBlank
@@ -20,6 +21,6 @@ public record AddLoginDto(
         Usuario usuario,
 
         @NotNull
-        Perfil perfil
+        String perfil
     ) {
 }

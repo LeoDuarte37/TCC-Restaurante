@@ -1,5 +1,6 @@
 package com.restaurante.grupo07.infrastructure.model;
 
+import com.restaurante.grupo07.infrastructure.model.enumeration.Perfil;
 import jakarta.persistence.*;
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.NotNull;
@@ -34,6 +35,6 @@ public class Login {
     private Usuario usuario;
 
     @NotNull
-    @ManyToOne
+    @Enumerated(EnumType.STRING)
     private Perfil perfil;
 }

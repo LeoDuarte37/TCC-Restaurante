@@ -54,7 +54,7 @@ public class LoginServiceImpl implements LoginService {
                 return Optional.of(
                         new LoginDto(
                             login.get().getUsername(),
-                            login.get().getPerfil().getNome(),
+                            login.get().getPerfil().getNivel(),
                             login.get().getUsuario().getRestaurante().getId(),
                             login.get().getUsuario().getRestaurante().getUuid().toString(),
                             jwtService.gerarToken(login.get())
