@@ -27,6 +27,18 @@ public class SecurityConfig {
     @Autowired
     private SecurityFilter securityFilter;
 
+    private static final String[] WHITELIST = {
+            "/v3/api-docs/**",
+            "/swagger-ui/**",
+            "/swagger-ui.html",
+            "/swagger-resources",
+            "/swagger-resources/**",
+            "/configuration/ui",
+            "/configuration/security",
+            "/webjars/**",
+            "/h2-console/**"
+    };
+
     @Bean
     public SecurityFilterChain filterChain(HttpSecurity http) throws Exception {
 
@@ -86,7 +98,7 @@ public class SecurityConfig {
                         .hasAnyRole("ROOT", "ADMIN", "CAIXA", "GARCOM", "COZINHA")
                     .requestMatchers(HttpMethod.DELETE, "/pedido/{id}").hasAnyRole("ROOT", "ADMIN")
 
-                    .requestMatchers("/v3/api-docs/**", "swagger-ui/**", "swagger-ui.html").permitAll()
+                    .requestMatchers(WHITELIST).permitAll()
 
                     .anyRequest().authenticated()
 
@@ -104,8 +116,7 @@ public class SecurityConfig {
     }
 
     @Bean
-    public WebMvcConfigurer corsConfigurer()
-    {
+    public WebMvcConfigurer corsConfigurer() {
         return new WebMvcConfigurer() {
             @Override
             public void addCorsMappings(CorsRegistry registry) {
